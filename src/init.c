@@ -6,9 +6,10 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:31:42 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/28 11:38:25 by alevasse         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:00:13 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 void	init_player()
 {
@@ -66,4 +67,20 @@ void	init_side_dist()
 		stepY = 1;
 		side_distY = (mapY + 1.0 - posY) * delta_distY;
 	}
+}
+
+t_ctx	init_cub(argv[1])
+{
+	t_ctx	ret;
+
+	/*****
+	 * initialiser mlx
+	 * initialiser win
+	 * initialiser img
+	 * initialiser player
+	 * initialiser camera
+	 * initialiser ray
+	 * initialiser side_dist
+	*****/
+	return (ret);
 }
