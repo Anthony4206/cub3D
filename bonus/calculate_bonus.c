@@ -33,7 +33,7 @@ void	exec_dda()
 
 void	calc_perp_wall_dist()
 {
-	if (side ==0)
+	if (side == 0)
 		perp_wall_dist = (side_distX - delta_distX);
 	else
 		perp_wall_dist = (side_distY - delta_distY);
@@ -68,20 +68,20 @@ void    wall()
     double tex_pos = (draw_start - h / 2 + line_height / 2) * step;
     int y = draw_start;
     while (++y < draw_end)
-    {
+      {
         int texY = (int)tex_pos & (tex_height - 1);
         tex_pos += step;
         int color = texture[tex_num][tex_width * texY + texX];
         if (side == 1)
             color = (color >> 1) & 8355711;
         buffer[y][x] = color;
-    }
+      }
 }
 
 void	calc_FPS()
 {
 	old_time = time;
-	temps = getTicks();
+	temps = getTicks(); // se renseigner
 	double frame_time = (time - old_time) / 1000.0;
 	print(1.0 / frame_time);
 	redraw();

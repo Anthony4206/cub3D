@@ -27,7 +27,10 @@ int	main(int argc, char **argv)
 	ctx = parse(argv[1]);
     // parse_error et parse peuvent aussi être fait ensemble
     init_cub(&ctx);
+    init_sprite(&ctx);
     //mlx_hook pour configurer les touches d'action
-	//mlx_hoop qui renvoi à la fonction pour dessiner
+    //initialiser aussi la key pour les portes.
+    //mlx_hook pour configurer le bonus souris
+	//mlx_look qui renvoi à la fonction pour dessiner
     //return
 }

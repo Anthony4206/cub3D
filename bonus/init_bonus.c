@@ -10,6 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+void    clean_buffer()
+{
+    int y = -1;
+
+    while (++y < height)
+    {
+        int x = -1;
+        while (++x < weight) 
+            buffer[y][x] = 0;
+    }
+}
+
+void	init_camera()
+{
+	cameraX = 2 * x / (double)w - 1;
+	ray_dirX = dirX + planeX * cameraX;
+	ray_dirY = dirY + planeY * cameraX;
+}
 
 void	init_player()
 {
@@ -21,13 +39,6 @@ void	init_player()
 	planeY = 0.66;
 	time = 0;
 	old_time = 0;
-}
-
-void	init_camera()
-{
-	cameraX = 2 * x / (double)w - 1;
-	ray_dirX = dirX + planeX * cameraX;
-	ray_dirY = dirY + planeY * cameraX;
 }
 
 void	init_ray()
@@ -69,6 +80,16 @@ void	init_side_dist()
 	}
 }
 
+void    init_door_img()
+{
+    //initialiser image
+}
+
+void    init_sprite_img()
+{
+    //initialiser image
+}
+
 t_ctx	init_cub(argv[1])
 {
 	t_ctx	ret;
@@ -80,6 +101,7 @@ t_ctx	init_cub(argv[1])
 	 * initialiser addr
 	 * initialiser texture
 	 * initialiser addr texture
+     * initialiser bonus;
 	*****/
 	return (ret);
 }
