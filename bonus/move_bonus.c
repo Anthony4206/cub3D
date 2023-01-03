@@ -44,4 +44,5 @@ void	read_keys()
 		planeX = planeX * cos(rot_speed) - planeY * sin(rot_speed);
 		planeY = old_planeX * sin(rot_speed) + planeY * cos(rot_speed);		
 	}
+	//ajouter key minimap
 }

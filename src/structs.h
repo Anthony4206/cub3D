@@ -54,6 +54,22 @@ typedef struct s_map
 	int		side;
 }			t_map;
 
+typedef struct s_parse
+{
+	int	map_height;
+	int	map_width;
+	//initial malloc
+	char	*N;
+	char	*S;
+	char	*E;
+	char	*W;
+	char	*F;
+	int		F_RGB;
+	char	*C;
+	int		C_RGB;
+}		t_parse;
+
+
 typedef struct s_data
 {
 	void	*img;
@@ -68,6 +84,7 @@ typedef struct s_ctx
 	void		*mlx;
 	void		*win;
 	t_data		img;
+	t_parse		parse;
 	t_map		map;
 	t_wall		wall;
 	t_ray		ray;

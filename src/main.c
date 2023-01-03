@@ -10,24 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "utils.h"
+#include "structs.h"
+#include "parse.h"
+
 int	main(int argc, char **argv)
 {
 	t_ctx	ctx;
 
 	if (argc != 2)
-	{
-		//message d'erreur
-		//exit failure
-	}
-	if (parse_error(argv[1]))
+		error_exit("error: too few arguments\n");
+	ctx.parse = parse(argv[1]);
 	{
 		//message d'erreur (envoyé directement dans la fonction parse)
 		//exit failure
 	}
-	ctx = parse(argv[1]);
-    // parse_error et parse peuvent aussi être fait ensemble
-    init_cub(&ctx);
+	 // parse_error et parse peuvent aussi être fait ensemble
+    //init_cub(&ctx);
     //mlx_hook pour configurer les touches d'action
-	//mlx_hoop qui renvoi à la fonction pour dessiner
+	//mlx_loop qui renvoi à la fonction pour dessiner
     //return
 }

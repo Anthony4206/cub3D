@@ -12,7 +12,7 @@
 
 NAME 			= cub3D
 
-SRC				=	
+SRC				= src/main.c src/parse.c src/utils.c
 
 SRC_B			= 
 
@@ -38,7 +38,7 @@ CYAN			:= "\033[0;36m"
 RESET			:= "\033[0m"
 
 %.o:			%.c
-				@${CC} ${CFLAGS} ${INCLUDE} -o $@ -c $<     
+				@${CC} ${CFLAGS} ${INCLUDE} -o $@ -c $<
 
 all: 			${NAME}
 
@@ -58,7 +58,7 @@ ${NAME}:		${OBJ} ${HEAD}
 clean:
 				@make clean -C ${LIBS}
 				@${RM} ${OBJ}
-				@${RM} bonus
+#				@${RM} bonus
 				@echo ${CYAN}"Cleaned '${NAME}' objects with success"${RESET}
 				
 fclean:			clean

@@ -1,4 +1,4 @@
-void    dorr()
+void    door()
 {
     //gérer les portes
 }
