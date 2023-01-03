@@ -3,6 +3,7 @@
 #include "libft.h"
 #include "utils.h"
 #include "structs.h"
+#include "parse_map.h"
 
 int	is_initial(char *line)
 {
@@ -148,11 +149,6 @@ void	check_line(t_parse *parse, char *line)
 	i += n;
 }
 
-// int	check_map(char **map)
-// {
-
-// }
-
 void	init_parse(t_parse *parse)
 {
 	parse->N = NULL;
@@ -161,20 +157,6 @@ void	init_parse(t_parse *parse)
 	parse->W = NULL;
 	parse->F = NULL;
 	parse->C = NULL;
-}
-
-void	get_map(t_parse *parse, int fd)
-{
-	char	*line;
-
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break;
-		check_map_line(parse, line);
-		free(line);
-	}
 }
 
 t_parse	parse(char *str)
@@ -188,7 +170,7 @@ t_parse	parse(char *str)
 	if (fd == -1)
 		error_exit("Error\nInvalid map name\n");
 	if (ft_strncmp(str + ft_strlen(str) - 4, ".cub", 4))
-		error_exit("Error\nInvalid map format\n");
+		error_exit("Error\nInvalid map format 1\n");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -202,7 +184,7 @@ t_parse	parse(char *str)
 		}
 		free(line);
 	}
-	get_map(&ret, fd);
+	get_map(&ret, fd, str);
 	return (ret);
 	//si erreur:
 		//print un message d'erreur approprié

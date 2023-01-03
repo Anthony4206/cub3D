@@ -12,7 +12,7 @@
 
 NAME 			= cub3D
 
-SRC				= src/main.c src/parse.c src/utils.c
+SRC				= src/main.c src/parse.c src/utils.c src/parse_map.c
 
 SRC_B			= 
 

@@ -58,6 +58,8 @@ typedef struct s_parse
 {
 	int	map_height;
 	int	map_width;
+	int	line_map_start;
+	char	**map;
 	//initial malloc
 	char	*N;
 	char	*S;
