@@ -10,69 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "utils.h"
+#include "structs.h"
+#include "parse.h"
 
-void	init_player()
+void	init_player(t_ctx *ctx)
 {
-	posX = see map;
-	posY = see map;
-	dirX = -1; // example
-	dirY = 0; // example
-	planeX = 0;
-	planeY = 0.66;
+	ctx->player.posX = ctx->parse.init_posX;
+	ctx->player.posY = ctx->parse.init_posY;
+	if (ctx->parse.init_dir == N || ctx->parse.init_dir == S)
+		ctx->player.dirX = 0;
+	else if (ctx->parse.init_dir == E)
+		ctx->player.dirX = 1;
+	else
+		ctx->player.dirX = -1;
+	if (ctx->parse.init_dir == E || ctx->parse.init_dir == W)
+		ctx->player.dirY = 0;
+	else if (ctx->parse.init_dir == S)
+		ctx->player.dirY = 1;
+	else
+		ctx->player.dirY = -1;
+	ctx->ray.plane_X = 0;
+	ctx->ray.plane_Y = 0.66;
 	time = 0;
 	old_time = 0;
 }
 
-void	init_camera()
+void	init_cub(argv[1], t_ctx *ctx)
 {
-	cameraX = 2 * x / (double)w - 1;
-	ray_dirX = dirX + planeX * cameraX;
-	ray_dirY = dirY + planeY * cameraX;
-}
-
-void	init_ray()
-{
-	mapX = (int)posX;
-	mapY = (int)posY;
-	if (ray_dirX == 0)
-		delta_distX = 1e30;
-	else
-		delta_distX = abs(1 / ray_dirX);
-	if (ray_dirY == 0)
-		delta_distY = 1e30;
-	else
-		delta_distY = abs(1 / ray_dirY);
-	hit = 0;
-}
-
-void	init_side_dist()
-{
-	if (ray_dirX < 0)
-	{
-		stepX = -1;
-		side_distX = (posX - mapX) * delta_distX;
-	}
-	else
-	{
-		stepX = 1;
-		side_distX = (mapX + 1.0 - posX) * delta_distX;
-	}
-	if (ray_dirY < 0)
-	{
-		stepY = -1;
-		side_distY = (posY - mapY) * delta_distY;	
-	}
-	else
-	{
-		stepY = 1;
-		side_distY = (mapY + 1.0 - posY) * delta_distY;
-	}
-}
-
-t_ctx	init_cub(argv[1])
-{
-	t_ctx	ret;
-
+	init_player(ctx);
 	/*****
 	 * initialiser mlx
 	 * initialiser win
@@ -81,5 +48,5 @@ t_ctx	init_cub(argv[1])
 	 * initialiser texture
 	 * initialiser addr texture
 	*****/
-	return (ret);
+
 }

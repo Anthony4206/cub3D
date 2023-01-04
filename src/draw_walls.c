@@ -10,36 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	exec_dda()
-{
-	while (hit == 0)
-	{
-		if (side_distX < side_distY)
-		{
-			side_distX += delta_distX;
-			mapX += stepX;
-			side = 0;
-		}
-		else
-		{
-			side_distY += delta_distY;
-			mapY += stepY;
-			side = 1;			
-		}
-		if (worldmap[mapX][mapY] > 0)
-			hit = 1;
-	}
-}
+#include "libft.h"
+#include "utils.h"
+#include "structs.h"
+#include "parse.h"
 
-void	calc_perp_wall_dist()
-{
-	if (side ==0)
-		perp_wall_dist = (side_distX - delta_distX);
-	else
-		perp_wall_dist = (side_distY - delta_distY);
-}
-
-void	calc_height_wall()
+void	calc_height_wall(t_ctx *ctx)
 {
 	line_height = (int)(h / perp_wall_dist);
 	draw_start = -line_height / 2 + h / 2;

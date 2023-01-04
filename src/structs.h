@@ -19,8 +19,6 @@ typedef struct s_player
 	double	posY;
 	double	dirX;
 	double	dirY;
-	double	planeX;
-	double	planeY;
 	double	time;
 	double	old_time;
 }			t_player;
@@ -30,6 +28,18 @@ typedef struct s_ray
 	double	cameraX;
 	double	ray_dirX;
 	double	ray_dirY;
+	double	plane_X;
+	double	plane_Y;
+	double	delta_distX;
+	double	delta_distY;
+	double	side_distX;
+	double	side_distY;
+	int		stepX;
+	int		stepY;
+	int		mapX;
+	int		mapY;
+	int		hit_side;
+	double	perp_wall_dist;
 }			t_ray;
 
 typedef struct s_wall
@@ -39,27 +49,15 @@ typedef struct s_wall
 	int	draw_end;
 }		t_wall;
 
-typedef struct s_map
-{
-	int		mapX;
-	int		mapY;
-	double	side_distX;
-	double	side_distY;
-	double	delta_distX;
-	double	delta_distY;
-	double	perp_wall_dist;
-	int		stepX;
-	int		stepY;
-	int		hit;
-	int		side;
-}			t_map;
-
 typedef struct s_parse
 {
 	int	map_height;
 	int	map_width;
 	int	line_map_start;
 	char	**map;
+	double	init_posX;
+	double	init_posY;
+	char	init_dir; //NSEW
 	//initial malloc
 	char	*N;
 	char	*S;
@@ -79,6 +77,8 @@ typedef struct s_data
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }			t_data;
 
 typedef struct s_ctx

@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_exit("error: too few arguments\n");
 	ctx.parse = parse(argv[1]);
+	
 	{
 		//message d'erreur (envoyé directement dans la fonction parse)
 		//exit failure
