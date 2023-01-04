@@ -151,13 +151,11 @@ void	check_line(t_parse *parse, char *line)
 
 void    check_pos(char **map, int i, int j)
 {
-    if (map[i - 1][j - 1])
-    else if (map[i - 1][j])
-    else if (map[i - 1][j + 1])
-    else if (map[i][j - 1])
-    else if (map[i][j + 1])
-    else if (map[i - 1][j])
-    else if (map[i - 1][j])
+    if (map[i - 1][j - 1] == ' ' || map[i - 1][j] == ' '
+        || map[i - 1][j + 1] == ' ' || map[i][j - 1] == ' '
+        || map[i][j + 1] == ' ' || map[i + 1][j - 1] == ' '
+        || map[i + 1][j] == ' ' || map[i + 1][j + 1] == ' ')
+        error_exit("Error\nMap is not close\n");
 }
 
 void    parse_wall(t_parse ctx)
