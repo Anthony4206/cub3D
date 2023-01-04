@@ -21,7 +21,7 @@ OBJ_B			= ${SRC_B:.c=.o}
 
 INCLUDE 		= -I./include/ -Imlx
 
-MLX				= -lmlx -framework OpenGL -framework AppKit
+MLX				= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 HEAD			= include/libft.h
 

@@ -149,14 +149,43 @@ void	check_line(t_parse *parse, char *line)
 	i += n;
 }
 
-void	init_parse(t_parse *parse)
+void    check_pos(char **map, int i, int j)
 {
-	parse->N = NULL;
-	parse->S = NULL;
-	parse->E = NULL;
-	parse->W = NULL;
-	parse->F = NULL;
-	parse->C = NULL;
+    if (map[i - 1][j - 1])
+    else if (map[i - 1][j])
+    else if (map[i - 1][j + 1])
+    else if (map[i][j - 1])
+    else if (map[i][j + 1])
+    else if (map[i - 1][j])
+    else if (map[i - 1][j])
+}
+
+void    parse_wall(t_parse ctx)
+{
+    int i;
+    int j;
+
+    i = -1;
+    while (++i < ctx.map_height)
+    {
+        j = -1;
+        while (++j < ctx.map_width)
+        {
+            if (i == 0 || i == ctx.map_height - 1)
+            {
+                if (ctx.map[i][j] != ' ' && ctx.map[i][j] != '1')
+                    error_exit("Error\nMap is not close\n");
+            }
+            else
+            {
+                if (!ft_strchr(" 1", ctx.map[i][0])
+                    || !ft_strchr(" 1", ctx.map[i][ctx.map_width - 1]))
+                    error_exit("Error\nMap is not close\n");
+                if (ft_strchr("NSEW0", ctx.map[i][j]))
+                    check_pos(ctx.map, i, j);
+            }
+        }
+    }
 }
 
 t_parse	parse(char *str)
@@ -165,7 +194,7 @@ t_parse	parse(char *str)
 	int		fd;
 	char	*line;
 
-	init_parse(&ret);
+	ft_bzero(&ret, sizeof(t_parse));
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		error_exit("Error\nInvalid map name\n");
@@ -185,6 +214,7 @@ t_parse	parse(char *str)
 		free(line);
 	}
 	get_map(&ret, fd, str);
+    parse_wall(ret);
 	return (ret);
 	//si erreur:
 		//print un message d'erreur approprié

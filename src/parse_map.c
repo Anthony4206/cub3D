@@ -11,6 +11,7 @@ void	check_map_line(char *line)
 	i = 0;
 	while (line[i])
 	{
+//      if (!ft_strchr("NSEW01 \n\t", line[i]))
 		if (!(line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W'
 			|| line[i] == '0' || line[i] == '1' || line[i] == ' ' || line[i] == '	' 
 			|| line[i] == '\n'))
@@ -95,20 +96,29 @@ void	get_size_map(t_parse *parse, int fd)
 void	get_map(t_parse *parse, int fd, char *file)
 {
 	int	i;
+//  int j;
 	char	*line;
 
-	i = 0;
+//  i = -1;
 	get_size_map(parse, fd);
 	fd = open(file, O_RDONLY);
-	parse->map = malloc(sizeof(char *) * (parse->map_height + 1));
+	parse->map = malloc(sizeof(char *) * (parse->map_height + 1)); // ft_calloc sinon
+//  while (++i < parse->map_height)
+//      parse->map[i] = ft_calloc(sizeof(char), parse->map_width + 1);
+	i = 0;
 	while (i++ < parse->line_map_start)
 		line = get_next_line(fd);
 	i = 0;
+//  while (i++ < parse->map_height) // si correctement check
 	while (1)
 	{
 		if (!line || line[0] == '\n')
 			break ;
 		parse->map[i++] = ft_strdup(line);
+//  	ft_strlcat(parse->map[i], line, -1);
+//      j = ft_strlen(line);
+//      while (j < parse->map_width)
+//          parse->map[i][j++] = ' ';
 		free(line);
 		line = get_next_line(fd);
 	}
