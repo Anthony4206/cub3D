@@ -6,15 +6,12 @@
 
 void	check_map_line(char *line)
 {
-	int	i;
+	int	        i;
 
 	i = 0;
 	while (line[i])
 	{
-//      if (!ft_strchr("NSEW01 \n\t", line[i]))
-		if (!(line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W'
-			|| line[i] == '0' || line[i] == '1' || line[i] == ' ' || line[i] == '	' 
-			|| line[i] == '\n'))
+        if (!ft_strchr("NSEW01 \n\t", line[i]))
 		{
 			printf("ERORR CHAR=%c.\n", line[i]);
 			free(line);
@@ -29,15 +26,15 @@ int	check_empty_line(char *line)
 	int	i;
 
 	i = 0;
-	if (!line || line[0] == '\0')
-		return (1);
+	if (!line)
+		return (0);
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\n')
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 void	check_if_map_in_last(char *line, int fd)
@@ -68,14 +65,13 @@ void	get_size_map(t_parse *parse, int fd)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (!check_empty_line(line))
+		if (check_empty_line(line))
 			break ;
 		i++;
 	}
-	parse->line_map_start = i;
 	while (1)
 	{
-		if (!line || check_empty_line(line))
+		if (!check_empty_line(line))
 			break ;
 		parse->map_height++;
 		size = ft_strlen(line);
@@ -95,32 +91,46 @@ void	get_size_map(t_parse *parse, int fd)
 
 void	get_map(t_parse *parse, int fd, char *file)
 {
-	int	i;
-//  int j;
+	int	    i;
+    int     j;
 	char	*line;
 
-//  i = -1;
+    i = -1;
 	get_size_map(parse, fd);
 	fd = open(file, O_RDONLY);
-	parse->map = malloc(sizeof(char *) * (parse->map_height + 1)); // ft_calloc sinon
-//  while (++i < parse->map_height)
-//      parse->map[i] = ft_calloc(sizeof(char), parse->map_width + 1);
-	i = 0;
-	while (i++ < parse->line_map_start)
+	parse->map = ft_calloc(sizeof(char *), parse->map_height + 1);
+    while (++i < parse->map_height)
+        parse->map[i] = ft_calloc(sizeof(char), parse->map_width + 1);
+    j = 6;
+    while (1)
+    {
 		line = get_next_line(fd);
-	i = 0;
-//  while (i++ < parse->map_height) // si correctement check
-	while (1)
+        if (check_empty_line(line))
+            j--;
+        if (j == 0)
+            break ;
+    }
+	line = get_next_line(fd);
+    while (!check_empty_line(line))
+	    line = get_next_line(fd);
+	i = -1;
+    while (++i < parse->map_height)
 	{
-		if (!line || line[0] == '\n')
-			break ;
-		parse->map[i++] = ft_strdup(line);
-//  	ft_strlcat(parse->map[i], line, -1);
-//      j = ft_strlen(line);
-//      while (j < parse->map_width)
-//          parse->map[i][j++] = ' ';
+  	    ft_strlcat(parse->map[i], line, -1);
+        j = ft_strlen(line) - 2;
+//        printf("map_wight : %d\n", parse->map_width);
+        if (!parse->map[i][parse->map_width])
+        {
+//            printf("!\n");
+            j++;
+        }
+ //       printf("j : %d\n", j);
+        while (++j < parse->map_width)
+            parse->map[i][j - 1] = ' ';
+        parse->map[i][j] = '\0';
+ //       printf("i : %d : %s\n", i, parse->map[i]);
 		free(line);
 		line = get_next_line(fd);
 	}
-	//if (line[0] == '\n')
+	free(line);
 }

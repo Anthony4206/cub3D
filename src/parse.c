@@ -158,29 +158,60 @@ void    check_pos(char **map, int i, int j)
         error_exit("Error\nMap is not close\n");
 }
 
-void    parse_wall(t_parse ctx)
+int chr_last_wall(char **map)
 {
     int i;
     int j;
+    int player;
+    int ret;
 
     i = -1;
-    while (++i < ctx.map_height)
+    player = 0;
+    while (map[++i])
     {
         j = -1;
-        while (++j < ctx.map_width)
+        while (map[i][++j])
         {
-            if (i == 0 || i == ctx.map_height - 1)
+            if (ft_strchr("NSEW", map[i][j]))
+                player++;
+            if (ft_strchr("0NSEW", map[i][j]) && j > ret)
+                ret = j;
+        }
+    }
+    if (player != 1)
+        error_exit("Error\nNumber of disabled players\n");
+    return (ret + 1);
+}
+
+void    parse_wall(t_parse parse)
+{
+    int i;
+    int j;
+    int last;
+
+    last = chr_last_wall(parse.map);
+//    printf("%d\n", last);
+    i = -1;
+    while (++i < parse.map_height)
+    {
+        j = -1;
+        while (parse.map[i][++j] && j <= last)
+        {
+            if (i == 0 || i == parse.map_height - 1)
             {
-                if (ctx.map[i][j] != ' ' && ctx.map[i][j] != '1')
+                if (!ft_strchr(" 1", parse.map[i][j]))
+                {
+//                    printf("1\n");
                     error_exit("Error\nMap is not close\n");
+                }
             }
             else
             {
-                if (!ft_strchr(" 1", ctx.map[i][0])
-                    || !ft_strchr(" 1", ctx.map[i][ctx.map_width - 1]))
+                if (!ft_strchr(" 1", parse.map[i][0])
+                    || !ft_strchr(" 1", parse.map[i][last]))
                     error_exit("Error\nMap is not close\n");
-                if (ft_strchr("NSEW0", ctx.map[i][j]))
-                    check_pos(ctx.map, i, j);
+                if (ft_strchr("NSEW0", parse.map[i][j]))
+                    check_pos(parse.map, i, j);
             }
         }
     }
