@@ -1,0 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_header.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 13:10:26 by alevasse          #+#    #+#             */
+/*   Updated: 2023/01/05 15:51:07 by alevasse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <libft.h>
+
+#include "../structs.h"
+#include "../utils.h"
+#include "parse.h"
+
+int	check_int_color(char *str)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	if (str[0] == '-')
+		error_exit("Error\nInvalid RGB code\n");
+	while (str[0] == '0' && ft_isdigit(str[1]))
+		str++;
+	while (ft_isdigit(str[i]))
+		i++;
+	if (i > 3)
+		error_exit("Error\nInvalid RGB code\n");
+	n = ft_atoi(str);
+	if (n > 255)
+		error_exit("Error\nInvalid RGB code\n");
+	return (n);
+}
+
+int	check_colors(char *color)
+{
+	int	i;
+	int	r;
+	int	g;
+	int	b;
+
+	i = -1;
+	r = check_int_color(color);
+	while (ft_isdigit(color[++i]))
+		;
+	if (!(color[i] == ',' && ft_isdigit(color[i + 1])))
+		error_exit("Error\nInvalid color code\n");
+	i++;
+	g = check_int_color(color + i)
+		;
+	while (ft_isdigit(color[++i]))
+		;
+	if (!(color[i] == ',' && ft_isdigit(color[i + 1])))
+		error_exit("Error\nInvalid color code\n");
+	i++;
+	b = check_int_color(color + i);
+	while (ft_isdigit(color[++i]))
+		;
+	while (color[i] == ' ')
+		i++;
+	if (color[i] != '\n')
+		error_exit("Error\nInvalid color code\n");
+	return (create_rgb(r, g, b));
+}
+
+void	init_texture(char *texture, t_parse *parse, int n)
+{
+	if (texture[0] == 'N')
+		parse->N = add_arg(texture + n);
+	else if (texture[0] == 'S')
+		parse->S = add_arg(texture + n);
+	else if (texture[0] == 'E')
+		parse->E = add_arg(texture + n);
+	else if (texture[0] == 'W')
+		parse->W = add_arg(texture + n);
+	else if (texture[0] == 'F')
+	{
+		parse->F = add_arg(texture + n);
+		parse->F_RGB = check_colors(parse->F);
+	}
+	else if (texture[0] == 'C')
+	{
+		parse->C = add_arg(texture + n);
+		parse->C_RGB = check_colors(parse->C);
+	}
+}
+
+void	parse_texture(char *texture, t_parse *parse, int n)
+{
+	if (texture[0] == 'N' && parse->N)
+		error_exit("Error: texture specified more than once\n");
+	else if (texture[0] == 'S' && parse->S)
+		error_exit("Error: texture specified more than once\n");
+	else if (texture[0] == 'W' && parse->W)
+		error_exit("Error: texture specified more than once\n");
+	else if (texture[0] == 'E' && parse->E)
+		error_exit("Error: texture specified more than once\n");
+	else if (texture[0] == 'F' && parse->F)
+		error_exit("Error: texture specified more than once\n");
+	else if (texture[0] == 'C' && parse->C)
+		error_exit("Error: texture specified more than once\n");
+	init_texture(texture, parse, n);
+}
