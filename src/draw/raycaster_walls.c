@@ -1,9 +1,24 @@
-#include "libft.h"
-#include "utils.h"
-#include "structs.h"
-#include "parse.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster_walls.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdemma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 17:21:24 by mdemma            #+#    #+#             */
+/*   Updated: 2023/01/05 17:21:30 by mdemma           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	generate_texture(t_ctx *ctx)
+#include "libft.h"
+#include "../utils.h"
+#include "../main.h"
+#include "../structs.h"
+#include "../parse/parse.h"
+#include "walls.h"
+
+//A CHANGER AVEC LES TEXTURES IMPORTEES
+/*void	generate_texture(t_ctx *ctx)
 {
 	for(int x = 0; x < ctx->tex.tex_width; x++)
   for(int y = 0; y < ctx->tex.tex_height; y++)
@@ -16,26 +31,20 @@ void	generate_texture(t_ctx *ctx)
 	ctx->tex.texture[1][ctx->tex.tex_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
 	ctx->tex.texture[2][ctx->tex.tex_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
 	ctx->tex.texture[3][ctx->tex.tex_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-	ctx->tex.texture[4][ctx->tex.tex_width * y + x] = 256 * xorcolor; //xor green
-	ctx->tex.texture[5][ctx->tex.tex_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-	ctx->tex.texture[6][ctx->tex.tex_width * y + x] = 65536 * ycolor; //red gradient
-	ctx->tex.texture[7][ctx->tex.tex_width * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
   }
-}
+}*/
 
 //cameraX: points to the right vertical stripe, x-coordinate on the camera plane
 //with cameraX=0 being the center, camX=-1 being left side, camX=1 being right side
 //x is the x-coord on the screen (ex:50 is at the center of a 100-wide screen)
 //w is the width of the screen
 //PAS A INITIALISER: CALCULATION for each ray dir_vector coordinates
-void	calculate_rays(t_ctx *ctx)
+void	raycasting_walls(t_ctx *ctx)
 {
 	int	x;
 	
 	x = 0;
-	//ctx->time.time = 0;
-	//ctx->time.old_time = 0;
-	generate_texture(ctx);
+	//generate_texture(ctx);
 	ctx->ray.mapX = (int)ctx->player.posX;
 	ctx->ray.mapY = (int)ctx->player.posY;
 	while (x++ < ctx->screen.width)
@@ -46,11 +55,11 @@ void	calculate_rays(t_ctx *ctx)
 		if (ctx->ray.ray_dirX == 0)
 			ctx->ray.delta_distX = 1e30;
 		else
-			ctx->ray.delta_distX = abs(1 / ctx->ray.ray_dirX);
+			ctx->ray.delta_distX = fabs(1 / ctx->ray.ray_dirX);
 		if (ctx->ray.ray_dirY == 0)
 			ctx->ray.delta_distY = 1e30;
 		else
-			ctx->ray.delta_distY = abs(1 / ctx->ray.ray_dirY);
+			ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
 		calculate_side_dist(ctx);
 		exec_dda(ctx);
 		calc_perp_wall_dist(ctx);
@@ -104,7 +113,7 @@ void	exec_dda(t_ctx *ctx)
 			ctx->ray.mapY += ctx->ray.stepY;
 			ctx->ray.hit_side = 1;			
 		}
-		if (worldmap[ctx->ray.mapX][ctx->ray.mapY] > 0)
+		if (ctx->parse.map[ctx->ray.mapX][ctx->ray.mapY] - '0' > 0)
 			hit = true;
 	}
 }

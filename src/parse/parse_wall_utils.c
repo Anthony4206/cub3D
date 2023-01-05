@@ -27,8 +27,8 @@ void	check_pos(char **map, int i, int j)
 
 void	parse_player(t_parse *parse, char *orient, int i, int j)
 {
-	parse->pX = j;
-	parse->pY = i;
-	parse->orient = *orient;
+	parse->init_posX = j;
+	parse->init_posY = i;
+	parse->init_dir = *orient;
 	*orient = '0';
 }

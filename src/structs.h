@@ -21,12 +21,6 @@ typedef struct s_player
 	double	dirY;
 }			t_player;
 
-typedef struct s_time
-{
-	double	time;
-	double	old_time;
-}			t_time;
-
 typedef struct s_ray
 {
 	double	cameraX;
@@ -119,7 +113,6 @@ typedef struct s_ctx
 	t_player	player;
 	t_screen	screen;
 	t_tex		tex;
-	t_time		time;
 }			t_ctx;
 
 #endif

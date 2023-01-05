@@ -13,33 +13,32 @@
 #include "libft.h"
 #include "utils.h"
 #include "structs.h"
-#include "parse.h"
+#include "parse/parse.h"
 
 void	init_player(t_ctx *ctx)
 {
 	ctx->player.posX = ctx->parse.init_posX;
 	ctx->player.posY = ctx->parse.init_posY;
-	if (ctx->parse.init_dir == N || ctx->parse.init_dir == S)
+	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
 		ctx->player.dirX = 0;
-	else if (ctx->parse.init_dir == E)
+	else if (ctx->parse.init_dir == 'E')
 		ctx->player.dirX = 1;
 	else
 		ctx->player.dirX = -1;
-	if (ctx->parse.init_dir == E || ctx->parse.init_dir == W)
+	if (ctx->parse.init_dir == 'E' || ctx->parse.init_dir == 'W')
 		ctx->player.dirY = 0;
-	else if (ctx->parse.init_dir == S)
+	else if (ctx->parse.init_dir == 'S')
 		ctx->player.dirY = 1;
 	else
 		ctx->player.dirY = -1;
 	ctx->ray.plane_X = 0;
 	ctx->ray.plane_Y = 0.66;
-	time = 0;
-	old_time = 0;
 }
 
-void	init_cub(argv[1], t_ctx *ctx)
+void	init_cub(char *argv, t_ctx *ctx)
 {
 	init_player(ctx);
+	(void)argv;
 	/*****
 	 * initialiser mlx
 	 * initialiser win

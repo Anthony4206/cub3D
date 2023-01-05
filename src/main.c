@@ -15,6 +15,8 @@
 #include "utils.h"
 #include "structs.h"
 #include "parse/parse.h"
+#include "draw/walls.h"
+#include "main.h"
 
 int	main(int argc, char **argv)
 {
@@ -23,6 +25,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_exit("error: too few arguments\n");
 	ctx.parse = parse(argv[1]);
+	init_cub(argv[1], &ctx);
+	raycasting_walls(&ctx);
 //	system("leaks cub3D");
 	
 	{
@@ -34,4 +38,5 @@ int	main(int argc, char **argv)
     //mlx_hook pour configurer les touches d'action
 	//mlx_loop qui renvoi à la fonction pour dessiner
     //return
+	return (0);
 }
