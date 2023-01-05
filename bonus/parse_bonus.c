@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 09:14:29 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 10:20:47 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:30:53 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void    parse_map()
     //éventuellement changer les valeurs des mur pour parser les bonnes textures
     //sinon parser directement lors de l'initialisation du char** map
     //malloc une map carré
-
 }
 
 t_ctx   parse(char *map_file)

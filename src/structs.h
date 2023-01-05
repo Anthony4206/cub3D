@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 15:13:57 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/05 11:55:21 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ typedef struct s_map
 
 typedef struct s_parse
 {
-	int		line_map_start;
+	int	map_height;
+	int	map_width;
+	int	line_map_start;
 	char	**map;
 	double	init_posX;
 	double	init_posY;
 	char	init_dir; //NSEW
-	//initial malloc
 	char	*N;
 	char	*S;
 	char	*E;

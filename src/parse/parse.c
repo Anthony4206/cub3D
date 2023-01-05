@@ -5,36 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 09:14:29 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 10:20:47 by alevasse         ###   ########.fr       */
+/*   Created: 2023/01/05 14:59:37 by alevasse          #+#    #+#             */
+/*   Updated: 2023/01/05 15:01:18 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void    parse_color()
+#include <fcntl.h>
+#include <libft.h>
+
+#include "../utils.h"
+#include "../structs.h"
+#include "parse.h"
+
+/*void	parse_color()
 {
     //parse des textures
     //parse de la couleur du sol
     //parse de la couleur du plafond
-}
+}*/
 
-void    parse_map()
+t_parse	parse(char *str)
 {
-    //parse des infos générales de la map
-    //parse des infos sur le joueur grace à NSEW
-    //changer les valeurs si nécéssaire (NSEW devient 0 par ex)
-    //parser la map dans char** map (éventuellement remplacer les espaces)
-    //éventuellement changer les valeurs des mur pour parser les bonnes textures
-    //sinon parser directement lors de l'initialisation du char** map
-    //malloc une map carré
+	t_parse	ret;
+	int		fd;
+	char	*line;
 
-}
-
-t_ctx   parse(char *map_file)
-{
-    t_ctx   ret;
-
-    //parse des couleurs
-    //parse de la map
-
-    return (ret);
+	ft_bzero(&ret, sizeof(t_parse));
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		error_exit("Error\nInvalid map name\n");
+	if (ft_strncmp(str + ft_strlen(str) - 4, ".cub", 4))
+		error_exit("Error\nInvalid map format 1\n");
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		check_line(&ret, line);
+		if (ret.C && ret.E && ret.F && ret.N && ret.S && ret.W)
+			break ;
+		free(line);
+	}
+	free(line);
+	get_map(&ret, fd, str);
+	parse_wall(ret);
+	return (ret);
 }
