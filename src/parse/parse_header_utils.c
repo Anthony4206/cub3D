@@ -11,18 +11,27 @@
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdio.h>
+
+#include "../utils.h"
 
 int	create_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
-char	*add_arg(char *s)
+char	*add_arg(char *s, int size)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	*ret;
 
 	i = -1;
+	ret = ft_calloc(sizeof(char), size + 1);
 	while (s[++i] == ' ')
 		;
-	return (ft_strdup(s + i));
+	j = 0;
+	while (s[i] && (s[i] != ' ' && s[i] != '\n' && s[i] != '\0'))
+		ret[j++] = s[i++];
+	return (ret);
 }

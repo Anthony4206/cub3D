@@ -42,6 +42,43 @@ int	is_initial(char *line)
 		return (0);
 }
 
+int	ft_strlen_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		;
+	return (i);
+}
+
+int	check_arg(char *line, int initial)
+{
+	char	**tmp;
+	int		size;
+
+	size = 0;
+	tmp = ft_split(line + initial, ' ');
+	if (ft_strchr(tmp[0], '\n'))
+	{
+		if (tmp[0][0] == '\n')
+		{
+			ft_free_tab(tmp, ft_strlen_tab(tmp));
+			error_exit("Error\nInvalid texture argument\n");
+		}
+		size = ft_strlen(tmp[0]) - 1;
+	}
+	else if (tmp[1][0] == '\n')
+		size = ft_strlen(tmp[0]);
+	else
+	{
+		ft_free_tab(tmp, ft_strlen_tab(tmp));
+		error_exit("Error\nInvalid texture argument\n");
+	}
+	ft_free_tab(tmp, ft_strlen_tab(tmp));
+	return (size);
+}
+
 void	check_line(t_parse *parse, char *line)
 {
 	int	i;
@@ -58,6 +95,5 @@ void	check_line(t_parse *parse, char *line)
 		free(line);
 		error_exit("Error\nInvalid texture initials\n");
 	}
-	parse_texture(line + i, parse, n);
-	i += n;
+	parse_texture(line + i, parse, check_arg(line, n), n);
 }

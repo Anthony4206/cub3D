@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdio.h>
 
 #include "../structs.h"
 #include "../utils.h"
@@ -60,48 +61,44 @@ int	check_colors(char *color)
 	b = check_int_color(color + i);
 	while (ft_isdigit(color[++i]))
 		;
-	while (color[i] == ' ')
-		i++;
-	if (color[i] != '\n')
-		error_exit("Error\nInvalid color code\n");
 	return (create_rgb(r, g, b));
 }
 
-void	init_texture(char *texture, t_parse *parse, int n)
+void	init_texture(char *texture, t_parse *parse, int size, int n)
 {
 	if (texture[0] == 'N')
-		parse->N = add_arg(texture + n);
+		parse->N = add_arg(texture + n, size);
 	else if (texture[0] == 'S')
-		parse->S = add_arg(texture + n);
+		parse->S = add_arg(texture + n, size);
 	else if (texture[0] == 'E')
-		parse->E = add_arg(texture + n);
+		parse->E = add_arg(texture + n, size);
 	else if (texture[0] == 'W')
-		parse->W = add_arg(texture + n);
+		parse->W = add_arg(texture + n, size);
 	else if (texture[0] == 'F')
 	{
-		parse->F = add_arg(texture + n);
+		parse->F = add_arg(texture + n, size);
 		parse->F_RGB = check_colors(parse->F);
 	}
 	else if (texture[0] == 'C')
 	{
-		parse->C = add_arg(texture + n);
+		parse->C = add_arg(texture + n, size);
 		parse->C_RGB = check_colors(parse->C);
 	}
 }
 
-void	parse_texture(char *texture, t_parse *parse, int n)
+void	parse_texture(char *texture, t_parse *parse, int size, int n)
 {
 	if (texture[0] == 'N' && parse->N)
-		error_exit("Error: texture specified more than once\n");
+		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'S' && parse->S)
-		error_exit("Error: texture specified more than once\n");
+		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'W' && parse->W)
-		error_exit("Error: texture specified more than once\n");
+		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'E' && parse->E)
-		error_exit("Error: texture specified more than once\n");
+		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'F' && parse->F)
-		error_exit("Error: texture specified more than once\n");
+		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'C' && parse->C)
-		error_exit("Error: texture specified more than once\n");
-	init_texture(texture, parse, n);
+		error_exit("Error\nTexture specified more than once\n");
+	init_texture(texture, parse, size, n);
 }

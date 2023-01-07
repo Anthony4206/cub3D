@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	ctx.parse = parse(argv[1]);
 	init_cub(argv[1], &ctx);
 	raycasting_walls(&ctx);
-//	system("leaks cub3D");
+	system("leaks cub3D");
 	
 	{
 		//message d'erreur (envoyé directement dans la fonction parse)

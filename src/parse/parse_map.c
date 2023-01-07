@@ -18,29 +18,28 @@
 #include "../utils.h"
 #include "../structs.h"
 
-void	add_size(t_parse *parse, char *line, int fd)
+void	add_size(t_parse *parse, char **line, int fd)
 {
 	int		size;
 
 	while (1)
 	{
-		if (!check_empty_line(line))
+		if (!check_empty_line(*line))
 			break ;
 		parse->map_height++;
-		size = ft_strlen(line);
-		if (line[size - 1] == '\n')
+		size = ft_strlen(*line);
+		if ((*line)[size - 1] == '\n')
 			size--;
 		if (size > parse->map_width)
 			parse->map_width = size;
-		check_map_line(line);
-		free(line);
-		line = get_next_line(fd);
+		check_map_line(*line);
+		free(*line);
+		*line = get_next_line(fd);
 	}
 }
 
-void	get_size_map(t_parse *parse, int fd)
+void	get_size_map(t_parse *parse, char *line, int fd)
 {
-	char	*line;
 	int		i;
 
 	parse->map_height = 0;
@@ -56,8 +55,8 @@ void	get_size_map(t_parse *parse, int fd)
 		free(line);
 		i++;
 	}
-	add_size(parse, line, fd);
-	check_if_map_in_last(line, fd);
+	add_size(parse, &line, fd);
+	check_if_map_in_last(&line, fd);
 	close(fd);
 }
 
@@ -100,14 +99,12 @@ void	init_map_tab(t_parse *parse, char *line, int fd)
 	free(line);
 }
 
-void	get_map(t_parse *parse, int fd, char *file)
+void	get_map(t_parse *parse, char *line, int fd, char *file)
 {
 	int		i;
-	char	*line;
 
 	i = -1;
-	line = NULL;
-	get_size_map(parse, fd);
+	get_size_map(parse, line, fd);
 	fd = open(file, O_RDONLY);
 	parse->map = ft_calloc(sizeof(char *), parse->map_height + 1);
 	while (++i < parse->map_height)

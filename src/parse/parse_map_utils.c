@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdio.h>
 
 #include "../utils.h"
 
@@ -18,15 +19,14 @@ void	check_map_line(char *line)
 {
 	int	i;
 
-	i = 0;
-	while (line[i])
+	i = -1;
+	while (line[++i])
 	{
 		if (!ft_strchr("NSEW01 \n", line[i]))
 		{
 			free(line);
 			error_exit("Error\nInvalid map format\n");
 		}
-		i++;
 	}
 }
 
@@ -46,19 +46,22 @@ int	check_empty_line(char *line)
 	return (0);
 }
 
-void	check_if_map_in_last(char *line, int fd)
+void	check_if_map_in_last(char **line, int fd)
 {
-	if (!check_empty_line(line))
+	if (!check_empty_line(*line))
 	{
 		while (1)
 		{
-			free(line);
-			line = get_next_line(fd);
-			if (check_empty_line(line) || !line)
+			free(*line);
+			*line = get_next_line(fd);
+			if (check_empty_line(*line))
+			{
+				free(*line);
+				error_exit("Error\nMap not finishing item\n");
+			}
+			if (!(*line))
 				break ;
 		}
-		if (check_empty_line(line))
-			error_exit("Error\nMap not finishing item\n");
 	}
-//	free(line);
+	free(*line);
 }
