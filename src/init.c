@@ -23,6 +23,8 @@ void	init_player(t_ctx *ctx)
 {
 	ctx->player.posX = ctx->parse.init_posX;
 	ctx->player.posY = ctx->parse.init_posY;
+	printf("P posX = %f\n", ctx->player.posX);
+	printf("P posY = %f\n", ctx->player.posY);
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
 		ctx->player.dirX = 0;
 	else if (ctx->parse.init_dir == 'E')
@@ -42,8 +44,8 @@ void	init_player(t_ctx *ctx)
 void    init_mlx(t_ctx *ctx)
 {
 	ctx->mlx = mlx_init();
-	ctx->win = mlx_new_window(ctx->mlx, WIGHT, HEIGHT, "cub3d");
-	ctx->img.img = mlx_new_image(ctx->mlx, WIGHT, HEIGHT);
+	ctx->win = mlx_new_window(ctx->mlx, WIDTH, HEIGHT, "cub3d");
+	ctx->img.img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
 	ctx->img.addr = mlx_get_data_addr(ctx->img.img, &ctx->img.bpp,
 			&ctx->img.line_len, &ctx->img.endian);
 }

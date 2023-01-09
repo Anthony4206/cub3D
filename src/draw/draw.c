@@ -25,22 +25,23 @@ void	print_background(t_ctx *ctx)
 	while (++i < (HEIGHT / 2))
 	{
 		j = -1;
-		while (++j < WIGHT)
+		while (++j < WIDTH)
 			my_mlx_pixel_put(&ctx->img, j, i, ctx->parse.C_RGB);
 	}
 	i--;
 	while (++i < HEIGHT)
 	{
 		j = -1;
-		while (++j < WIGHT)
+		while (++j < WIDTH)
 			my_mlx_pixel_put(&ctx->img, j, i, ctx->parse.F_RGB);
 	}
 }
 
 int	draw(t_ctx *ctx)
 {
-	ft_bzero(ctx->img.addr, WIGHT * HEIGHT * 4);
+//	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
 	print_background(ctx);
+	raycasting_walls(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
 	return (0);
 }

@@ -22,12 +22,14 @@ int	main(int argc, char **argv)
 {
 	t_ctx	ctx;
 
-	if (argc != 2)
-		error_exit("error: too few arguments\n");
+	(void)argv;
+	(void)argc;
+	/*if (argc != 2)
+		error_exit("error: too few arguments\n");*/
     ft_bzero(&ctx, sizeof(t_ctx));
-	ctx.parse = parse(argv[1]);
+	ctx.parse = parse(/*argv[1]*/"maps/42.cub");
 	init_cub(&ctx);
-	raycasting_walls(&ctx);
+	//raycasting_walls(&ctx);
 //	system("leaks cub3D");
 	
 	{

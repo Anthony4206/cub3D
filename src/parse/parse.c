@@ -32,7 +32,7 @@ t_parse	parse(char *str)
 		error_exit("Error\nInvalid map format\n");
 	parse_header(&ret, &line, fd);
 	get_map(&ret, line, fd, str);
-	parse_wall(ret);
+	parse_wall(&ret);
 	close(fd);
 	return (ret);
 }

@@ -30,7 +30,7 @@ void	get_size_map(t_parse *parse, char *line, int fd);
 void	get_map(t_parse *parse, char *line, int fd, char *file);
 void	check_pos(char **map, int i, int j);
 void	parse_player(t_parse *parse, char *orient, int i, int j);
-void	parse_wall(t_parse parse);
+void	parse_wall(t_parse *parse);
 void	check_if_map_in_last(char **line, int fd);
 void	parse_header(t_parse *parse, char **line, int fd);
 void    check_open_file(t_parse *parse);

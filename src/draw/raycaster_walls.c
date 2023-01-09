@@ -16,23 +16,41 @@
 #include "../structs.h"
 #include "../parse/parse.h"
 #include "walls.h"
+#include <stdio.h>
 
 //A CHANGER AVEC LES TEXTURES IMPORTEES
-/*void	generate_texture(t_ctx *ctx)
+void	generate_texture(t_ctx *ctx)
 {
+	printf("ctx->tex.tex_width = %d\n", ctx->tex.tex_width);
+	printf("ctx->tex.tex_height = %d\n", ctx->tex.tex_height);
+	ctx->tex.texture = ft_calloc(4, sizeof(int *));
+	ctx->tex.texture[0] = ft_calloc(ctx->tex.tex_width * ctx->tex.tex_height + ctx->tex.tex_width, sizeof(int));
+	ctx->tex.texture[1] = ft_calloc(ctx->tex.tex_width * ctx->tex.tex_height + ctx->tex.tex_width, sizeof(int));
+	ctx->tex.texture[2] = ft_calloc(ctx->tex.tex_width * ctx->tex.tex_height + ctx->tex.tex_width, sizeof(int));
+	ctx->tex.texture[3] = ft_calloc(ctx->tex.tex_width * ctx->tex.tex_height + ctx->tex.tex_width, sizeof(int));
+	printf("taille CALLOC TEXTURE = %d\n", ctx->tex.tex_width * ctx->tex.tex_height + ctx->tex.tex_width);
 	for(int x = 0; x < ctx->tex.tex_width; x++)
-  for(int y = 0; y < ctx->tex.tex_height; y++)
-  {
-    int xorcolor = (x * 256 / ctx->tex.tex_width) ^ (y * 256 / ctx->tex.tex_height);
-    //int xcolor = x * 256 / texWidth;
-    int ycolor = y * 256 / ctx->tex.tex_height;
-    int xycolor = y * 128 / ctx->tex.tex_height + x * 128 / ctx->tex.tex_width;
-    ctx->tex.texture[0][ctx->tex.tex_width * y + x] = 65536 * 254 * (x != y && x != ctx->tex.tex_width - y); //flat red texture with black cross
+	for(int y = 0; y < ctx->tex.tex_height; y++)
+{
+	int xorcolor = (x * 256 / ctx->tex.tex_width) ^ (y * 256 / ctx->tex.tex_height);
+	//int xcolor = x * 256 / texWidth;
+	//int ycolor = y * 256 / ctx->tex.tex_height;
+	int xycolor = y * 128 / ctx->tex.tex_height + x * 128 / ctx->tex.tex_width;
+	ctx->tex.texture[0][ctx->tex.tex_width * y + x] = 65536 * 254 * (x != y && x != ctx->tex.tex_width - y); //flat red texture with black cross
 	ctx->tex.texture[1][ctx->tex.tex_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
 	ctx->tex.texture[2][ctx->tex.tex_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
 	ctx->tex.texture[3][ctx->tex.tex_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-  }
-}*/
+}
+}
+
+void	init_screen_buffer(t_ctx *ctx)
+{
+	int	i = -1;
+
+	ctx->screen.buffer = malloc(sizeof(unsigned int *) * HEIGHT);
+	while (++i < HEIGHT)
+		ctx->screen.buffer[i] = malloc(sizeof(unsigned int) * WIDTH);
+}
 
 //cameraX: points to the right vertical stripe, x-coordinate on the camera plane
 //with cameraX=0 being the center, camX=-1 being left side, camX=1 being right side
@@ -44,12 +62,17 @@ void	raycasting_walls(t_ctx *ctx)
 	int	x;
 	
 	x = 0;
-	//generate_texture(ctx);
+	ctx->tex.tex_width = 64;
+	ctx->tex.tex_height = 64;
+	generate_texture(ctx);
 	ctx->ray.mapX = (int)ctx->player.posX;
+	printf("INIT map X = %d\n", ctx->ray.mapX);
+	printf("INIT map Y = %d\n", ctx->ray.mapY);
 	ctx->ray.mapY = (int)ctx->player.posY;
-	while (x++ < ctx->screen.width)
+	init_screen_buffer(ctx);
+	while (x++ < WIDTH)
 	{
-		ctx->ray.cameraX = 2 * x / (double)ctx->screen.width - 1;
+		ctx->ray.cameraX = 2 * x / (double)WIDTH - 1;
 		ctx->ray.ray_dirX = ctx->player.dirX + ctx->ray.plane_X * ctx->ray.cameraX;
 		ctx->ray.ray_dirY = ctx->player.dirY + ctx->ray.plane_Y * ctx->ray.cameraX;
 		if (ctx->ray.ray_dirX == 0)
@@ -61,6 +84,7 @@ void	raycasting_walls(t_ctx *ctx)
 		else
 			ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
 		calculate_side_dist(ctx);
+		printf("DEPART X = %d\n", x);
 		exec_dda(ctx);
 		calc_perp_wall_dist(ctx);
 		draw_wall(ctx, x);
@@ -113,7 +137,11 @@ void	exec_dda(t_ctx *ctx)
 			ctx->ray.mapY += ctx->ray.stepY;
 			ctx->ray.hit_side = 1;			
 		}
-		if (ctx->parse.map[ctx->ray.mapX][ctx->ray.mapY] - '0' > 0)
+		printf("----- TEEEEST ctx->parse.map[%d][%d]", ctx->ray.mapY, ctx->ray.mapX);
+		fflush(stdout);
+		printf("= %d\n", ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0');
+		fflush(stdout);
+		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' > 0)
 			hit = true;
 	}
 }

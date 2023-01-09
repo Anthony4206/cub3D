@@ -19,12 +19,12 @@ int	main(int argc, char **argv)
 		//message d'erreur
 		//exit failure
 	}
-	if (parse_error(argv[1]))
+	if (parse_error(/*argv[1]*/"maps/42.cub"))
 	{
 		//message d'erreur (envoyé directement dans la fonction parse)
 		//exit failure
 	}
-	ctx = parse(argv[1]);
+	ctx = parse(/*argv[1]*/"maps/42.cub");
     // parse_error et parse peuvent aussi être fait ensemble
     init_cub(&ctx);
     init_sprite(&ctx);

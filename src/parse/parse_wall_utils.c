@@ -16,6 +16,7 @@
 #include "../utils.h"
 #include "parse.h"
 
+
 void	check_pos(char **map, int i, int j)
 {
 	if (map[i - 1][j - 1] == ' ' || map[i - 1][j] == ' '
@@ -29,6 +30,8 @@ void	parse_player(t_parse *parse, char *orient, int i, int j)
 {
 	parse->init_posX = j;
 	parse->init_posY = i;
+	printf("J posX = %f\n", parse->init_posX);
+	printf("I posY = %f\n", parse->init_posY);
 	parse->init_dir = *orient;
 	*orient = '0';
 }

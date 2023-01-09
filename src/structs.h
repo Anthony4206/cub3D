@@ -13,8 +13,11 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIGHT 900
+# define WIDTH 900
 # define HEIGHT 600
+
+# include <stdio.h>
+#include <stdbool.h>
 
 typedef struct s_player
 {
@@ -91,6 +94,8 @@ typedef struct s_parse
 typedef struct s_data
 {
 	void	*img;
+	int		tex_width;
+	int		tex_height;
 	char	*addr;
 	int		bpp;
 	int		line_len;

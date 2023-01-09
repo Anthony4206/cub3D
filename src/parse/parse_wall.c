@@ -67,18 +67,18 @@ void	check_is_close(t_parse parse, int last, int i, int j)
 	}
 }
 
-void	parse_wall(t_parse parse)
+void	parse_wall(t_parse *parse)
 {
 	int	i;
 	int	j;
 	int	last;
 
-	last = chr_last_wall(&parse, parse.map);
+	last = chr_last_wall(parse, parse->map);
 	i = -1;
-	while (++i < parse.map_height)
+	while (++i < parse->map_height)
 	{
 		j = -1;
-		while (parse.map[i][++j] && j <= last)
-			check_is_close(parse, last, i, j);
+		while (parse->map[i][++j] && j <= last)
+			check_is_close(*parse, last, i, j);
 	}
 }
