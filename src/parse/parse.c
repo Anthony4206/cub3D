@@ -18,29 +18,6 @@
 #include "../structs.h"
 #include "parse.h"
 
-/*void	parse_color()
-{
-	//parse des textures
-	//parse de la couleur du sol
-	//parse de la couleur du plafond
-}*/
-
-void	parse_header(t_parse *parse, char **line, int fd)
-{
-	while (1)
-	{
-		*line = get_next_line(fd);
-		if (!(*line))
-			error_exit("Error\nInvalid map format\n");
-		check_line(parse, *line);
-		if (parse->C && parse->E && parse->F && parse->N
-			&& parse->S && parse->W)
-			break ;
-		free(*line);
-	}
-	free(*line);
-}
-
 //les dossiers sont open (à voir)
 t_parse	parse(char *str)
 {

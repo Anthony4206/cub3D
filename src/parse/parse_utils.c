@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdio.h>
 
 #include "../structs.h"
 #include "../utils.h"

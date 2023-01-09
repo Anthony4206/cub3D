@@ -35,17 +35,31 @@ void	init_player(t_ctx *ctx)
 	ctx->ray.plane_Y = 0.66;
 }
 
-void	init_cub(char *argv, t_ctx *ctx)
+void    init_mlx(t_ctx *ctx)
+{
+    ctx->mlx = mlx_init();
+    ctx->win = mlx_new_window(ctx->mlx, WIGHT, HEIGHT, "cub3d");
+    ctx->img.img = mlw_new_img(ctx->mlx, WIGHT, HEIGHT);
+    ctx->img.addr = mlx_get_data_addr(ctx->img.img, &ctx->img.bpp,
+            &ctx->img.line_len, &ctx->img.endian);
+}
+
+void    init_texture(t_ctx *ctx)
+{
+    int wight_img;
+    int height_img;
+
+    ctx->
+}
+
+void	init_cub(t_ctx *ctx)
 {
 	init_player(ctx);
-	(void)argv;
-	/*****
-	 * initialiser mlx
-	 * initialiser win
+	init_mlx(ctx);
+	init_texture(ctx);
 	 * initialiser img
 	 * initialiser addr
 	 * initialiser texture
 	 * initialiser addr texture
-	*****/
 
 }

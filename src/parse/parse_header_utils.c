@@ -12,12 +12,26 @@
 
 #include <libft.h>
 #include <stdio.h>
+#include <fcntl.h>
 
+#include "../structs.h"
 #include "../utils.h"
 
 int	create_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
+}
+
+void    check_open_file(t_parse *parse)
+{
+    if (open(parse->N, O_RDONLY) == -1)
+        error_exit("Error\nInvalid texture file name\n");
+    if (open(parse->S, O_RDONLY) == -1)
+        error_exit("Error\nInvalid texture file name\n");
+    if (open(parse->E, O_RDONLY) == -1)
+        error_exit("Error\nInvalid texture file name\n");
+    if (open(parse->W, O_RDONLY) == -1)
+        error_exit("Error\nInvalid texture file name\n");
 }
 
 char	*add_arg(char *s, int size)

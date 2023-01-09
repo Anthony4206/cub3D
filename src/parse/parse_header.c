@@ -102,3 +102,23 @@ void	parse_texture(char *texture, t_parse *parse, int size, int n)
 		error_exit("Error\nTexture specified more than once\n");
 	init_texture(texture, parse, size, n);
 }
+
+void	parse_header(t_parse *parse, char **line, int fd)
+{
+	while (1)
+	{
+		*line = get_next_line(fd);
+		if (!(*line))
+        {
+	        free(*line);
+			error_exit("Error\nInvalid map format\n");
+        }
+		check_line(parse, *line);
+		if (parse->C && parse->E && parse->F && parse->N
+			&& parse->S && parse->W)
+			break ;
+		free(*line);
+	}
+    check_open_file(parse);
+	free(*line);
+}

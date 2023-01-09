@@ -13,6 +13,9 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# define WIGHT 900
+# define HEIGHT 600
+
 typedef struct s_player
 {
 	double	posX;
@@ -101,6 +104,11 @@ typedef struct s_screen
 	unsigned int	**buffer;
 }			t_screen;
 
+typedef struct s_sreen
+{
+    
+}   t_texture;
+
 typedef struct s_ctx
 {
 	void		*mlx;
@@ -112,6 +120,7 @@ typedef struct s_ctx
 	t_ray		ray;
 	t_player	player;
 	t_screen	screen;
+    t_texture   texture;
 	t_tex		tex;
 }			t_ctx;
 

@@ -24,10 +24,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_exit("error: too few arguments\n");
+    // bzero ctx au cas ou ?
 	ctx.parse = parse(argv[1]);
 	init_cub(argv[1], &ctx);
 	raycasting_walls(&ctx);
-	system("leaks cub3D");
+//	system("leaks cub3D");
 	
 	{
 		//message d'erreur (envoyé directement dans la fonction parse)
