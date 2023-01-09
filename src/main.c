@@ -6,17 +6,17 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:25:14 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:30:22 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:31:08 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
 #include "utils.h"
+#include "init.h"
 #include "structs.h"
 #include "parse/parse.h"
 #include "draw/walls.h"
-#include "main.h"
 
 int	main(int argc, char **argv)
 {
@@ -24,9 +24,9 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_exit("error: too few arguments\n");
-    // bzero ctx au cas ou ?
+    ft_bzero(&ctx, sizeof(t_ctx));
 	ctx.parse = parse(argv[1]);
-	init_cub(argv[1], &ctx);
+	init_cub(&ctx);
 	raycasting_walls(&ctx);
 //	system("leaks cub3D");
 	

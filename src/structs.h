@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 11:55:21 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:29:43 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,15 @@ typedef struct s_screen
 	int				width; //in pixel
 	int				height; //in pixel
 	unsigned int	**buffer;
-}			t_screen;
+}					t_screen;
 
-typedef struct s_sreen
+typedef struct s_texture
 {
-    
-}   t_texture;
+    t_data	N_wall;
+    t_data	S_wall;
+    t_data	E_wall;
+    t_data	W_wall;
+}   		t_texture;
 
 typedef struct s_ctx
 {

@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:59:37 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:01:18 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:31:15 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_parse	parse(char *str)
 	int		fd;
 	char	*line;
 
-	ft_bzero(&ret, sizeof(t_parse));
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		error_exit("Error\nInvalid map name\n");

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdemma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:30:46 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/05 17:30:50 by mdemma           ###   ########.fr       */
+/*   Updated: 2023/01/09 10:02:46 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../main.h"
+#include "../init.h"
 #include "../structs.h"
 #include "walls.h"
 

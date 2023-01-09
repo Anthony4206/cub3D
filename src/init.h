@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdemma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:27:58 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/05 17:28:01 by mdemma           ###   ########.fr       */
+/*   Updated: 2023/01/09 10:00:37 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef INIT_H
+# define INIT_H
 
 # include "structs.h"
 # include <math.h>
 #include <stdbool.h>
 
-void	init_cub(char *argv, struct s_ctx *ctx);
+void	init_cub(t_ctx *ctx);
 
 #endif

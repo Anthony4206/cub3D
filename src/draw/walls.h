@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_walls.h                                       :+:      :+:    :+:   */
+/*   walls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdemma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:25:42 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/05 17:25:44 by mdemma           ###   ########.fr       */
+/*   Updated: 2023/01/09 10:14:09 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../structs.h"
 
+int		draw(t_ctx *ctx);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	raycasting_walls(t_ctx *ctx);
 void	calculate_side_dist(t_ctx *ctx);
 void	exec_dda(t_ctx *ctx);
