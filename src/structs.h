@@ -13,8 +13,8 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIDTH 1200
-# define HEIGHT 900
+# define WIDTH 50
+# define HEIGHT 40
 
 # include <stdio.h>
 #include <stdbool.h>

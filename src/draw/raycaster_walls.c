@@ -41,9 +41,9 @@ void	init_screen_buffer(t_ctx *ctx)
 {
 	int	i = -1;
 
-	ctx->screen.buffer = malloc(sizeof(unsigned int *) * HEIGHT);
+	ctx->screen.buffer = ft_calloc(sizeof(unsigned int *), HEIGHT);
 	while (++i < HEIGHT)
-		ctx->screen.buffer[i] = malloc(sizeof(unsigned int) * WIDTH);
+		ctx->screen.buffer[i] = ft_calloc(sizeof(unsigned int), WIDTH);
 }
 
 //stepX and StepY eather -1 or +1 to indicate the dir of the ray
@@ -87,20 +87,24 @@ void	raycasting_walls(t_ctx *ctx)
 	init_screen_buffer(ctx);
 	while (++x < WIDTH)
 	{
-		printf("Pour X = %d\n", x);
+		//printf("Pour X = %d\n", x);
 		ctx->ray.cameraX = 2 * x / (double)WIDTH - 1;
 		ctx->ray.ray_dirX = ctx->player.dirX + ctx->ray.plane_X * ctx->ray.cameraX;
 		ctx->ray.ray_dirY = ctx->player.dirY + ctx->ray.plane_Y * ctx->ray.cameraX;
 		ctx->ray.mapX = (int)ctx->player.posX;
 		ctx->ray.mapY = (int)ctx->player.posY;
-		if (ctx->ray.ray_dirX == 0)
-			ctx->ray.delta_distX = 1e30;
-		else
-			ctx->ray.delta_distX = fabs(1 / ctx->ray.ray_dirX);
-		if (ctx->ray.ray_dirY == 0)
-			ctx->ray.delta_distY = 1e30;
-		else
-			ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
+		// if (ctx->ray.ray_dirX == 0)
+		// 	ctx->ray.delta_distX = 1e30;
+		// else
+		// 	ctx->ray.delta_distX = fabs(1 / ctx->ray.ray_dirX);
+		// if (ctx->ray.ray_dirY == 0)
+		// 	ctx->ray.delta_distY = 1e30;
+		// else
+		// 	ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
+		ctx->ray.delta_distX = sqrt(1 + (ctx->ray.ray_dirY * ctx->ray.ray_dirY) / (ctx->ray.ray_dirX * ctx->ray.ray_dirX));
+    	ctx->ray.delta_distY = sqrt(1 + (ctx->ray.ray_dirX * ctx->ray.ray_dirX) / (ctx->ray.ray_dirY * ctx->ray.ray_dirY));
+		printf("ON TESTE : ctx->ray.delta_distX = %f\n", ctx->ray.delta_distX);
+		printf("ON TESTE : ctx->ray.delta_distY = %f\n", ctx->ray.delta_distY);
 		calculate_side_dist(ctx);
 		exec_dda(ctx, x);
 		calc_perp_wall_dist(ctx);
@@ -119,7 +123,11 @@ void	exec_dda(t_ctx *ctx, int x)
 	bool	hit;
 	int		i = 0;
 
+	(void)x;
 	hit = false;
+
+	printf("TEST666 ctx->ray.side_distX = %f\n", ctx->ray.side_distX);
+	printf("TEST666 ctx->ray.side_distY = %f\n", ctx->ray.side_distY);
 	while (hit == false)
 	{
 		if (ctx->ray.side_distX < ctx->ray.side_distY)
@@ -127,13 +135,12 @@ void	exec_dda(t_ctx *ctx, int x)
 			ctx->ray.side_distX += ctx->ray.delta_distX;
 			ctx->ray.mapX += ctx->ray.stepX;
 			ctx->ray.hit_side = 0;
+			printf("++++++++++++ICCIIIIIIIII++++++++++++++\n");
 		}
 		else
 		{
 			ctx->ray.side_distY += ctx->ray.delta_distY;
-//			printf("mapY before : %d\n", ctx->ray.mapY);
 			ctx->ray.mapY += ctx->ray.stepY;
-//			printf("mapY after : %d\n", ctx->ray.mapY);
 			ctx->ray.hit_side = 1;			
 		}
 		if (i++ < 20)
@@ -145,7 +152,7 @@ void	exec_dda(t_ctx *ctx, int x)
 		}
 		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' > 0)
 		{
-			printf("WALL HIT !\n");
+			printf("WALL HIT ! with side = %d\n", ctx->ray.hit_side);
 			hit = true;
 		}
 	}
