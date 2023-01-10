@@ -30,10 +30,10 @@ void	generate_texture(t_ctx *ctx)
 	for(int y = 0; y < ctx->tex.tex_height; y++)
 {
 
-	ctx->tex.texture[0][ctx->tex.tex_width * y + x] = 0x00FFFF; //bleu
-	ctx->tex.texture[1][ctx->tex.tex_width * y + x] = 0x009900; //vert
-	ctx->tex.texture[2][ctx->tex.tex_width * y + x] = 0x6600CC; //violet
-	ctx->tex.texture[3][ctx->tex.tex_width * y + x] = 0xFFFFFF; //blanc
+	ctx->tex.texture[0][ctx->tex.tex_width * y + x] = 0xFF0000; //bleu
+	ctx->tex.texture[1][ctx->tex.tex_width * y + x] = 0xFF0000;; //vert
+	ctx->tex.texture[2][ctx->tex.tex_width * y + x] = 0xFF0000;; //violet
+	ctx->tex.texture[3][ctx->tex.tex_width * y + x] = 0xFF0000; //rouge
 }
 }
 
@@ -84,12 +84,10 @@ void	raycasting_walls(t_ctx *ctx)
 	ctx->tex.tex_width = 64;
 	ctx->tex.tex_height = 64;
 	generate_texture(ctx);
-//	printf("INIT map X = %d\n", ctx->ray.mapX);
-//	printf("INIT map Y = %d\n", ctx->ray.mapY);
 	init_screen_buffer(ctx);
 	while (++x < WIDTH)
 	{
-//		printf("test : %d\n", x);
+		printf("Pour X = %d\n", x);
 		ctx->ray.cameraX = 2 * x / (double)WIDTH - 1;
 		ctx->ray.ray_dirX = ctx->player.dirX + ctx->ray.plane_X * ctx->ray.cameraX;
 		ctx->ray.ray_dirY = ctx->player.dirY + ctx->ray.plane_Y * ctx->ray.cameraX;
@@ -104,19 +102,22 @@ void	raycasting_walls(t_ctx *ctx)
 		else
 			ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
 		calculate_side_dist(ctx);
-//		printf("DEPART X = %d\n", x);
-		exec_dda(ctx);
+		exec_dda(ctx, x);
 		calc_perp_wall_dist(ctx);
 		draw_wall(ctx, x);
 	}
+	draw_buffer(ctx);
+	//clear_buffer(ctx->screen.buffer);
+	printf("FIN RAYCASTING LOOP\n");
 }
 
 //if side == 1, we bumped a Yline => N or S wall
 // if side == 0, a x-line => E or W wall
 //we check if the square we bumped into belongs to a wall, if yes, we stop
-void	exec_dda(t_ctx *ctx)
+void	exec_dda(t_ctx *ctx, int x)
 {
 	bool	hit;
+	int		i = 0;
 
 	hit = false;
 	while (hit == false)
@@ -135,13 +136,20 @@ void	exec_dda(t_ctx *ctx)
 //			printf("mapY after : %d\n", ctx->ray.mapY);
 			ctx->ray.hit_side = 1;			
 		}
-//		printf("----- TEEEEST ctx->parse.map[%d][%d]", ctx->ray.mapY, ctx->ray.mapX);
-//		fflush(stdout);
-//		printf("= %d\n", ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0');
-//		fflush(stdout);
-		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapY] - '0' > 0)
+		if (i++ < 20)
+		{
+			printf("----- pour X = %d TEEEEST ctx->parse.map[%d][%d]", x, ctx->ray.mapY, ctx->ray.mapX);
+			fflush(stdout);
+			printf("= %d\n", ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0');
+			fflush(stdout);
+		}
+		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' > 0)
+		{
+			printf("WALL HIT !\n");
 			hit = true;
+		}
 	}
+	printf("end of DDA !\n");
 }
 
 void	calc_perp_wall_dist(t_ctx *ctx)

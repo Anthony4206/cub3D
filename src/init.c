@@ -82,6 +82,7 @@ void	init_cub(t_ctx *ctx)
 	init_player(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
-	mlx_loop_hook(ctx->mlx, draw, ctx);
+	draw(ctx);
+	//mlx_loop_hook(ctx->mlx, draw, ctx);
 	mlx_loop(ctx->mlx);
 }

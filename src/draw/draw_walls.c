@@ -65,15 +65,17 @@ void	color_x_stripe(t_ctx *ctx, int x)
         ctx->tex.texY = (int)tex_pos & (ctx->tex.tex_height - 1);
         tex_pos += step;
        	if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0) // NORD
-			color = ctx->tex.texture[0][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			color = 0xfabc3c; //yellow
+			// color = ctx->tex.texture[0][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
 		else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX > 0) // EST
-			color = ctx->tex.texture[1][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			color = 0xFF0000;
+			// color = ctx->tex.texture[1][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
 		else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY > 0) // SUD
-			color = ctx->tex.texture[2][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			color = 0x7dff42; //green
+			// color = ctx->tex.texture[2][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
 		else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX < 0) // OUEST
-			color = ctx->tex.texture[3][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
-        if (ctx->ray.hit_side == 1) // pour assombrir... pas demandé
-            color = (color >> 1) & 8355711;
+			color = 0xc442ff; //purple
+			// color = ctx->tex.texture[3][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
 		ctx->screen.buffer[y][x] = color;
 //		printf("BUFFER COLORED[%d][%d] = %d\n", y, x, ctx->screen.buffer[y][x]);
     }
@@ -108,17 +110,35 @@ void	color_x_stripe(t_ctx *ctx, int x)
 //         ctx->screen.buffer[y][x] = color;
 //     }
 // }
+
+void	display_buffer(t_ctx *ctx)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+				printf("%d ", ctx->screen.buffer[y][x]);
+		printf("\n");
+	}
+}
+
 void	draw_buffer(t_ctx *ctx)
 {
 	int	x;
 	int	y;
 
 	x = -1;
+	// display_buffer(ctx);
 	while (++x < WIDTH)
 	{
 		y = -1;
 		while (++y < HEIGHT)
-			my_mlx_pixel_put(&ctx->img, y, x, ctx->screen.buffer[y][x]);
+			if (ctx->screen.buffer[y][x] != 0)
+				my_mlx_pixel_put(&ctx->img, y, x, ctx->screen.buffer[y][x]);
 	}
 }
 
@@ -134,6 +154,4 @@ void    draw_wall(t_ctx *ctx, int x)
 	calc_wall_x(ctx);
 	calc_x_coord_tex(ctx);
 	color_x_stripe(ctx, x);
-	draw_buffer(ctx);
-	//clear_buffer(ctx->screen.buffer);
 }
