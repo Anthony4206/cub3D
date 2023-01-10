@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:53:57 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 16:05:03 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:56:45 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,25 +99,25 @@ void	init_map_tab(t_parse *parse, char *line, int fd)
 	free(line);
 }
 
-void	display_map(t_parse *parse)
+/*void	display_map(t_parse *parse)
 {
 	int x;
 	int y;
 
 	x = 0;
 	y = 0;
-	printf("MAP HEIGHT = %d\n", parse->map_height);
-	printf("MAP WIDTH = %d\n", parse->map_width);
-	while (y < parse->map_height - 1)
+//	printf("MAP HEIGHT = %d\n", parse->map_height);
+//	printf("MAP WIDTH = %d\n", parse->map_width);
+	while (y < parse->map_height)
 	{
 		while (parse->map[y][x])
-			printf("%c", parse->map[y][x++]);
+//			printf("%c", parse->map[y][x]);
 		//printf("Fin de ligne a : %d\n", x);
-		printf("\n");
+//		printf("\n");
 		x = 0;
 		y++;
 	}
-}
+}*/
 
 void	get_map(t_parse *parse, char *line, int fd, char *file)
 {
@@ -136,5 +136,5 @@ void	get_map(t_parse *parse, char *line, int fd, char *file)
 		line = get_next_line(fd);
 	}
 	init_map_tab(parse, line, fd);
-	display_map(parse);
+//	display_map(parse);
 }

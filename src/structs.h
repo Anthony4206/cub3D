@@ -6,15 +6,15 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/09 11:29:43 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:03:50 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIDTH 900
-# define HEIGHT 600
+# define WIDTH 500
+# define HEIGHT 350
 
 # include <stdio.h>
 #include <stdbool.h>
@@ -73,9 +73,9 @@ typedef struct s_map
 
 typedef struct s_parse
 {
-	int	map_height;
-	int	map_width;
-	int	line_map_start;
+	int		map_height;
+	int		map_width;
+	int		line_map_start;
 	char	**map;
 	double	init_posX;
 	double	init_posY;

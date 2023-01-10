@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:18:21 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/09 10:35:32 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:49:40 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	check_map_line(char *line)
 	{
 		if (!ft_strchr("NSEW01 \n", line[i]))
 		{
-			printf("%s\n", line);
 			free(line);
 			error_exit("Error\nInvalid map format\n");
 		}

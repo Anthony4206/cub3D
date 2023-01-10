@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:30:46 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/09 10:02:46 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:48:22 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	color_x_stripe(t_ctx *ctx, int x)
 
 	step = 1.0 * ctx->tex.tex_height / ctx->wall.line_height;
 	tex_pos = (ctx->wall.draw_start - HEIGHT / 2 + ctx->wall.line_height / 2) * step;
-    y = ctx->wall.draw_start;
+    y = ctx->wall.draw_start - 1;
     while (++y < ctx->wall.draw_end)
     {
         ctx->tex.texY = (int)tex_pos & (ctx->tex.tex_height - 1);
@@ -75,7 +75,7 @@ void	color_x_stripe(t_ctx *ctx, int x)
         if (ctx->ray.hit_side == 1) // pour assombrir... pas demandé
             color = (color >> 1) & 8355711;
 		ctx->screen.buffer[y][x] = color;
-		printf("BUFFER COLORED[%d][%d] = %d\n", y, x, ctx->screen.buffer[y][x]);
+//		printf("BUFFER COLORED[%d][%d] = %d\n", y, x, ctx->screen.buffer[y][x]);
     }
 }
 
