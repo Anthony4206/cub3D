@@ -26,19 +26,25 @@ void	init_player(t_ctx *ctx)
 	printf("P posX = %f\n", ctx->player.posX);
 	printf("P posY = %f\n", ctx->player.posY);
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
+	{
 		ctx->player.dirX = 0;
+		ctx->ray.plane_X = 0.66;
+		ctx->ray.plane_Y = 0.0;
+	}
 	else if (ctx->parse.init_dir == 'E')
 		ctx->player.dirX = 1;
 	else
 		ctx->player.dirX = -1;
 	if (ctx->parse.init_dir == 'E' || ctx->parse.init_dir == 'W')
+	{
 		ctx->player.dirY = 0;
+		ctx->ray.plane_X = 0;
+		ctx->ray.plane_Y = 0.66;
+	}
 	else if (ctx->parse.init_dir == 'S')
 		ctx->player.dirY = 1;
 	else
 		ctx->player.dirY = -1;
-	ctx->ray.plane_X = 0;
-	ctx->ray.plane_Y = 0.66;
 }
 
 void    init_mlx(t_ctx *ctx)

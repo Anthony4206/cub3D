@@ -89,22 +89,25 @@ void	raycasting_walls(t_ctx *ctx)
 	{
 		//printf("Pour X = %d\n", x);
 		ctx->ray.cameraX = 2 * x / (double)WIDTH - 1;
+		// printf("IMPORTANT = ctx->ray.cameraX = %f\n", ctx->ray.cameraX);
 		ctx->ray.ray_dirX = ctx->player.dirX + ctx->ray.plane_X * ctx->ray.cameraX;
 		ctx->ray.ray_dirY = ctx->player.dirY + ctx->ray.plane_Y * ctx->ray.cameraX;
+		// printf("ON TESTE NOUVEAU: ctx->ray.ray_dirX = %f\n", ctx->ray.ray_dirX);
+		// printf("ON TESTE NOUVEAU :ctx->ray.ray_dirY = %f\n", ctx->ray.ray_dirY);
 		ctx->ray.mapX = (int)ctx->player.posX;
 		ctx->ray.mapY = (int)ctx->player.posY;
-		// if (ctx->ray.ray_dirX == 0)
-		// 	ctx->ray.delta_distX = 1e30;
-		// else
-		// 	ctx->ray.delta_distX = fabs(1 / ctx->ray.ray_dirX);
-		// if (ctx->ray.ray_dirY == 0)
-		// 	ctx->ray.delta_distY = 1e30;
-		// else
-		// 	ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
-		ctx->ray.delta_distX = sqrt(1 + (ctx->ray.ray_dirY * ctx->ray.ray_dirY) / (ctx->ray.ray_dirX * ctx->ray.ray_dirX));
-    	ctx->ray.delta_distY = sqrt(1 + (ctx->ray.ray_dirX * ctx->ray.ray_dirX) / (ctx->ray.ray_dirY * ctx->ray.ray_dirY));
-		printf("ON TESTE : ctx->ray.delta_distX = %f\n", ctx->ray.delta_distX);
-		printf("ON TESTE : ctx->ray.delta_distY = %f\n", ctx->ray.delta_distY);
+		if (ctx->ray.ray_dirX == 0)
+			ctx->ray.delta_distX = 1e30;
+		else
+			ctx->ray.delta_distX = fabs(1 / ctx->ray.ray_dirX);
+		if (ctx->ray.ray_dirY == 0)
+			ctx->ray.delta_distY = 1e30;
+		else
+			ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
+		// ctx->ray.delta_distX = sqrt(1 + (ctx->ray.ray_dirY * ctx->ray.ray_dirY) / (ctx->ray.ray_dirX * ctx->ray.ray_dirX));
+    	// ctx->ray.delta_distY = sqrt(1 + (ctx->ray.ray_dirX * ctx->ray.ray_dirX) / (ctx->ray.ray_dirY * ctx->ray.ray_dirY));
+		//printf("ON TESTE : ctx->ray.delta_distX = %f\n", ctx->ray.delta_distX);
+		//printf("ON TESTE : ctx->ray.delta_distY = %f\n", ctx->ray.delta_distY);
 		calculate_side_dist(ctx);
 		exec_dda(ctx, x);
 		calc_perp_wall_dist(ctx);
