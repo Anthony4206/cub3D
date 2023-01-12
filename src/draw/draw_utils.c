@@ -24,3 +24,18 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		*(unsigned int *)dst = color;
 	}
 }
+
+void	display_buffer(t_ctx *ctx)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+				printf("%d ", ctx->screen.buffer[y][x]);
+		printf("\n");
+	}
+}

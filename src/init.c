@@ -12,35 +12,38 @@
 
 #include <mlx.h>
 #include <libft.h>
-
 #include "init.h"
 #include "utils.h"
 #include "structs.h"
 #include "parse/parse.h"
 #include "draw/walls.h"
 
+void	init_plane(t_ctx *ctx)
+{
+	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
+	{
+		ctx->ray.plane_X = 0.66;
+		ctx->ray.plane_Y = 0.0;
+	}
+	else
+	{
+		ctx->ray.plane_X = 0;
+		ctx->ray.plane_Y = 0.66;
+	}
+}
+
 void	init_player(t_ctx *ctx)
 {
 	ctx->player.posX = ctx->parse.init_posX + 0.5;
 	ctx->player.posY = ctx->parse.init_posY + 0.5;
-	printf("P posX = %f\n", ctx->player.posX);
-	printf("P posY = %f\n", ctx->player.posY);
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
-	{
 		ctx->player.dirX = 0;
-		ctx->ray.plane_X = 0.66;
-		ctx->ray.plane_Y = 0.0;
-	}
 	else if (ctx->parse.init_dir == 'E')
 		ctx->player.dirX = 1;
 	else
 		ctx->player.dirX = -1;
 	if (ctx->parse.init_dir == 'E' || ctx->parse.init_dir == 'W')
-	{
 		ctx->player.dirY = 0;
-		ctx->ray.plane_X = 0;
-		ctx->ray.plane_Y = 0.66;
-	}
 	else if (ctx->parse.init_dir == 'S')
 		ctx->player.dirY = 1;
 	else
@@ -59,8 +62,7 @@ void    init_mlx(t_ctx *ctx)
 void    init_texture_img(t_ctx *ctx)
 {
 	ctx->texture.N_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.N, &ctx->texture.N_wall.tex_width,
-                &ctx->texture.N_wall.tex_height);
+			ctx->parse.N, &ctx->tex.tex_width, &ctx->tex.tex_height);
 	ctx->texture.N_wall.addr = mlx_get_data_addr(ctx->texture.N_wall.img,
 			&ctx->texture.N_wall.bpp, &ctx->texture.N_wall.line_len,
 			&ctx->texture.N_wall.endian);
@@ -82,12 +84,21 @@ void    init_texture_img(t_ctx *ctx)
 			&ctx->texture.W_wall.endian);
 }
 
+void	init_screen_buffer(t_ctx *ctx)
+{
+	int y = -1;
+
+	ctx->screen.buffer = ft_calloc(sizeof(unsigned int *), HEIGHT);
+	while (++y < HEIGHT)
+		ctx->screen.buffer[y] = ft_calloc(sizeof(unsigned int), WIDTH);
+}
+
 void	init_cub(t_ctx *ctx)
 {
 	init_player(ctx);
+	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
-	draw(ctx);
-	//mlx_loop_hook(ctx->mlx, draw, ctx);
-	mlx_loop(ctx->mlx);
+	generate_texture(ctx);
+	init_screen_buffer(ctx);
 }
