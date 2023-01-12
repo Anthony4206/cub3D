@@ -21,8 +21,8 @@
 
 void	init_player(t_ctx *ctx)
 {
-	ctx->player.posX = ctx->parse.init_posX;
-	ctx->player.posY = ctx->parse.init_posY;
+	ctx->player.posX = ctx->parse.init_posX + 0.5;
+	ctx->player.posY = ctx->parse.init_posY + 0.5;
 	printf("P posX = %f\n", ctx->player.posX);
 	printf("P posY = %f\n", ctx->player.posY);
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')

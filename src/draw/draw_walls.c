@@ -228,7 +228,8 @@ void	clear_buffer(unsigned int **buffer)
 void    draw_wall(t_ctx *ctx, int x)
 {
 	calc_height_wall(ctx);
-	ctx->tex.tex_num = ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' - 1;
+    if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX )
+//	ctx->tex.tex_num = ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' - 1;
 	calc_wall_x(ctx);
 	calc_x_coord_tex(ctx);
 	color_x_stripe(ctx, x);

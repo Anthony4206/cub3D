@@ -57,8 +57,8 @@ int	draw(t_ctx *ctx)
 {
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
 //	print_background(ctx);
-//	raycasting_walls(ctx);
-    test_img(ctx);
+	raycasting_walls(ctx);
+//    test_img(ctx);
 	printf("BEFORE PUT IMAGE TO WINDOW\n");
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
 	return (0);

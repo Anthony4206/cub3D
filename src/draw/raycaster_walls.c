@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 //A CHANGER AVEC LES TEXTURES IMPORTEES
-void	generate_texture(t_ctx *ctx)
+/*void	generate_texture(t_ctx *ctx)
 {
 	ctx->tex.texture = ft_calloc(4, sizeof(int *));
 	ctx->tex.texture[0] = ft_calloc(ctx->tex.tex_width * ctx->tex.tex_height + ctx->tex.tex_width, sizeof(int));
@@ -35,7 +35,7 @@ void	generate_texture(t_ctx *ctx)
 	ctx->tex.texture[2][ctx->tex.tex_width * y + x] = 0xFF0000;; //violet
 	ctx->tex.texture[3][ctx->tex.tex_width * y + x] = 0xFF0000; //rouge
 }
-}
+}*/
 
 void	init_screen_buffer(t_ctx *ctx)
 {
@@ -83,7 +83,7 @@ void	raycasting_walls(t_ctx *ctx)
 	x = -1;
 	ctx->tex.tex_width = 64;
 	ctx->tex.tex_height = 64;
-	generate_texture(ctx);
+//	generate_texture(ctx);
 	init_screen_buffer(ctx);
 	while (++x < WIDTH)
 	{
