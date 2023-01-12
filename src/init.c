@@ -18,8 +18,6 @@
 #include "parse/parse.h"
 #include "draw/walls.h"
 
-
-
 void	init_plane(t_ctx *ctx)
 {
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
@@ -36,8 +34,8 @@ void	init_plane(t_ctx *ctx)
 
 void	init_player(t_ctx *ctx)
 {
-	ctx->player.posX = ctx->parse.init_posX;
-	ctx->player.posY = ctx->parse.init_posY;
+	ctx->player.posX = ctx->parse.init_posX + 0.5;
+	ctx->player.posY = ctx->parse.init_posY + 0.5;
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
 		ctx->player.dirX = 0;
 	else if (ctx->parse.init_dir == 'E')
