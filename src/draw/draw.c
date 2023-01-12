@@ -37,11 +37,28 @@ void	print_background(t_ctx *ctx)
 	}
 }
 
+void    test_img(t_ctx *ctx)
+{
+    int y;
+    int x = -1;
+    
+    while (++x < ctx->texture.E_wall.tex_width)
+    {
+        y = -1;
+        while (++y < ctx->texture.E_wall.tex_height)
+        {
+            ctx->img.addr[y * ctx->img.line_len / 4 + x] =
+                ctx->texture.E_wall.addr[y * ctx->texture.E_wall.line_len / 4 + x];
+        }
+    }
+}
+
 int	draw(t_ctx *ctx)
 {
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
-	print_background(ctx);
-	raycasting_walls(ctx);
+//	print_background(ctx);
+//	raycasting_walls(ctx);
+    test_img(ctx);
 	printf("BEFORE PUT IMAGE TO WINDOW\n");
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
 	return (0);

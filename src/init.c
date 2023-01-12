@@ -52,26 +52,25 @@ void    init_mlx(t_ctx *ctx)
 
 void    init_texture_img(t_ctx *ctx)
 {
-	int	wight_img;
-	int	height_img;
-
 	ctx->texture.N_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.N, &wight_img, &height_img);
+			ctx->parse.N, &ctx->texture.N_wall.tex_width,
+                &ctx->texture.N_wall.tex_height);
 	ctx->texture.N_wall.addr = mlx_get_data_addr(ctx->texture.N_wall.img,
 			&ctx->texture.N_wall.bpp, &ctx->texture.N_wall.line_len,
 			&ctx->texture.N_wall.endian);
 	ctx->texture.S_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.S, &wight_img, &height_img);	
+			ctx->parse.S, &ctx->texture.S_wall.tex_width,
+                &ctx->texture.S_wall.tex_height);	
 	ctx->texture.S_wall.addr = mlx_get_data_addr(ctx->texture.S_wall.img,
 			&ctx->texture.S_wall.bpp, &ctx->texture.S_wall.line_len,
 			&ctx->texture.S_wall.endian);
 	ctx->texture.E_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.E, &wight_img, &height_img);	
+			ctx->parse.E, &ctx->texture.E_wall.tex_width, &ctx->texture.E_wall.tex_height);	
 	ctx->texture.E_wall.addr = mlx_get_data_addr(ctx->texture.E_wall.img,
 			&ctx->texture.E_wall.bpp, &ctx->texture.E_wall.line_len,
 			&ctx->texture.E_wall.endian);
 	ctx->texture.W_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.W, &wight_img, &height_img);
+			ctx->parse.W, &ctx->texture.W_wall.tex_width, &ctx->texture.W_wall.tex_height);
 	ctx->texture.W_wall.addr = mlx_get_data_addr(ctx->texture.W_wall.img,
 			&ctx->texture.W_wall.bpp, &ctx->texture.W_wall.line_len,
 			&ctx->texture.W_wall.endian);
