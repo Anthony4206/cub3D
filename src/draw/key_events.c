@@ -2,16 +2,32 @@
 #include "../structs.h"
 #include "walls.h"
 
+
 void	player_move(int keycode, t_ctx *ctx)
 {
-	if (keycode == 125)
-		ctx->player.posX -= 1;
-	else if (keycode == 126)
-		ctx->player.posX += 1;
-	else if (keycode == 123)
-		ctx->player.posY -= 1;
+	float	step;
+
+	step = 1;
+	if (keycode == 126)
+	{
+		ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
+		ctx->player.posY = ctx->player.posY + (ctx->player.dirY * step);
+	}
+	else if (keycode == 125)
+	{
+		ctx->player.posX = ctx->player.posX - (ctx->player.dirX * step);
+		ctx->player.posY = ctx->player.posY - (ctx->player.dirY * step);
+	}
 	else if (keycode == 124)
-		ctx->player.posY += 1;
+	{
+		ctx->player.posX = ctx->player.posX - (ctx->player.dirY * step);
+		ctx->player.posY = ctx->player.posY + (ctx->player.dirX * step);
+	}
+	else if (keycode == 123)
+	{
+		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
+		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
+	}
 	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
 	draw(ctx);
 }
