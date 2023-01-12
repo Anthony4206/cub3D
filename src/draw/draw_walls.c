@@ -126,19 +126,97 @@ void	display_buffer(t_ctx *ctx)
 	}
 }
 
+// void	display2_buffer(t_ctx *ctx)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	y = -1;
+// 	while (++y < WIDTH)
+// 	{
+// 		x = -1;
+// 		while (++x < HEIGHT)
+// 				printf("%d ", ctx->screen.buffer[y][x]);
+// 		printf("\n");
+// 	}
+// }
+
+void	rotate_counterclock_buf(t_ctx *ctx)
+{
+	int	x;
+	int	y;
+	unsigned int **buf;
+	int x2;
+	int	y2;
+
+	printf("-----------BUFFER ROTATE---------\n");
+	y = HEIGHT;
+	x2 = 0;
+	int	i = -1;
+	buf = ft_calloc(sizeof(unsigned int *), WIDTH);
+	while (++i < WIDTH)
+		buf[i] = ft_calloc(sizeof(unsigned int), HEIGHT);
+	while (--y > 0)
+	{
+		x = -1;
+		y2 = 0;
+		while (++x < WIDTH)
+		{
+			buf[y2][x2] = ctx->screen.buffer[y][x];
+			y2++;
+		}
+		free(ctx->screen.buffer[y]);
+		x2++;
+	}
+	free(ctx->screen.buffer);
+	ctx->screen.buffer = buf;
+}
+
+void	rotate_clockwise_buf(t_ctx *ctx)
+{
+	int	x;
+	int	y;
+	unsigned int **buf;
+	int x2;
+	int	y2;
+
+	y = -1;
+	x2 = 0;
+	int	i = -1;
+	buf = ft_calloc(sizeof(unsigned int *), WIDTH);
+	while (++i < WIDTH)
+		buf[i] = ft_calloc(sizeof(unsigned int), HEIGHT);
+	while (++y < HEIGHT)
+	{
+		x = WIDTH;
+		y2 = 0;
+		while (--x > 0)
+		{
+			buf[y2][x2] = ctx->screen.buffer[y][x];
+			y2++;
+		}
+		free(ctx->screen.buffer[y]);
+		x2++;
+	}
+	free(ctx->screen.buffer);
+	ctx->screen.buffer = buf;
+}
 void	draw_buffer(t_ctx *ctx)
 {
 	int	x;
 	int	y;
 
 	x = -1;
-	// display_buffer(ctx);
+	//display_buffer(ctx);
+	if (ctx->parse.init_dir == 'N'|| ctx->parse.init_dir == 'E')
+		rotate_counterclock_buf(ctx);
+	else
+		rotate_clockwise_buf(ctx);
 	while (++x < WIDTH)
 	{
 		y = -1;
 		while (++y < HEIGHT)
-			if (ctx->screen.buffer[y][x] != 0)
-				my_mlx_pixel_put(&ctx->img, y, x, ctx->screen.buffer[y][x]);
+			my_mlx_pixel_put(&ctx->img, y, x, ctx->screen.buffer[y][x]);
 	}
 }
 
