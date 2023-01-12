@@ -2,28 +2,32 @@
 #include "../structs.h"
 #include "walls.h"
 
+// void	player_moves(int keycode, t_ctx *ctx)
+// {
 
-void	player_move(int keycode, t_ctx *ctx)
+// }
+
+void	player_moves(int keycode, t_ctx *ctx)
 {
 	float	step;
 
 	step = 1;
-	if (keycode == 126)
+	if (keycode == 13)
 	{
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
 		ctx->player.posY = ctx->player.posY + (ctx->player.dirY * step);
 	}
-	else if (keycode == 125)
+	else if (keycode == 1)
 	{
 		ctx->player.posX = ctx->player.posX - (ctx->player.dirX * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirY * step);
 	}
-	else if (keycode == 124)
+	else if (keycode == 2)
 	{
 		ctx->player.posX = ctx->player.posX - (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY + (ctx->player.dirX * step);
 	}
-	else if (keycode == 123)
+	else if (keycode == 0)
 	{
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
@@ -40,14 +44,17 @@ void	end_program(t_ctx *ctx)
 
 int	deal_key(int keycode, t_ctx *ctx)
 {
+		//printf("Keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(ctx->mlx, ctx->win);
 		end_program(ctx);
 		exit(EXIT_SUCCESS);
 	}
-	else if (keycode >= 123 && keycode <= 126)
-		player_move(keycode, ctx);
+	else if ((keycode >= 0 && keycode <= 2) || keycode == 13)
+		player_moves(keycode, ctx);
+	// else if ((keycode >= 123 && keycode <= 126)
+	// 	player_rotates(keycode, ctx);
 	// else if (keycode >= 83 && keycode <= 92)
 	// 	change_colors(keycode, global);
 	// else if (keycode == 69 || keycode == 78)
