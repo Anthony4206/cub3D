@@ -27,7 +27,8 @@ int	main(int argc, char **argv)
     ft_bzero(&ctx, sizeof(t_ctx));
 	ctx.parse = parse(argv[1]);
 	init_cub(&ctx);
-	//raycasting_walls(&ctx);
+	take_instructions_and_draw(&ctx);
+	mlx_loop(ctx.mlx);
 //	system("leaks cub3D");
 	
 	{

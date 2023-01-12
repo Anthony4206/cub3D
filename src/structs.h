@@ -13,11 +13,13 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIDTH 900
-# define HEIGHT 700
+# define WIDTH 800
+# define HEIGHT 600
 
 # include <stdio.h>
+#include <mlx.h>
 #include <stdbool.h>
+#include <mlx.h>
 
 typedef struct s_player
 {
