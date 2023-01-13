@@ -14,10 +14,50 @@
 #include "../init.h"
 #include "../structs.h"
 #include "walls.h"
+#include "../parse/parse.h"
+
+void	get_texture(t_ctx *ctx)
+{
+	if (ctx->ray.hit_side == 1 )
+	{
+		if (ctx->ray.ray_dirY <= 0) 
+		{
+			if (ctx->player.dirX >= 0 ) // orient N et EST
+				ctx->wall.texture = ctx->texture.N_wall; //mur nord
+			else
+				ctx->wall.texture = ctx->texture.S_wall;//orient ouest mur sud
+		}
+		else
+		{
+			if (ctx->player.dirX >= 0 ) // orient S et EST
+				ctx->wall.texture = ctx->texture.S_wall;
+			else
+				ctx->wall.texture = ctx->texture.N_wall;
+		}
+	}
+	else 
+	{
+		if (ctx->ray.ray_dirX <= 0) 
+		{
+			if (ctx->player.dirY <= 0) // orient N et OUEST
+				ctx->wall.texture = ctx->texture.W_wall; //mur ouest
+			else
+				ctx->wall.texture = ctx->texture.E_wall; //orient sud mur est
+		}
+		else
+		{
+			if (ctx->player.dirY <= 0) // orient N et EST
+				ctx->wall.texture = ctx->texture.E_wall; //mur est
+			else
+				ctx->wall.texture = ctx->texture.W_wall;//orient sud mur ouest
+		}
+	}
+}
 
 void    draw_wall(t_ctx *ctx, int x)
 {
-	ctx->tex.tex_num = ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' - 1;
+	//ctx->tex.tex_num = ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' - 1;
+	get_texture(ctx);
 	calc_wall_x(ctx);
 	calc_x_coord_tex(ctx);
 	color_x_stripe(ctx, x);
@@ -38,11 +78,11 @@ because we stay in the same vertical stripe of the screen.
 stripe the correct y-coordinate of the texture, called texY.*/
 void	calc_x_coord_tex(t_ctx *ctx)
 {
-	ctx->tex.texX = (int)(ctx->tex.wallX * (double)ctx->tex.tex_width);
+	ctx->tex.texX = (int)(ctx->tex.wallX * (double)ctx->wall.texture.tex_width);
     if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX > 0)
-        ctx->tex.texX = ctx->tex.tex_width - ctx->tex.texX - 1;
+        ctx->tex.texX = ctx->wall.texture.tex_width - ctx->tex.texX - 1;
     if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0) 
-        ctx->tex.texX = ctx->tex.tex_width - ctx->tex.texX - 1;
+        ctx->tex.texX = ctx->wall.texture.tex_width - ctx->tex.texX - 1;
 }
 
 /* Determines how much to increase the texture coordinate
@@ -54,47 +94,14 @@ void	color_x_stripe(t_ctx *ctx, int x)
 	int		y;
 	int		color;
 
-	step = 1.0 * ctx->tex.tex_height / ctx->wall.line_height;
+	step = 1.0 * ctx->wall.texture.tex_height / ctx->wall.line_height;
 	tex_pos = (ctx->wall.draw_start - HEIGHT / 2 + ctx->wall.line_height / 2) * step;
     y = ctx->wall.draw_start - 1;
     while (++y < ctx->wall.draw_end)
     {
-        ctx->tex.texY = (int)tex_pos & (ctx->tex.tex_height - 1);
+        ctx->tex.texY = (int)tex_pos & (ctx->wall.texture.tex_height - 1);
         tex_pos += step;
-	if (ctx->ray.hit_side == 1 )
-		{
-			if (ctx->ray.ray_dirY <= 0) 
-			{
-				if (ctx->player.dirX >= 0 ) // orient N et EST
-					color = ctx->tex.texture[0][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //mur nord
-				else
-					color = ctx->tex.texture[2][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //orient ouest mur sud
-			}
-			else
-			{
-				if (ctx->player.dirX >= 0 ) // orient S et EST
-					color = ctx->tex.texture[2][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //mur sud
-				else
-					color = ctx->tex.texture[0][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //orient ouest mur nord
-			}
-		}
-		else 
-		{
-			if (ctx->ray.ray_dirX <= 0) 
-			{
-				if (ctx->player.dirY <= 0) // orient N et OUEST
-					color = ctx->tex.texture[3][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //mur ouest
-				else
-					color = ctx->tex.texture[1][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //orient sud mur est
-			}
-			else
-			{
-				if (ctx->player.dirY <= 0) // orient N et EST
-					color = ctx->tex.texture[1][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //mur est
-				else
-					color = ctx->tex.texture[3][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX]; //orient sud mur ouest
-			}
-		}
+		color = (*(int*)(ctx->wall.texture.addr + (4 * ctx->wall.texture.tex_width * (int)ctx->tex.texY) + (4 * (int)ctx->tex.texX)));
 		ctx->screen.buffer[y][x] = color;
     }
 }
