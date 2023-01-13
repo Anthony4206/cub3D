@@ -1,7 +1,7 @@
-NO ./texture/walls/wall_10.xpm
-SO ./texture/walls/wall_2.xpm
-WE ./texture/walls/wall_3.xpm
-EA ./texture/walls/wall_4.xpm
+NO ./texture/walls/wall_1.xpm
+SO ./texture/walls/wall_3.xpm
+WE ./texture/walls/wall_5.xpm
+EA ./texture/walls/wall_7.xpm
 
 F   136,45,23
 C 119,181,254
@@ -9,10 +9,10 @@ C 119,181,254
 11111111111111111
 10000000000000001
 10000000000000001
-10000001111000001
+10N00001111000001
 10000001000000001
 10000001000000001
-1000N000000000001
+10000000000000001
 10000000000000001
 10000000000000001
 11111111111111111

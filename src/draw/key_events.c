@@ -1,4 +1,5 @@
 #include <libft.h>
+#include <math.h>
 #include "../structs.h"
 #include "walls.h"
 
@@ -6,6 +7,36 @@
 // {
 
 // }
+
+void    player_rotates(int keycode, t_ctx *ctx)
+{
+    float   a;
+    double  tmp_x;
+    double  tmp_plane_x;
+    a = 0;
+    if (keycode == 123)
+    {
+        a = -0.1;
+        tmp_x = ctx->player.dirX * cos(a) + ctx->player.dirY * (-sin(a));
+        ctx->player.dirY = ctx->player.dirX * sin(a) + ctx->player.dirY * (cos(a));
+        ctx->player.dirX = tmp_x;
+        tmp_plane_x = ctx->ray.plane_X * cos(a) - ctx->ray.plane_Y * sin(a);
+        ctx->ray.plane_Y =ctx->ray.plane_X * sin(a) + ctx->ray.plane_Y * cos(a);
+        ctx->ray.plane_X = tmp_plane_x;
+    }
+    else if (keycode == 124)
+    {
+        a = 0.1;
+        tmp_x = ctx->player.dirX * cos(a) + ctx->player.dirY * (-sin(a));
+        ctx->player.dirY = ctx->player.dirX * sin(a) + ctx->player.dirY * (cos(a));
+        ctx->player.dirX = tmp_x;
+        tmp_plane_x = ctx->ray.plane_X * cos(a) - ctx->ray.plane_Y * sin(a);
+        ctx->ray.plane_Y =ctx->ray.plane_X * sin(a) + ctx->ray.plane_Y * cos(a);
+        ctx->ray.plane_X = tmp_plane_x;
+    }
+    ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
+    draw(ctx);
+}
 
 void	player_moves(int keycode, t_ctx *ctx)
 {
@@ -53,8 +84,8 @@ int	deal_key(int keycode, t_ctx *ctx)
 	}
 	else if ((keycode >= 0 && keycode <= 2) || keycode == 13)
 		player_moves(keycode, ctx);
-	// else if ((keycode >= 123 && keycode <= 126)
-	// 	player_rotates(keycode, ctx);
+	 else if (keycode >= 123 && keycode <= 124)
+	 	player_rotates(keycode, ctx);
 	// else if (keycode >= 83 && keycode <= 92)
 	// 	change_colors(keycode, global);
 	// else if (keycode == 69 || keycode == 78)

@@ -6,15 +6,15 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/10 11:03:50 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:18:03 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1800
+# define HEIGHT 1200
 
 # include <stdio.h>
 #include <mlx.h>
@@ -48,10 +48,22 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }			t_ray;
 
+typedef struct s_data
+{
+	void	*img;
+	int		tex_width;
+	int		tex_height;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_data;
+
 typedef struct s_tex
 {
 	int		tex_width;
 	int		tex_height;
+	t_data	select_tex;
 	int		**texture; //tab of all textures, containing texHeight*texWidth
 	int		tex_num;
 	double	wallX;
@@ -91,18 +103,6 @@ typedef struct s_parse
 	char	*C;
 	int		C_RGB;
 }		t_parse;
-
-
-typedef struct s_data
-{
-	void	*img;
-	int		tex_width;
-	int		tex_height;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_data;
 
 typedef struct s_screen
 {
