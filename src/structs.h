@@ -19,7 +19,7 @@
 # include <stdio.h>
 #include <mlx.h>
 #include <stdbool.h>
-#include <mlx.h>
+# include <math.h>
 
 typedef struct s_player
 {
