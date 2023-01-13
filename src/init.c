@@ -62,13 +62,12 @@ void    init_mlx(t_ctx *ctx)
 void    init_texture_img(t_ctx *ctx)
 {
 	ctx->texture.N_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.N, &ctx->tex.tex_width, &ctx->tex.tex_height);
+			ctx->parse.N, &ctx->texture.N_wall.tex_width, &ctx->texture.N_wall.tex_height);
 	ctx->texture.N_wall.addr = mlx_get_data_addr(ctx->texture.N_wall.img,
 			&ctx->texture.N_wall.bpp, &ctx->texture.N_wall.line_len,
 			&ctx->texture.N_wall.endian);
 	ctx->texture.S_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.S, &ctx->texture.S_wall.tex_width,
-                &ctx->texture.S_wall.tex_height);	
+			ctx->parse.S, &ctx->texture.S_wall.tex_width, &ctx->texture.S_wall.tex_height);	
 	ctx->texture.S_wall.addr = mlx_get_data_addr(ctx->texture.S_wall.img,
 			&ctx->texture.S_wall.bpp, &ctx->texture.S_wall.line_len,
 			&ctx->texture.S_wall.endian);
@@ -99,6 +98,6 @@ void	init_cub(t_ctx *ctx)
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
-	generate_texture(ctx);
+	//generate_texture(ctx);
 	init_screen_buffer(ctx);
 }

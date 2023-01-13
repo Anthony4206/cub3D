@@ -13,13 +13,13 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 900
+# define HEIGHT 700
 
 # include <stdio.h>
 #include <mlx.h>
 #include <stdbool.h>
-#include <mlx.h>
+# include <math.h>
 
 typedef struct s_player
 {
@@ -50,8 +50,8 @@ typedef struct s_ray
 
 typedef struct s_tex
 {
-	int		tex_width;
-	int		tex_height;
+	// int		tex_width;
+	// int		tex_height;
 	int		**texture; //tab of all textures, containing texHeight*texWidth
 	int		tex_num;
 	double	wallX;
@@ -59,11 +59,23 @@ typedef struct s_tex
 	int		texY;
 }		t_tex;
 
+typedef struct s_data
+{
+	void	*img;
+	int		tex_width;
+	int		tex_height;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_data;
+
 typedef struct s_wall
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_data	texture;
 }		t_wall;
 
 //A REMPLIR AVEC DES DONNEES DU PARSE
@@ -91,18 +103,6 @@ typedef struct s_parse
 	char	*C;
 	int		C_RGB;
 }		t_parse;
-
-
-typedef struct s_data
-{
-	void	*img;
-	int		tex_width;
-	int		tex_height;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_data;
 
 typedef struct s_screen
 {

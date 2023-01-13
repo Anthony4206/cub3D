@@ -17,11 +17,6 @@
 #include "../structs.h"
 #include "../utils.h"
 
-int	create_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
-
 void    check_open_file(t_parse *parse)
 {
     if (open(parse->N, O_RDONLY) == -1)

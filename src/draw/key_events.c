@@ -2,16 +2,63 @@
 #include "../structs.h"
 #include "walls.h"
 
-void	player_move(int keycode, t_ctx *ctx)
+void	player_moves(int keycode, t_ctx *ctx)
 {
-	if (keycode == 125)
-		ctx->player.posX -= 1;
-	else if (keycode == 126)
-		ctx->player.posX += 1;
-	else if (keycode == 123)
-		ctx->player.posY -= 1;
+	float	step;
+	step = 0.3;
+
+	if (keycode == 13)
+	{
+		ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
+		ctx->player.posY = ctx->player.posY + (ctx->player.dirY * step);
+	}
+	else if (keycode == 1)
+	{
+		ctx->player.posX = ctx->player.posX - (ctx->player.dirX * step);
+		ctx->player.posY = ctx->player.posY - (ctx->player.dirY * step);
+	}
+	else if (keycode == 2)
+	{
+		ctx->player.posX = ctx->player.posX - (ctx->player.dirY * step);
+		ctx->player.posY = ctx->player.posY + (ctx->player.dirX * step);
+	}
+	else if (keycode == 0)
+	{
+		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
+		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
+	}
+	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
+	draw(ctx);
+}
+
+void	player_rotates(int keycode, t_ctx *ctx)
+{
+	float	a;
+	double	tmp_x;
+	double	tmp_plane_x;
+
+	a = 0;
+	if (keycode == 123)
+	{
+		a = -0.1;
+		tmp_x = ctx->player.dirX * cos(a) + ctx->player.dirY * (-sin(a));
+		ctx->player.dirY = ctx->player.dirX * sin(a) + ctx->player.dirY * (cos(a));
+		ctx->player.dirX = tmp_x;
+		tmp_plane_x = ctx->ray.plane_X * cos(a) - ctx->ray.plane_Y * sin(a);
+		ctx->ray.plane_Y =ctx->ray.plane_X * sin(a) + ctx->ray.plane_Y * cos(a);
+		ctx->ray.plane_X = tmp_plane_x;
+	}
 	else if (keycode == 124)
-		ctx->player.posY += 1;
+	{
+		a = 0.1;
+		tmp_x = ctx->player.dirX * cos(a) + ctx->player.dirY * (-sin(a));
+		ctx->player.dirY = ctx->player.dirX * sin(a) + ctx->player.dirY * (cos(a));
+		ctx->player.dirX = tmp_x;
+		tmp_plane_x = ctx->ray.plane_X * cos(a) - ctx->ray.plane_Y * sin(a);
+		ctx->ray.plane_Y =ctx->ray.plane_X * sin(a) + ctx->ray.plane_Y * cos(a);
+		ctx->ray.plane_X = tmp_plane_x;
+	}
+	
 	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
 	draw(ctx);
 }
@@ -24,25 +71,16 @@ void	end_program(t_ctx *ctx)
 
 int	deal_key(int keycode, t_ctx *ctx)
 {
+	//printf("Keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(ctx->mlx, ctx->win);
 		end_program(ctx);
 		exit(EXIT_SUCCESS);
 	}
-	else if (keycode >= 123 && keycode <= 126)
-		player_move(keycode, ctx);
-	// else if (keycode >= 83 && keycode <= 92)
-	// 	change_colors(keycode, global);
-	// else if (keycode == 69 || keycode == 78)
-	// 	zoom(keycode, global);
-	// else if (keycode == 116 || keycode == 121 || keycode == 12 || keycode == 13)
-	// 	change_z_factor(keycode, global);
-	// else if ((keycode >= 6 && keycode <= 8) || (keycode <= 0 && keycode < 3))
-	// 	rotation(keycode, global);
-	// else if (keycode == 51)
-	// 	reinitialize(keycode, global);
-	// else if (keycode == 35)
-	// 	change_projection_type(keycode, global);
+	else if ((keycode >= 0 && keycode <= 2) || keycode == 13)
+		player_moves(keycode, ctx);
+	else if (keycode >= 123 && keycode <= 124)
+		player_rotates(keycode, ctx);
 	return (0);
 }
