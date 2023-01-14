@@ -56,7 +56,6 @@ void	get_texture(t_ctx *ctx)
 
 void    draw_wall(t_ctx *ctx, int x)
 {
-	//ctx->tex.tex_num = ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' - 1;
 	get_texture(ctx);
 	calc_wall_x(ctx);
 	calc_x_coord_tex(ctx);

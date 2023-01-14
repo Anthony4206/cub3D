@@ -70,7 +70,7 @@ int	take_instructions_and_draw(t_ctx *ctx)
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
 	draw(ctx);
 	mlx_hook(ctx->win, 2, 0, deal_key, ctx);
-	// mlx_hook(global->win_id, 17, 0, close_window_mouse, global);
+	mlx_hook(ctx->win, 17, 0, close_win_mouse, ctx);
 	// mlx_hook(global->win_id, 4, 0, press_mouse, global);
 	// mlx_hook(global->win_id, 5, 0,release_mouse, global);
 	// mlx_hook(global->win_id, 6, 0, move_mouse, global); 

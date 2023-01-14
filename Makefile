@@ -16,7 +16,7 @@ SRC				=	src/main.c src/utils.c src/init.c src/parse/parse.c src/parse/parse_map
 					src/parse/parse_map_utils.c src/parse/parse_header.c src/parse/parse_header_utils.c \
 					src/parse/parse_wall.c src/parse/parse_wall_utils.c src/parse/parse_utils.c\
 					src/draw/draw.c src/draw/draw_utils.c src/draw/draw_walls_w_tex.c src/draw/raycaster_walls.c \
-					src/draw/key_events.c \
+					src/draw/key_events.c src/draw/mouse_events.c\
 
 SRC_B			= 
 

@@ -31,6 +31,7 @@ void	draw_and_clear_buffer(t_ctx *ctx);
 void	display_buffer(t_ctx *ctx);
 void	generate_texture(t_ctx *ctx);
 int		deal_key(int keycode, t_ctx *ctx);
-
+int		close_win_mouse(void *param);
+void	end_program(t_ctx *ctx);
 
 #endif
