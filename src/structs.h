@@ -48,17 +48,6 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }			t_ray;
 
-typedef struct s_tex
-{
-	// int		tex_width;
-	// int		tex_height;
-	int		**texture; //tab of all textures, containing texHeight*texWidth
-	int		tex_num;
-	double	wallX;
-	int		texX;
-	int		texY;
-}		t_tex;
-
 typedef struct s_data
 {
 	void	*img;
@@ -69,6 +58,18 @@ typedef struct s_data
 	int		line_len;
 	int		endian;
 }			t_data;
+
+typedef struct s_tex
+{
+	// int		tex_width;
+	// int		tex_height;
+    t_data  select_tex;
+	int		**texture; //tab of all textures, containing texHeight*texWidth
+	int		tex_num;
+	double	wallX;
+	int		texX;
+	int		texY;
+}		t_tex;
 
 typedef struct s_wall
 {

@@ -57,12 +57,14 @@ void	draw_and_clear_buffer(t_ctx *ctx)
 //x is the x-coord on the screen (ex:50 is at the center of a 100-wide screen)
 //w is the width of the screen
 //PAS A INITIALISER: CALCULATION for each ray dir_vector coordinates
-void	draw(t_ctx *ctx)
+int	draw(t_ctx *ctx)
 {
+	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
 	print_background(ctx);
 	raycasting_walls(ctx);
 	draw_and_clear_buffer(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
+    return (0);
 }
 
 int	take_instructions_and_draw(t_ctx *ctx)
@@ -70,6 +72,7 @@ int	take_instructions_and_draw(t_ctx *ctx)
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
 	draw(ctx);
 	mlx_hook(ctx->win, 2, 0, deal_key, ctx);
+    mlx_loop_hook(ctx->mlx, draw, ctx);
 	// mlx_hook(global->win_id, 17, 0, close_window_mouse, global);
 	// mlx_hook(global->win_id, 4, 0, press_mouse, global);
 	// mlx_hook(global->win_id, 5, 0,release_mouse, global);

@@ -98,6 +98,5 @@ void	init_cub(t_ctx *ctx)
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
-	//generate_texture(ctx);
 	init_screen_buffer(ctx);
 }

@@ -15,7 +15,7 @@
 
 # include "../structs.h"
 
-void	draw(t_ctx *ctx);
+int 	draw(t_ctx *ctx);
 int		take_instructions_and_draw(t_ctx *ctx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	raycasting_walls(t_ctx *ctx);

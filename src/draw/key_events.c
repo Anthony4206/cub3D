@@ -27,8 +27,8 @@ void	player_moves(int keycode, t_ctx *ctx)
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
 	}
-	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
-	draw(ctx);
+//	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
+//	draw(ctx);
 }
 
 void	player_rotates(int keycode, t_ctx *ctx)
@@ -59,8 +59,8 @@ void	player_rotates(int keycode, t_ctx *ctx)
 		ctx->ray.plane_X = tmp_plane_x;
 	}
 	
-	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
-	draw(ctx);
+//	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
+//	draw(ctx);
 }
 
 void	end_program(t_ctx *ctx)
