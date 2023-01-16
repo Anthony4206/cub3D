@@ -21,18 +21,18 @@
 # include <stdbool.h>
 # include <math.h>
 
-/*********
- * Struct bonus
- * ***********/
-
 typedef struct s_sprite
 {
     double  x;
     double  y;
     int     texture;
-}       t_sprite;
+}           t_sprite;
 
-/**********************/
+typedef struct s_mouse
+{
+    int     save_x;
+    int     mouse_pressed;
+}           t_mouse;
 
 typedef struct s_player
 {
@@ -146,6 +146,8 @@ typedef struct s_ctx
 	t_screen	screen;
     t_texture   texture;
 	t_tex		tex;
+    t_sprite    *sprite;
+    t_mouse     mouse;
 }			t_ctx;
 
 #endif

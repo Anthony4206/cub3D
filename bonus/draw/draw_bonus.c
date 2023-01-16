@@ -74,9 +74,9 @@ int	take_instructions_and_draw(t_ctx *ctx)
 	draw(ctx);
 	mlx_hook(ctx->win, 2, 0, deal_key, ctx);
 	mlx_hook(ctx->win, 17, 0, ft_close, ctx);
-	mlx_hook(ctx->win, 4, 0, press_mouse, global);
-	mlx_hook(ctx->win, 5, 0,release_mouse, global);
-	mlx_hook(ctx->win, 6, 0, move_mouse, global); 
+	mlx_hook(ctx->win, 4, 0, press_mouse, ctx);
+	mlx_hook(ctx->win, 5, 0, release_mouse, ctx);
+	mlx_hook(ctx->win, 6, 0, move_mouse, ctx);
     mlx_loop_hook(ctx->mlx, draw, ctx);
 	mlx_loop(ctx->mlx);
 	return (0);

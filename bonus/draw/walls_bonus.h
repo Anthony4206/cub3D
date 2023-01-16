@@ -31,5 +31,8 @@ void	draw_and_clear_buffer(t_ctx *ctx);
 void	display_buffer(t_ctx *ctx);
 int		deal_key(int keycode, t_ctx *ctx);
 int	    ft_close(t_ctx *ctx);
+int	    press_mouse(int button, int x, int y, void *param);
+int	    release_mouse(int button, int x, int y, void *param);
+int	    move_mouse(int x, int y, void *param);
 
 #endif
