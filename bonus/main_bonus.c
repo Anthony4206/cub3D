@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft.h>
+
+#include "utils_bonus.h"
+#include "init_bonus.h"
+#include "structs_bonus.h"
+#include "parse/parse_bonus.h"
+#include "draw/walls_bonus.h"
+
 int	main(int argc, char **argv)
 {
 	t_ctx	ctx;
 
 	if (argc != 2)
-	{
-		//message d'erreur
-		//exit failure
-	}
-	if (parse_error(/*argv[1]*/"maps/42.cub"))
-	{
-		//message d'erreur (envoyé directement dans la fonction parse)
-		//exit failure
-	}
-	ctx = parse(/*argv[1]*/"maps/42.cub");
-    // parse_error et parse peuvent aussi être fait ensemble
-    init_cub(&ctx);
-    init_sprite(&ctx);
-    //mlx_hook pour configurer les touches d'action
-    //initialiser aussi la key pour les portes.
+		error_exit("error: too few arguments\n");
+    ft_bzero(&ctx, sizeof(t_ctx));
+	ctx.parse = parse(argv[1]);
+	init_cub(&ctx);
+	take_instructions_and_draw(&ctx);
+	mlx_loop(ctx.mlx);
     //mlx_hook pour configurer le bonus souris
-	//mlx_look qui renvoi à la fonction pour dessiner
-    //return
+//	system("leaks cub3D");
+    //initialiser aussi la key pour les portes.
+	return (0);
 }

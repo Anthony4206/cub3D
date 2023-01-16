@@ -17,6 +17,11 @@
 #include "../utils.h"
 #include "parse.h"
 
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
 int	check_int_color(char *str)
 {
 	int	i;
@@ -89,7 +94,7 @@ void	init_texture(char *texture, t_parse *parse, int size, int n)
 void	parse_texture(char *texture, t_parse *parse, int size, int n)
 {
 	if (texture[0] == 'N' && parse->N)
-		error_exit("Error\n more than once\n");
+		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'S' && parse->S)
 		error_exit("Error\nTexture specified more than once\n");
 	else if (texture[0] == 'W' && parse->W)

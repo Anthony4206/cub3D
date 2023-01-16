@@ -1,83 +1,106 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:31:42 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 16:00:13 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/16 06:54:11 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void    clean_buffer()
-{
-    int y = -1;
+#include <mlx.h>
+#include <libft.h>
 
-    while (++y < height)
-    {
-        int x = -1;
-        while (++x < weight) 
-            buffer[y][x] = 0;
-    }
-}
+#include "init_bonus.h"
+#include "utils_bonus.h"
+#include "structs_bonus.h"
+#include "parse/parse_bonus.h"
+#include "draw/walls_bonus.h"
 
-void	init_camera()
+void	init_plane(t_ctx *ctx)
 {
-	cameraX = 2 * x / (double)w - 1;
-	ray_dirX = dirX + planeX * cameraX;
-	ray_dirY = dirY + planeY * cameraX;
-}
-
-void	init_player()
-{
-	posX = see map;
-	posY = see map;
-	dirX = -1; // example
-	dirY = 0; // example
-	planeX = 0;
-	planeY = 0.66;
-	time = 0;
-	old_time = 0;
-}
-
-void	init_ray()
-{
-	mapX = (int)posX;
-	mapY = (int)posY;
-	if (ray_dirX == 0)
-		delta_distX = 1e30;
-	else
-		delta_distX = abs(1 / ray_dirX);
-	if (ray_dirY == 0)
-		delta_distY = 1e30;
-	else
-		delta_distY = abs(1 / ray_dirY);
-	hit = 0;
-}
-
-void	init_side_dist()
-{
-	if (ray_dirX < 0)
+	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
 	{
-		stepX = -1;
-		side_distX = (posX - mapX) * delta_distX;
+		ctx->ray.plane_X = 0.66;
+		ctx->ray.plane_Y = 0.0;
 	}
 	else
 	{
-		stepX = 1;
-		side_distX = (mapX + 1.0 - posX) * delta_distX;
+		ctx->ray.plane_X = 0;
+		ctx->ray.plane_Y = 0.66;
 	}
-	if (ray_dirY < 0)
-	{
-		stepY = -1;
-		side_distY = (posY - mapY) * delta_distY;	
-	}
+}
+
+void	init_player(t_ctx *ctx)
+{
+	ctx->player.posX = ctx->parse.init_posX + 0.5;
+	ctx->player.posY = ctx->parse.init_posY + 0.5;
+	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
+		ctx->player.dirX = 0;
+	else if (ctx->parse.init_dir == 'E')
+		ctx->player.dirX = 1;
 	else
-	{
-		stepY = 1;
-		side_distY = (mapY + 1.0 - posY) * delta_distY;
-	}
+		ctx->player.dirX = -1;
+	if (ctx->parse.init_dir == 'E' || ctx->parse.init_dir == 'W')
+		ctx->player.dirY = 0;
+	else if (ctx->parse.init_dir == 'S')
+		ctx->player.dirY = 1;
+	else
+		ctx->player.dirY = -1;
+}
+
+void    init_mlx(t_ctx *ctx)
+{
+	ctx->mlx = mlx_init();
+	ctx->win = mlx_new_window(ctx->mlx, WIDTH, HEIGHT, "cub3d");
+	ctx->img.img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
+	ctx->img.addr = mlx_get_data_addr(ctx->img.img, &ctx->img.bpp,
+			&ctx->img.line_len, &ctx->img.endian);
+}
+
+void    init_texture_img(t_ctx *ctx)
+{
+	ctx->texture.N_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.N, &ctx->texture.N_wall.tex_width, &ctx->texture.N_wall.tex_height);
+	ctx->texture.N_wall.addr = mlx_get_data_addr(ctx->texture.N_wall.img,
+			&ctx->texture.N_wall.bpp, &ctx->texture.N_wall.line_len,
+			&ctx->texture.N_wall.endian);
+	ctx->texture.S_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.S, &ctx->texture.S_wall.tex_width, &ctx->texture.S_wall.tex_height);	
+	ctx->texture.S_wall.addr = mlx_get_data_addr(ctx->texture.S_wall.img,
+			&ctx->texture.S_wall.bpp, &ctx->texture.S_wall.line_len,
+			&ctx->texture.S_wall.endian);
+	ctx->texture.E_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.E, &ctx->texture.E_wall.tex_width, &ctx->texture.E_wall.tex_height);	
+	ctx->texture.E_wall.addr = mlx_get_data_addr(ctx->texture.E_wall.img,
+			&ctx->texture.E_wall.bpp, &ctx->texture.E_wall.line_len,
+			&ctx->texture.E_wall.endian);
+	ctx->texture.W_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.W, &ctx->texture.W_wall.tex_width, &ctx->texture.W_wall.tex_height);
+	ctx->texture.W_wall.addr = mlx_get_data_addr(ctx->texture.W_wall.img,
+			&ctx->texture.W_wall.bpp, &ctx->texture.W_wall.line_len,
+			&ctx->texture.W_wall.endian);
+}
+
+void	init_screen_buffer(t_ctx *ctx)
+{
+	int y = -1;
+
+	ctx->screen.buffer = ft_calloc(sizeof(unsigned int *), HEIGHT);
+	while (++y < HEIGHT)
+		ctx->screen.buffer[y] = ft_calloc(sizeof(unsigned int), WIDTH);
+}
+
+void	init_cub(t_ctx *ctx)
+{
+	init_player(ctx);
+	init_plane(ctx);
+	init_mlx(ctx);
+	init_texture_img(ctx);
+    init_mini_map(ctx);
+	init_screen_buffer(ctx);
 }
 
 void    init_door_img()
@@ -88,20 +111,4 @@ void    init_door_img()
 void    init_sprite_img()
 {
     //initialiser image
-}
-
-t_ctx	init_cub(argv[1])
-{
-	t_ctx	ret;
-
-	/*****
-	 * initialiser mlx
-	 * initialiser win
-	 * initialiser img
-	 * initialiser addr
-	 * initialiser texture
-	 * initialiser addr texture
-     * initialiser bonus;
-	*****/
-	return (ret);
 }

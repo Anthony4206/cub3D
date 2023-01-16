@@ -6,20 +6,20 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/13 12:18:03 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/16 13:04:18 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define WIDTH 1800
-# define HEIGHT 1200
+# define WIDTH 900
+# define HEIGHT 700
 
 # include <stdio.h>
 #include <mlx.h>
 #include <stdbool.h>
-#include <mlx.h>
+# include <math.h>
 
 typedef struct s_player
 {
@@ -61,9 +61,9 @@ typedef struct s_data
 
 typedef struct s_tex
 {
-	int		tex_width;
-	int		tex_height;
-	t_data	select_tex;
+	// int		tex_width;
+	// int		tex_height;
+    t_data  select_tex;
 	int		**texture; //tab of all textures, containing texHeight*texWidth
 	int		tex_num;
 	double	wallX;
@@ -73,9 +73,10 @@ typedef struct s_tex
 
 typedef struct s_wall
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_data	texture;
 }		t_wall;
 
 //A REMPLIR AVEC DES DONNEES DU PARSE
