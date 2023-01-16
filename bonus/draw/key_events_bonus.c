@@ -6,8 +6,12 @@
 void	player_moves(int keycode, t_ctx *ctx)
 {
 	float	step;
-	step = 0.3;
+	float	old_pos_x;
+	float	old_pos_y;
 
+	step = 0.3;
+	old_pos_x = ctx->player.posX;
+	old_pos_y = ctx->player.posY;
 	if (keycode == 13)
 	{
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
@@ -28,8 +32,11 @@ void	player_moves(int keycode, t_ctx *ctx)
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
 	}
-//	ft_bzero(ctx->img.addr, HEIGHT * ctx->img.line_len); //reset the already colored pixels (all bytes)
-//	draw(ctx);
+	if (ctx->parse.map[(int)ctx->player.posY][(int)ctx->player.posX] - '0' > 0)
+	{
+		ctx->player.posX = old_pos_x;
+		ctx->player.posY = old_pos_y;
+	}
 }
 
 void	player_rotates(int keycode, t_ctx *ctx)
