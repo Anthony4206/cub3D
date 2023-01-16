@@ -31,6 +31,7 @@ void	draw_and_clear_buffer(t_ctx *ctx);
 void	display_buffer(t_ctx *ctx);
 void	generate_texture(t_ctx *ctx);
 int		deal_key(int keycode, t_ctx *ctx);
-
+ int	press_key(int key, void *param);
+ int	release_key(int key, void *param);
 
 #endif

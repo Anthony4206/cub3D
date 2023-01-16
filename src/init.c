@@ -94,6 +94,12 @@ void	init_screen_buffer(t_ctx *ctx)
 
 void	init_cub(t_ctx *ctx)
 {
+	ctx->keys.key_w = false;
+	ctx->keys.key_a = false;
+	ctx->keys.key_s = false;
+	ctx->keys.key_d = false;
+	ctx->keys.key_left = false;
+	ctx->keys.key_right = false;
 	init_player(ctx);
 	init_plane(ctx);
 	init_mlx(ctx);

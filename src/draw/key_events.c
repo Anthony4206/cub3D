@@ -3,6 +3,28 @@
 #include "../structs.h"
 #include "walls.h"
 
+int	release_key(int key, void *param)
+{
+    t_ctx	*ctx;
+
+    (void)key;
+    ctx = (t_ctx *)param;
+    if (key == 13)
+ 		ctx->keys.key_w = false;
+	else if (key == 0)
+		ctx->keys.key_a = false;
+	else if (key == 1)
+ 		ctx->keys.key_s = false;
+	else if (key == 2)
+ 		ctx->keys.key_d = false;
+	else if (key == 123)
+ 		ctx->keys.key_left = false;
+	else if (key == 124)
+ 		ctx->keys.key_right = false;
+	//printf("keycode = %d is released\n", key);
+    return (0);
+}
+
 void	player_moves(int keycode, t_ctx *ctx)
 {
 	float	step;
@@ -10,24 +32,41 @@ void	player_moves(int keycode, t_ctx *ctx)
 	float	old_pos_y;
 
 	step = 0.3;
+	// 	printf("keycode = %d\n", keycode);
 	old_pos_x = ctx->player.posX;
 	old_pos_y = ctx->player.posY;
-	if (keycode == 13)
-	{
-		ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
-		ctx->player.posY = ctx->player.posY + (ctx->player.dirY * step);
-	}
+ 	if (keycode == 13)
+ 		ctx->keys.key_w = true;
+	else if (keycode == 0)
+ 		ctx->keys.key_a = true;
 	else if (keycode == 1)
+ 		ctx->keys.key_s = true;
+	else if (keycode == 2)
+ 		ctx->keys.key_d = true;
+	else if (keycode == 123)
+ 		ctx->keys.key_left = true;
+	else if (keycode == 124)
+ 		ctx->keys.key_right = true;
+	if (keycode == 13 && ctx->keys.key_w == true)
+	{
+		// printf("ctx->keys.key_w = %d\n", ctx->keys.key_w);
+		// while (ctx->keys.key_w == true)
+		// {
+			ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
+			ctx->player.posY = ctx->player.posY + (ctx->player.dirY * step);
+		// }
+	}
+	else if (keycode == 1 && ctx->keys.key_s == true)
 	{
 		ctx->player.posX = ctx->player.posX - (ctx->player.dirX * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirY * step);
-	}
-	else if (keycode == 2)
+	}	
+	else if (keycode == 2 && ctx->keys.key_d == true)
 	{
 		ctx->player.posX = ctx->player.posX - (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY + (ctx->player.dirX * step);
 	}
-	else if (keycode == 0)
+	else if (keycode == 0 && ctx->keys.key_a == true)
 	{
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
