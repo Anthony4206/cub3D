@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:14:45 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/10 09:37:26 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/16 07:25:06 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "../structs_bonus.h"
 #include "walls_bonus.h"
+#include "../init_bonus.h"
 
 void	print_background(t_ctx *ctx)
 {
@@ -65,6 +66,7 @@ int	draw(t_ctx *ctx)
 	raycasting_walls(ctx);
 	draw_and_clear_buffer(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
+	draw_minimap(ctx);
     return (0);
 }
 

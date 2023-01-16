@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:31:42 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 16:00:13 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/16 06:54:11 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	init_cub(t_ctx *ctx)
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
-    //initialiser bonus;
+    init_mini_map(ctx);
 	init_screen_buffer(ctx);
 }
 

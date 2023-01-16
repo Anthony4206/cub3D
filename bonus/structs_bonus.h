@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   structs_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/10 11:03:50 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:17:13 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define WIDTH 900
 # define HEIGHT 700
+# define M_WIDTH 350
+# define M_HEIGHT 350
+# define SIZE_MINI 45
 
 # include <stdio.h>
 # include <mlx.h>
@@ -33,6 +36,22 @@ typedef struct s_mouse
     int     save_x;
     int     mouse_pressed;
 }           t_mouse;
+
+typedef struct s_data
+{
+	void	*img;
+	int		tex_width;
+	int		tex_height;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_data;
+
+typedef struct s_minimap
+{
+	t_data	mini_map;
+}			t_minimap;
 
 typedef struct s_player
 {
@@ -61,17 +80,6 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }			t_ray;
 
-typedef struct s_data
-{
-	void	*img;
-	int		tex_width;
-	int		tex_height;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_data;
-
 typedef struct s_tex
 {
 	// int		tex_width;
@@ -82,7 +90,7 @@ typedef struct s_tex
 	double	wallX;
 	int		texX;
 	int		texY;
-}		t_tex;
+}			t_tex;
 
 typedef struct s_wall
 {
@@ -90,7 +98,7 @@ typedef struct s_wall
 	int		draw_start;
 	int		draw_end;
 	t_data	texture;
-}		t_wall;
+}			t_wall;
 
 //A REMPLIR AVEC DES DONNEES DU PARSE
 typedef struct s_map
@@ -148,6 +156,7 @@ typedef struct s_ctx
 	t_tex		tex;
     t_sprite    *sprite;
     t_mouse     mouse;
-}			t_ctx;
+	t_minimap	mini;
+}				t_ctx;
 
 #endif
