@@ -96,6 +96,25 @@ void	draw_walls_mini_map(t_ctx *ctx, int scale)
 	}
 }
 
+void    draw_player(t_ctx *ctx, int scale)
+{
+    int x;
+    int y;
+    int incr_x;
+    int incr_y;
+
+    x = ctx->player.posX * scale + (scale / 3);
+    y = ctx->player.posY * scale + (scale / 3);
+    incr_y = -1;
+    while (++incr_y < (scale / 3) * 2)
+    {
+        incr_x = -1;
+        while (++incr_x < (scale / 3) * 2)
+            my_mlx_pixel_put(&ctx->mini.mini_map, x + incr_x,
+                y + incr_y, 0x70FF0000);
+    }
+}
+
 void    draw_minimap(t_ctx *ctx)
 {
 	int	scale;
@@ -107,5 +126,6 @@ void    draw_minimap(t_ctx *ctx)
 	ft_bzero(ctx->mini.mini_map.addr, (M_WIDTH) * (M_HEIGHT) * 4);
 	print_background_minimap(ctx, scale);
 	draw_walls_mini_map(ctx, scale);
+    draw_player(ctx, scale);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->mini.mini_map.img, 0, 0);
 }

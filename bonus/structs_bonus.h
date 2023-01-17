@@ -17,7 +17,6 @@
 # define HEIGHT 700
 # define M_WIDTH 350
 # define M_HEIGHT 350
-# define SIZE_MINI 45
 
 # include <stdio.h>
 # include <mlx.h>
@@ -26,10 +25,15 @@
 
 typedef struct s_sprite
 {
-    double  x;
-    double  y;
-    int     texture;
-}           t_sprite;
+    int             num; //nb of sprites
+    unsigned int    **buffer;
+    double          *z_buffer;
+    int             *sprite_tab;
+    double          *sprite_distance;
+    double          x;
+    double          y;
+    int             texture;
+}                    t_sprite;
 
 typedef struct s_mouse
 {

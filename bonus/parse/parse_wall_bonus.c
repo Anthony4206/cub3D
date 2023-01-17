@@ -29,7 +29,7 @@ void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 			if (*player == 1)
 				parse_player(parse, &parse->map[i][j], i, j);
 		}
-		if (ft_strchr("0NSEW", parse->map[i][j]) && j > *pos)
+		if (ft_strchr("0NSEWDA", parse->map[i][j]) && j > *pos)
 			*pos = j;
 	}
 }
@@ -62,7 +62,7 @@ void	check_is_close(t_parse parse, int last, int i, int j)
 		if (!ft_strchr(" 1", parse.map[i][0])
 			|| !ft_strchr(" 1", parse.map[i][last]))
 			error_exit("Error\nMap is not close\n");
-		if (ft_strchr("NSEW0", parse.map[i][j]))
+		else if (ft_strchr("NSEW0DA", parse.map[i][j]))
 			check_pos(parse.map, i, j);
 	}
 }
