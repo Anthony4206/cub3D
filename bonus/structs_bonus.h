@@ -24,12 +24,23 @@
 # include <stdbool.h>
 # include <math.h>
 
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+}			t_coord;
+
 typedef struct s_sprite
 {
-    double  x;
-    double  y;
-    int     texture;
-}           t_sprite;
+	int 			num; //nb of sprites
+	double			*z_buffer;
+    int				*sprite_order;
+    double			*sprite_distance;
+	double			x;
+	double			y;
+	int				texture;
+	t_coord			*sprite;
+}					t_sprite;
 
 typedef struct s_mouse
 {
