@@ -81,6 +81,6 @@ void	color_x_stripe(t_ctx *ctx, int x)
                 (int)ctx->tex.texX)));
         ctx->screen.buffer[y][x] = color;
     }
-    ctx->sprite.z_buffer[x] = ctx->ray.perp_wall_dist;
+    //ctx->sprite.z_buffer[x] = ctx->ray.perp_wall_dist;
 }
 
