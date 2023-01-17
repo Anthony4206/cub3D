@@ -22,7 +22,7 @@ void	check_map_line(char *line)
 	i = -1;
 	while (line[++i])
 	{
-		if (!ft_strchr("NSEW01 \n", line[i]))
+		if (!ft_strchr("NSEW01 \nDA", line[i]))
 		{
 			free(line);
 			error_exit("Error\nInvalid map format\n");

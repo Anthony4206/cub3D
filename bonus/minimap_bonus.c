@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 06:48:58 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/16 10:25:40 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:13:46 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,55 +23,109 @@ void    init_mini_map(t_ctx *ctx)
 			&ctx->mini.mini_map.endian);
 }
 
-void	print_background_minimap(t_ctx *ctx)
+void	print_background_minimap(t_ctx *ctx, int scale)
 {
 	int x;
 	int y;
+	int	size;
 
-	y = -1;
-	while (++y < M_HEIGHT)
+	if (ctx->parse.map_height > ctx->parse.map_width)
 	{
-		x = -1;
-		while (++x < M_WIDTH)
-			my_mlx_pixel_put(&ctx->mini.mini_map, x, y, 0x70FFB266);
-	}
-}
-
-void	print_wall(t_ctx *ctx, int i, int j)
-{
-	int	size_max;
-
-	size_max = SIZE_MAX / 2;
-	if (ctx->player.posX - size)
-}
-
-void	draw_walls_mini_map(t_ctx *ctx)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < ctx->parse.map_height)
-	{
-		j = -1;
-		while (++j < ctx->parse.map_width)
+		size = scale * (ctx->parse.map_width + 1);
+		y = -1;
+		while (++y < M_HEIGHT)
 		{
-			if (ctx->parse.map[i][j] == '1')
-				print_wall(ctx, i * SIZE_MAX, j * SIZE_MAX);
+			x = -1;
+			while (++x < size)
+				my_mlx_pixel_put(&ctx->mini.mini_map, x, y, 0x70FFB266);
+			x--;
+			while (++x < M_WIDTH)
+				my_mlx_pixel_put(&ctx->mini.mini_map, x, y, 0xFFFFB266);
+		}
+	}
+	else
+	{
+		size = scale * (ctx->parse.map_height + 1);
+		y = -1;
+		while (++y < size)
+		{
+			x = -1;
+			while (++x < M_WIDTH)
+				my_mlx_pixel_put(&ctx->mini.mini_map, x, y, 0x70FFB266);
+		}
+		y--;
+		while (++y < M_HEIGHT)
+		{
+			x = -1;
+			while (++x < M_WIDTH)
+				my_mlx_pixel_put(&ctx->mini.mini_map, x, y, 0xFFFFB266);
 		}
 	}
 }
 
+void	print_wall(t_ctx *ctx, int scale, int x, int y)
+{
+	int	save_y;
+	int	save_x;
+
+	save_y = y;
+	save_x = x;
+	y--;
+	while (++y < save_y + scale)
+	{
+		x = save_x - 1;
+		while (++x < save_x + scale)
+			my_mlx_pixel_put(&ctx->mini.mini_map, x, y, 0x70000000);
+	}
+}
+
+void	draw_walls_mini_map(t_ctx *ctx, int scale)
+{
+	int	i;
+	int	j;
+
+	j = -1;
+	while (++j < ctx->parse.map_height)
+	{
+		i = -1;
+		while (++i < ctx->parse.map_width)
+		{
+			if (ctx->parse.map[j][i] == '1')
+				print_wall(ctx, scale, (i * scale) + 5, (j * scale) + 5);
+		}
+	}
+}
+
+void    draw_player(t_ctx *ctx, int scale)
+{
+    int x;
+    int y;
+    int incr_x;
+    int incr_y;
+
+    x = ctx->player.posX * scale + (scale / 3);
+    y = ctx->player.posY * scale + (scale / 3);
+    incr_y = -1;
+    while (++incr_y < (scale / 3) * 2)
+    {
+        incr_x = -1;
+        while (++incr_x < (scale / 3) * 2)
+            my_mlx_pixel_put(&ctx->mini.mini_map, x + incr_x,
+                y + incr_y, 0x70FF0000);
+    }
+}
+
 void    draw_minimap(t_ctx *ctx)
 {
-	ft_bzero(ctx->mini.mini_map.addr, (M_WIDTH) * (M_HEIGHT) * 4);
-	print_background_minimap(ctx);
-	draw_walls_mini_map(ctx);
-	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->mini.mini_map.img, 0, 0);
+	int	scale;
 
-    // Attribuer des couleurs en fonction des valeurs de char **map
-    // 1 pixel devient 10 pixels
-    // faire bouger le perso dans la minimap avec les keys
-    // vérifier qu'on se déplace sur un 0
-    // pour déssiner la map on procède comme pour déssiner cub3D
+	if (ctx->parse.map_height > ctx->parse.map_width)
+		scale = M_HEIGHT / ctx->parse.map_height;
+	else
+		scale = M_WIDTH / ctx->parse.map_width;	
+	ft_bzero(ctx->mini.mini_map.addr, (M_WIDTH) * (M_HEIGHT) * 4);
+	print_background_minimap(ctx, scale);
+	draw_walls_mini_map(ctx, scale);
+    draw_player(ctx, scale);
+	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->mini.mini_map.img, 0, 0);
 }

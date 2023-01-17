@@ -17,7 +17,6 @@
 # define HEIGHT 700
 # define M_WIDTH 350
 # define M_HEIGHT 350
-# define SIZE_MINI 45
 
 # include <stdio.h>
 # include <mlx.h>
@@ -152,6 +151,16 @@ typedef struct s_texture
     t_data	W_wall;
 }   		t_texture;
 
+typedef struct s_keys
+{
+	bool	key_w;
+	bool	key_a;
+	bool	key_s;
+	bool	key_d;
+	bool	key_left;
+	bool	key_right;
+}			t_keys;
+
 typedef struct s_ctx
 {
 	void		*mlx;
@@ -165,6 +174,7 @@ typedef struct s_ctx
 	t_screen	screen;
     t_texture   texture;
 	t_tex		tex;
+	t_keys		keys;
     t_sprite    *sprite;
     t_mouse     mouse;
 	t_minimap	mini;
