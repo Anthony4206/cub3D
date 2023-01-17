@@ -65,7 +65,7 @@ void	exec_dda(t_ctx *ctx, int x)
 			ctx->ray.mapY += ctx->ray.stepY;
 			ctx->ray.hit_side = 1;			
 		}
-		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' > 0)
+		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] - '0' == 1)
 			hit = true;
 	}
 }

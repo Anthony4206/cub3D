@@ -29,7 +29,7 @@ typedef struct s_coord
 	double	y;
 }			t_coord;
 
-typedef struct s_sprite
+typedef struct s_sprites
 {
 	int 			num; //nb of sprites
 	double			*z_buffer;
@@ -37,9 +37,18 @@ typedef struct s_sprite
     double			*sprite_distance;
 	double			spriteX;
 	double			spriteY;
-	int				texture;
 	t_coord			*sprite;
-}					t_sprite;
+	int				screen_x;
+	int				height;
+	int				width;
+	int				draw_start_y;
+	int				draw_start_x;
+	int				draw_end_y;
+	int				draw_end_x;
+	double  		trans_x;
+	double  		trans_y;
+	int				tex_x;
+}					t_sprites;
 
 typedef struct s_mouse
 {
@@ -134,6 +143,7 @@ typedef struct s_parse
 	int		F_RGB;
 	char	*C;
 	int		C_RGB;
+	int		sprites_num;
 }		t_parse;
 
 typedef struct s_screen
@@ -149,6 +159,7 @@ typedef struct s_texture
     t_data	S_wall;
     t_data	E_wall;
     t_data	W_wall;
+	t_data	**sprites;
 }   		t_texture;
 
 typedef struct s_keys
@@ -175,7 +186,7 @@ typedef struct s_ctx
     t_texture   texture;
 	t_tex		tex;
 	t_keys		keys;
-    t_sprite    *sprite;
+    t_sprites    sprites;
     t_mouse     mouse;
 	t_minimap	mini;
 }				t_ctx;

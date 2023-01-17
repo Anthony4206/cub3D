@@ -84,6 +84,39 @@ void    init_texture_img(t_ctx *ctx)
 			&ctx->texture.W_wall.endian);
 }
 
+void	init_sprites_img(t_ctx *ctx)
+{
+	ctx->texture.sprites = malloc(sizeof(t_data *) * 2);
+	ctx->texture.sprites[0] = malloc(sizeof(t_data) * 5);
+	ctx->texture.sprites[1] = malloc(sizeof(t_data) * 5);
+
+	ctx->texture.sprites[0][0].img = mlx_xpm_file_to_image(ctx->mlx,
+		"./texture/sprites/Explosion_5.xpm", &ctx->texture.sprites[0][0].tex_width, &ctx->texture.sprites[0][0].tex_height);
+	ctx->texture.sprites[0][0].addr = mlx_get_data_addr(ctx->texture.sprites[0][0].img,
+			&ctx->texture.sprites[0][0].bpp, &ctx->texture.sprites[0][0].line_len,
+			&ctx->texture.sprites[0][0].endian);
+	ctx->texture.sprites[0][1].img = mlx_xpm_file_to_image(ctx->mlx,
+		"./texture/sprites/Explosion_6.xpm", &ctx->texture.sprites[0][1].tex_width, &ctx->texture.sprites[0][1].tex_height);
+	ctx->texture.sprites[0][1].addr = mlx_get_data_addr(ctx->texture.sprites[0][1].img,
+			&ctx->texture.sprites[0][1].bpp, &ctx->texture.sprites[0][1].line_len,
+			&ctx->texture.sprites[0][1].endian);
+	// ctx->texture.sprites[0][2].img = mlx_xpm_file_to_image(ctx->mlx,
+	// 	"./texture/sprites/Kunoichi/eating2.xpm", &ctx->texture.sprites[0][2].tex_width, &ctx->texture.sprites[0][2].tex_height);
+	// ctx->texture.sprites[0][2].addr = mlx_get_data_addr(ctx->texture.sprites[0][2].img,
+	// 		&ctx->texture.sprites[0][2].bpp, &ctx->texture.sprites[0][2].line_len,
+	// 		&ctx->texture.sprites[0][2].endian);
+	// ctx->texture.sprites[0][3].img = mlx_xpm_file_to_image(ctx->mlx,
+	// 	"./texture/sprites/Kunoichi/eating3.xpm", &ctx->texture.sprites[0][3].tex_width, &ctx->texture.sprites[0][3].tex_height);
+	// ctx->texture.sprites[0][3].addr = mlx_get_data_addr(ctx->texture.sprites[0][3].img,
+	// 		&ctx->texture.sprites[0][3].bpp, &ctx->texture.sprites[0][3].line_len,
+	// 		&ctx->texture.sprites[0][3].endian);
+	// ctx->texture.sprites[0][4].img = mlx_xpm_file_to_image(ctx->mlx,
+	// 	"./texture/sprites/Kunoichi/eating4.xpm", &ctx->texture.sprites[0][4].tex_width, &ctx->texture.sprites[0][4].tex_height);
+	// ctx->texture.sprites[0][4].addr = mlx_get_data_addr(ctx->texture.sprites[0][4].img,
+	// 		&ctx->texture.sprites[0][4].bpp, &ctx->texture.sprites[0][4].line_len,
+	// 		&ctx->texture.sprites[0][4].endian);
+}
+
 void	init_screen_buffer(t_ctx *ctx)
 {
 	int y = -1;
@@ -93,22 +126,56 @@ void	init_screen_buffer(t_ctx *ctx)
 		ctx->screen.buffer[y] = ft_calloc(sizeof(unsigned int), WIDTH);
 }
 
+void	get_sprites_coord(t_ctx *ctx)
+{
+	int	y;
+	int	x;
+	int	i;
+
+	y = -1;
+	i = 0;
+	ctx->sprites.sprite = malloc(sizeof(t_coord) * ctx->sprites.num);
+	while (ctx->parse.map[++y])
+	{
+		x = -1;
+		while (ctx->parse.map[y][++x])
+		{
+			if (ft_strchr("A", ctx->parse.map[y][x]))
+			{
+				ctx->sprites.sprite[i].x = x;
+				ctx->sprites.sprite[i].y = y;
+				i++;
+			}
+		}
+	}
+}
+
+void    init_sprite(t_ctx *ctx)
+{
+    //on parse la map pour lister les sprites et renseigner leurs données
+    //on initialise les structs t_sprite
+    ctx->sprites.num = ctx->parse.sprites_num;
+    get_sprites_coord(ctx);
+    ctx->sprites.z_buffer = malloc(sizeof(double) * WIDTH);
+    ctx->sprites.sprite_order = malloc(sizeof(int) * ctx->sprites.num);
+    ctx->sprites.sprite_distance = malloc(sizeof(double) * ctx->sprites.num);
+    //fonction pour trier les sprites par ordre d'éloignement
+    //fonction pour initialiser les textures
+}
+
 void	init_cub(t_ctx *ctx)
 {
 	init_player(ctx);
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
+	init_sprites_img(ctx);
     init_mini_map(ctx);
 	init_screen_buffer(ctx);
+	init_sprite(ctx);
 }
 
 void    init_door_img()
-{
-    //initialiser image
-}
-
-void    init_sprite_img()
 {
     //initialiser image
 }

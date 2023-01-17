@@ -31,6 +31,8 @@ void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 		}
 		if (ft_strchr("0NSEWDA", parse->map[i][j]) && j > *pos)
 			*pos = j;
+		if (ft_strchr("A", parse->map[i][j]))
+			parse->sprites_num++;
 	}
 }
 

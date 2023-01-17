@@ -37,5 +37,6 @@ int	    release_mouse(int button, int x, int y, void *param);
 int	    move_mouse(int x, int y, void *param);
 void	player_moves(t_ctx *ctx);
 void	player_rotates(t_ctx *ctx);
+void    draw_sprite(t_ctx *ctx);
 
 #endif

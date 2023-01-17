@@ -66,6 +66,7 @@ int	draw(t_ctx *ctx)
 	player_rotates(ctx);
 	print_background(ctx);
 	raycasting_walls(ctx);
+	draw_sprite(ctx);
 	draw_and_clear_buffer(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
 	draw_minimap(ctx);
@@ -82,7 +83,7 @@ int	take_instructions_and_draw(t_ctx *ctx)
 	mlx_hook(ctx->win, 4, 0, press_mouse, ctx);
 	mlx_hook(ctx->win, 5, 0, release_mouse, ctx);
 	mlx_hook(ctx->win, 6, 0, move_mouse, ctx);
-    mlx_loop_hook(ctx->mlx, draw, ctx);
+	mlx_loop_hook(ctx->mlx, draw, ctx);
 	mlx_loop(ctx->mlx);
 	return (0);
 }
