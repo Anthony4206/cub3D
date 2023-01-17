@@ -16,17 +16,17 @@ void	player_moves(t_ctx *ctx)
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirX * step);
 		ctx->player.posY = ctx->player.posY + (ctx->player.dirY * step);
 	}
-	else if (ctx->keys.key_s == true)
+	if (ctx->keys.key_s == true)
 	{
 		ctx->player.posX = ctx->player.posX - (ctx->player.dirX * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirY * step);
 	}	
-	else if (ctx->keys.key_d == true)
+	if (ctx->keys.key_d == true)
 	{
 		ctx->player.posX = ctx->player.posX - (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY + (ctx->player.dirX * step);
 	}
-	else if (ctx->keys.key_a == true)
+	if (ctx->keys.key_a == true)
 	{
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
