@@ -60,6 +60,8 @@ void	draw_and_clear_buffer(t_ctx *ctx)
 int	draw(t_ctx *ctx)
 {
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
+	player_moves(ctx);
+	player_rotates(ctx);
 	print_background(ctx);
 	raycasting_walls(ctx);
 	draw_and_clear_buffer(ctx);
@@ -71,7 +73,7 @@ int	take_instructions_and_draw(t_ctx *ctx)
 {
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
 	draw(ctx);
-	mlx_hook(ctx->win, 2, 0, deal_key, ctx);
+	mlx_hook(ctx->win, 2, 0, press_key, ctx);
 	mlx_hook(ctx->win, 3, 0, release_key, ctx);
     mlx_loop_hook(ctx->mlx, draw, ctx);
 	mlx_loop(ctx->mlx);

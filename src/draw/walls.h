@@ -29,9 +29,10 @@ void	calc_wall_x(t_ctx *ctx);
 void	calc_height_wall(t_ctx *ctx);
 void	draw_and_clear_buffer(t_ctx *ctx);
 void	display_buffer(t_ctx *ctx);
-void	generate_texture(t_ctx *ctx);
-int		deal_key(int keycode, t_ctx *ctx);
- int	press_key(int key, void *param);
- int	release_key(int key, void *param);
+//void	generate_texture(t_ctx *ctx);
+int		press_key(int key, void *param);
+int		release_key(int key, void *param);
+void	player_moves(t_ctx *ctx);
+void	player_rotates(t_ctx *ctx);
 
 #endif

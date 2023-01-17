@@ -34,8 +34,8 @@ void	init_plane(t_ctx *ctx)
 
 void	init_player(t_ctx *ctx)
 {
-	ctx->player.posX = ctx->parse.init_posX + 0.55;
-	ctx->player.posY = ctx->parse.init_posY + 0.55;
+	ctx->player.posX = ctx->parse.init_posX + 0.6;
+	ctx->player.posY = ctx->parse.init_posY + 0.6;
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
 		ctx->player.dirX = 0;
 	else if (ctx->parse.init_dir == 'E')
