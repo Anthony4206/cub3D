@@ -36,8 +36,8 @@ typedef struct s_sprite
 	double			*z_buffer;
     int				*sprite_order;
     double			*sprite_distance;
-	double			x;
-	double			y;
+	double			spriteX;
+	double			spriteY;
 	int				texture;
 	t_coord			*sprite;
 }					t_sprite;
