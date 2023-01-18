@@ -68,7 +68,7 @@ typedef struct s_tex
 	int		tex_num;
 	double	wallX;
 	int		texX;
-	int		texY;
+	int		tex_y;
 }		t_tex;
 
 typedef struct s_wall

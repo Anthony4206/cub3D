@@ -51,7 +51,7 @@ void	calc_wall_x(t_ctx *ctx)
 /* The x-coordinate of the texture will remain the same,
 because we stay in the same vertical stripe of the screen.
 ->Now we need a loop in the y-direction to give each pixel of the vertical
-stripe the correct y-coordinate of the texture, called texY.*/
+stripe the correct y-coordinate of the texture, called tex_y.*/
 void	calc_x_coord_tex(t_ctx *ctx)
 {
 	ctx->tex.texX = (int)(ctx->tex.wallX * (double)ctx->tex.select_tex.tex_width);
@@ -75,11 +75,11 @@ void	color_x_stripe(t_ctx *ctx, int x)
     y = ctx->wall.draw_start - 1;
     while (++y < ctx->wall.draw_end)
     {
-        ctx->tex.texY = (int)tex_pos & (ctx->tex.select_tex.tex_height - 1);
+        ctx->tex.tex_y = (int)tex_pos & (ctx->tex.select_tex.tex_height - 1);
         tex_pos += step;
 
         color = (*(int*)(ctx->tex.select_tex.addr + (4 *
-            ctx->tex.select_tex.tex_width * (int)ctx->tex.texY) + (4 *
+            ctx->tex.select_tex.tex_width * (int)ctx->tex.tex_y) + (4 *
                 (int)ctx->tex.texX)));
         ctx->screen.buffer[y][x] = color;
     }

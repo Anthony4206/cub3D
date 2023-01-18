@@ -69,9 +69,9 @@ void    wall()
     int y = draw_start;
     while (++y < draw_end)
       {
-        int texY = (int)tex_pos & (tex_height - 1);
+        int tex_y = (int)tex_pos & (tex_height - 1);
         tex_pos += step;
-        int color = texture[tex_num][tex_width * texY + texX];
+        int color = texture[tex_num][tex_width * tex_y + texX];
         if (side == 1)
             color = (color >> 1) & 8355711;
         buffer[y][x] = color;
@@ -87,7 +87,7 @@ void	calc_FPS()
 	redraw();
 	cls();
 
-	//speed modifiers
-	double	move_speed = frame_time * 5.0;
-	double	rot_speed = frame_time * 3.0;
+	//v modifiers
+	double	move_v = frame_time * 5.0;
+	double	rot_v = frame_time * 3.0;
 }
