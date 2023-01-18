@@ -31,7 +31,7 @@ void    sort_sprites(t_ctx *ctx)
         while (++i < ctx->sprites.num - 1)
         {
             if (ctx->sprites.sprite_distance[ctx->sprites.sprite_order[i]]
-				< ctx->sprites.sprite_distance[ctx->sprites.sprite_order[i] + 1])
+				< ctx->sprites.sprite_distance[ctx->sprites.sprite_order[i + 1]])
             {
                 tmp = ctx->sprites.sprite_order[i]; 
                 ctx->sprites.sprite_order[i] = ctx->sprites.sprite_order[i + 1];
@@ -97,16 +97,25 @@ void	draw_stripes(t_ctx *ctx, int stripe)
 	{
 		int d = (y) * 256 - HEIGHT * 128 + ctx->sprites.height * 128;
 		// int texY = ((d * ctx->texture.sprites[ctx->sprites.sprite_order[i]].tex_height)
-		int texY = ((d * ctx->texture.sprites[0][0].tex_height)
+		int texY = ((d * ctx->texture.sprites[0][ctx->s].tex_height)
 				/ ctx->sprites.height) / 256;
 		//color = ctx->texture.sprites[ctx->sprites.sprite_order[i]].addr[ctx->texture.sprites[ctx->sprites.sprite_order[i]].tex_width
 		// color = ctx->texture.sprites[0][0].addr[ctx->texture.sprites[0][0].tex_width
 		// 		* texY + texX];
-		color = (*(int*)(ctx->texture.sprites[0][0].addr + (4 * ctx->texture.sprites[0][0].tex_width * (int)texY) + (4 *
+		color = (*(int*)(ctx->texture.sprites[0][ctx->s].addr + (4 * ctx->texture.sprites[0][ctx->s].tex_width * (int)texY) + (4 *
 			(int)ctx->sprites.tex_x)));
 		if((color & 0x00FFFFFF) != 0)
 			ctx->screen.buffer[y][stripe] = color;
 	}
+}
+
+//in milliseconds
+int	get_cur_time(t_ctx *ctx)
+{
+	unsigned int	t;
+
+	t = (get_time() - ctx->time.init_time);
+	return (t);
 }
 
 //sprite[i] => ctx->sprite[i].addr
@@ -114,10 +123,16 @@ void    draw_sprite(t_ctx *ctx)
 {
     int				i;
 	int				stripe;
+	int	cur_time;
 
 	calc_order_sprite_dist(ctx);
     sort_sprites(ctx);
     i = -1;
+	cur_time = get_cur_time(ctx);
+	if ((cur_time - ctx->time.init_time) % 1000000 >= 0 && (cur_time - ctx->time.init_time) % 1000000 <= 499999)
+		ctx->s = 0;
+	else
+		ctx->s = 1;
     while (++i < ctx->sprites.num)
     {
         transform_sprite_coord(ctx, i);
@@ -125,11 +140,9 @@ void    draw_sprite(t_ctx *ctx)
 		stripe = ctx->sprites.draw_start_x;
         while (++stripe < ctx->sprites.draw_end_x)
         {
-			//printf("TEST\n");
-			fflush(stdout);
             //int texX = (int)(256 * (stripe - (-sprite_width / 2 + sprite_screenX)) * ctx->texture.sprites[ctx->sprites.sprite_order[i]].tex_width / sprite_width) / 256;
 			ctx->sprites.tex_x = (int)(256 * (stripe - (-ctx->sprites.width / 2 + ctx->sprites.screen_x))
-					* ctx->texture.sprites[0][0].tex_width / ctx->sprites.width) / 256;
+					* ctx->texture.sprites[0][ctx->s].tex_width / ctx->sprites.width) / 256;
             if (ctx->sprites.trans_y > 0 && stripe > 0 && stripe < WIDTH
 				&& ctx->sprites.trans_y < ctx->sprites.z_buffer[stripe])
 				draw_stripes(ctx, stripe);

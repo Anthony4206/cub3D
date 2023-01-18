@@ -22,12 +22,19 @@
 # include <mlx.h>
 # include <stdbool.h>
 # include <math.h>
+# include <sys/time.h>
 
 typedef struct s_coord
 {
 	double	x;
 	double	y;
 }			t_coord;
+
+typedef struct s_time
+{
+	int	init_time;
+	
+}			t_time;
 
 typedef struct s_sprites
 {
@@ -189,6 +196,8 @@ typedef struct s_ctx
     t_sprites    sprites;
     t_mouse     mouse;
 	t_minimap	mini;
+	t_time		time;
+	int			s;
 }				t_ctx;
 
 #endif

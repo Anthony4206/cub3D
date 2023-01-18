@@ -19,6 +19,20 @@
 #include "parse/parse_bonus.h"
 #include "draw/walls_bonus.h"
 
+//tv_sec = seconds, tv.usec = micro seconds;
+//gettimeofday: returns time in microseconds
+//init_time returns time in milliseconds
+int	get_time(void)
+{
+	struct timeval	cur_time;
+	unsigned int	time;
+
+	gettimeofday(&cur_time, NULL);
+	time = (cur_time.tv_sec * 1000000) + cur_time.tv_usec;
+	return (time);
+}
+
+
 void	init_plane(t_ctx *ctx)
 {
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
@@ -100,21 +114,6 @@ void	init_sprites_img(t_ctx *ctx)
 	ctx->texture.sprites[0][1].addr = mlx_get_data_addr(ctx->texture.sprites[0][1].img,
 			&ctx->texture.sprites[0][1].bpp, &ctx->texture.sprites[0][1].line_len,
 			&ctx->texture.sprites[0][1].endian);
-	// ctx->texture.sprites[0][2].img = mlx_xpm_file_to_image(ctx->mlx,
-	// 	"./texture/sprites/Kunoichi/eating2.xpm", &ctx->texture.sprites[0][2].tex_width, &ctx->texture.sprites[0][2].tex_height);
-	// ctx->texture.sprites[0][2].addr = mlx_get_data_addr(ctx->texture.sprites[0][2].img,
-	// 		&ctx->texture.sprites[0][2].bpp, &ctx->texture.sprites[0][2].line_len,
-	// 		&ctx->texture.sprites[0][2].endian);
-	// ctx->texture.sprites[0][3].img = mlx_xpm_file_to_image(ctx->mlx,
-	// 	"./texture/sprites/Kunoichi/eating3.xpm", &ctx->texture.sprites[0][3].tex_width, &ctx->texture.sprites[0][3].tex_height);
-	// ctx->texture.sprites[0][3].addr = mlx_get_data_addr(ctx->texture.sprites[0][3].img,
-	// 		&ctx->texture.sprites[0][3].bpp, &ctx->texture.sprites[0][3].line_len,
-	// 		&ctx->texture.sprites[0][3].endian);
-	// ctx->texture.sprites[0][4].img = mlx_xpm_file_to_image(ctx->mlx,
-	// 	"./texture/sprites/Kunoichi/eating4.xpm", &ctx->texture.sprites[0][4].tex_width, &ctx->texture.sprites[0][4].tex_height);
-	// ctx->texture.sprites[0][4].addr = mlx_get_data_addr(ctx->texture.sprites[0][4].img,
-	// 		&ctx->texture.sprites[0][4].bpp, &ctx->texture.sprites[0][4].line_len,
-	// 		&ctx->texture.sprites[0][4].endian);
 }
 
 void	init_screen_buffer(t_ctx *ctx)
@@ -142,8 +141,8 @@ void	get_sprites_coord(t_ctx *ctx)
 		{
 			if (ft_strchr("A", ctx->parse.map[y][x]))
 			{
-				ctx->sprites.sprite[i].x = x;
-				ctx->sprites.sprite[i].y = y;
+				ctx->sprites.sprite[i].x = x + 0.5;
+				ctx->sprites.sprite[i].y = y + 0.5;
 				i++;
 			}
 		}
@@ -173,6 +172,7 @@ void	init_cub(t_ctx *ctx)
     init_mini_map(ctx);
 	init_screen_buffer(ctx);
 	init_sprite(ctx);
+	ctx->time.init_time = get_time();
 }
 
 void    init_door_img()
