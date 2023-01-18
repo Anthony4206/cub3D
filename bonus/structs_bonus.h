@@ -149,6 +149,7 @@ typedef struct s_texture
     t_data	S_wall;
     t_data	E_wall;
     t_data	W_wall;
+    t_data  tex_door[5];
 }   		t_texture;
 
 typedef struct s_keys

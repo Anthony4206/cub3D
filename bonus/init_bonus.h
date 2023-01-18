@@ -21,6 +21,6 @@
 void	init_cub(t_ctx *ctx);
 void    init_mini_map(t_ctx *ctx);
 void    draw_minimap(t_ctx *ctx);
-
+void    init_door_img(t_ctx * ctx);
 
 #endif
