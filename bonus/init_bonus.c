@@ -12,7 +12,7 @@
 
 #include <mlx.h>
 #include <libft.h>
-
+#include <fcntl.h>
 #include "init_bonus.h"
 #include "utils_bonus.h"
 #include "structs_bonus.h"
@@ -98,22 +98,42 @@ void    init_texture_img(t_ctx *ctx)
 			&ctx->texture.W_wall.endian);
 }
 
+void	parse_sprite(t_ctx *ctx)
+{
+	int	i;
+
+	i = -1;
+	ctx->sprites.sprite_path = malloc(sizeof(char *) * 5);
+	ctx->sprites.sprite_path[0] = ft_strdup("./texture/sprites/Explosion_1.xpm");
+	ctx->sprites.sprite_path[1] = ft_strdup("./texture/sprites/Explosion_2.xpm");
+	ctx->sprites.sprite_path[2] = ft_strdup("./texture/sprites/Explosion_3.xpm");
+	ctx->sprites.sprite_path[3] = ft_strdup("./texture/sprites/Explosion_4.xpm");
+	ctx->sprites.sprite_path[4] = ft_strdup("./texture/sprites/Explosion_1.xpm");
+	while (++i < 5)
+	{
+		if (open(ctx->sprites.sprite_path[i], O_RDONLY) < 0)
+			error_exit("Error\nInvalid sprite texture path.\n");
+	}
+}
+
 void	init_sprites_img(t_ctx *ctx)
 {
-	ctx->texture.sprites = malloc(sizeof(t_data *) * 2);
-	ctx->texture.sprites[0] = malloc(sizeof(t_data) * 5);
-	ctx->texture.sprites[1] = malloc(sizeof(t_data) * 5);
+	int i;
 
-	ctx->texture.sprites[0][0].img = mlx_xpm_file_to_image(ctx->mlx,
-		"./texture/sprites/Explosion_5.xpm", &ctx->texture.sprites[0][0].tex_width, &ctx->texture.sprites[0][0].tex_height);
-	ctx->texture.sprites[0][0].addr = mlx_get_data_addr(ctx->texture.sprites[0][0].img,
-			&ctx->texture.sprites[0][0].bpp, &ctx->texture.sprites[0][0].line_len,
-			&ctx->texture.sprites[0][0].endian);
-	ctx->texture.sprites[0][1].img = mlx_xpm_file_to_image(ctx->mlx,
-		"./texture/sprites/Explosion_6.xpm", &ctx->texture.sprites[0][1].tex_width, &ctx->texture.sprites[0][1].tex_height);
-	ctx->texture.sprites[0][1].addr = mlx_get_data_addr(ctx->texture.sprites[0][1].img,
-			&ctx->texture.sprites[0][1].bpp, &ctx->texture.sprites[0][1].line_len,
-			&ctx->texture.sprites[0][1].endian);
+	i = -1;
+	ctx->texture.sprites = malloc(sizeof(t_data) * 5);
+	printf("COUCOU\n");
+	while (++i < 5)
+	{
+		ctx->texture.sprites[i].img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->sprites.sprite_path[i], &ctx->texture.sprites[i].tex_width, &ctx->texture.sprites[i].tex_height);
+		ctx->texture.sprites[i].addr = mlx_get_data_addr(ctx->texture.sprites[i].img,
+			&ctx->texture.sprites[i].bpp, &ctx->texture.sprites[i].line_len,
+			&ctx->texture.sprites[i].endian);
+		printf("cctx->sprite.sprite_path[%d] = %s\n", i, ctx->sprites.sprite_path[i]);
+		fflush(stdout);
+	}
+
 }
 
 void	init_screen_buffer(t_ctx *ctx)
@@ -151,15 +171,11 @@ void	get_sprites_coord(t_ctx *ctx)
 
 void    init_sprite(t_ctx *ctx)
 {
-    //on parse la map pour lister les sprites et renseigner leurs données
-    //on initialise les structs t_sprite
     ctx->sprites.num = ctx->parse.sprites_num;
     get_sprites_coord(ctx);
     ctx->sprites.z_buffer = malloc(sizeof(double) * WIDTH);
     ctx->sprites.sprite_order = malloc(sizeof(int) * ctx->sprites.num);
     ctx->sprites.sprite_distance = malloc(sizeof(double) * ctx->sprites.num);
-    //fonction pour trier les sprites par ordre d'éloignement
-    //fonction pour initialiser les textures
 }
 
 void	init_cub(t_ctx *ctx)
@@ -168,6 +184,7 @@ void	init_cub(t_ctx *ctx)
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
+	parse_sprite(ctx);
 	init_sprites_img(ctx);
     init_mini_map(ctx);
 	init_screen_buffer(ctx);

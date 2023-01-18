@@ -23,6 +23,7 @@
 # include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
+# include <sys/stat.h>
 
 typedef struct s_coord
 {
@@ -33,7 +34,6 @@ typedef struct s_coord
 typedef struct s_time
 {
 	int	init_time;
-	
 }			t_time;
 
 typedef struct s_sprites
@@ -55,6 +55,8 @@ typedef struct s_sprites
 	double  		trans_x;
 	double  		trans_y;
 	int				tex_x;
+	int				selec_tex;
+	char			**sprite_path;
 }					t_sprites;
 
 typedef struct s_mouse
@@ -166,7 +168,7 @@ typedef struct s_texture
     t_data	S_wall;
     t_data	E_wall;
     t_data	W_wall;
-	t_data	**sprites;
+	t_data	*sprites;
 }   		t_texture;
 
 typedef struct s_keys
@@ -197,7 +199,6 @@ typedef struct s_ctx
     t_mouse     mouse;
 	t_minimap	mini;
 	t_time		time;
-	int			s;
 }				t_ctx;
 
 #endif
