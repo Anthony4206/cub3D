@@ -17,6 +17,20 @@
 #include "../structs_bonus.h"
 #include "../utils_bonus.h"
 
+void    check_door_xpm(void)
+{
+    if (open("./texture/doors/door_0.xpm", O_RDONLY) == -1)
+        error_exit("Error\nInvalid door's texture file name\n");
+    if (open("./texture/doors/door_1.xpm", O_RDONLY) == -1)
+        error_exit("Error\nInvalid door's texture file name\n");
+    if (open("./texture/doors/door_2.xpm", O_RDONLY) == -1)
+        error_exit("Error\nInvalid door's texture file name\n");
+    if (open("./texture/doors/door_3.xpm", O_RDONLY) == -1)
+        error_exit("Error\nInvalid door's texture file name\n");
+    if (open("./texture/doors/door_4.xpm", O_RDONLY) == -1)
+        error_exit("Error\nInvalid door's texture file name\n");
+}
+
 void    check_open_file(t_parse *parse)
 {
     if (open(parse->N, O_RDONLY) == -1)
@@ -27,6 +41,7 @@ void    check_open_file(t_parse *parse)
         error_exit("Error\nInvalid texture file name\n");
     if (open(parse->W, O_RDONLY) == -1)
         error_exit("Error\nInvalid texture file name\n");
+    check_door_xpm();
 }
 
 char	*add_arg(char *s, int size)
