@@ -16,6 +16,11 @@
 #include "../utils_bonus.h"
 #include "parse_bonus.h"
 
+void    check_door(char **map, int x, int y)
+{
+    if (map[y][x + 1] == )
+}
+
 void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 {
 	int	j;
@@ -23,6 +28,8 @@ void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 	j = -1;
 	while (parse->map[i][++j])
 	{
+        if (parse->map[i][j] == 'D')
+            check_door(parse, j, i);
 		if (ft_strchr("NSEW", parse->map[i][j]))
 		{
 			(*player)++;
