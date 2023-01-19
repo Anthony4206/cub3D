@@ -82,7 +82,7 @@ void    init_texture_img(t_ctx *ctx)
 	ctx->texture.W_wall.addr = mlx_get_data_addr(ctx->texture.W_wall.img,
 			&ctx->texture.W_wall.bpp, &ctx->texture.W_wall.line_len,
 			&ctx->texture.W_wall.endian);
-    init_door_img(ctx);
+	init_door_img(ctx);
 }
 
 void	init_screen_buffer(t_ctx *ctx)
@@ -106,4 +106,9 @@ void	init_cub(t_ctx *ctx)
 	init_screen_buffer(ctx);
 	init_sprite(ctx);
 	ctx->time.init_time = get_time();
+}
+
+void    init_door_img()
+{
+    //initialiser image
 }
