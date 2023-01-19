@@ -107,8 +107,3 @@ void	init_cub(t_ctx *ctx)
 	init_sprite(ctx);
 	ctx->time.init_time = get_time();
 }
-
-void    init_door_img()
-{
-    //initialiser image
-}

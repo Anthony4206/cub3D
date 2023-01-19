@@ -25,7 +25,8 @@ SRC_B			= 	bonus/main_bonus.c bonus/utils_bonus.c bonus/init_bonus.c bonus/parse
 					bonus/parse/parse_utils_bonus.c bonus/draw/draw_bonus.c bonus/draw/draw_utils_bonus.c \
 					bonus/draw/draw_walls_w_tex_bonus.c bonus/draw/raycaster_walls_bonus.c \
 					bonus/draw/key_events_bonus.c bonus/draw/key_mouse_bonus.c bonus/minimap_bonus.c \
-					bonus/draw/move_bonus.c bonus/init_door_bonus.c \
+					bonus/draw/move_bonus.c bonus/init_door_bonus.c  bonus/init_sprite_bonus.c \
+					bonus/draw/sprite_calc_bonus.c bonus/draw/sprite_draw_bonus.c\
 
 OBJ 			= ${SRC:.c=.o}
 OBJ_B			= ${SRC_B:.c=.o}
