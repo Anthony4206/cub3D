@@ -22,6 +22,8 @@
 # include <mlx.h>
 # include <stdbool.h>
 # include <math.h>
+# include <sys/time.h>
+# include <sys/stat.h>
 
 typedef struct s_coord
 {
@@ -29,17 +31,33 @@ typedef struct s_coord
 	double	y;
 }			t_coord;
 
-typedef struct s_sprite
+typedef struct s_time
+{
+	int	init_time;
+}			t_time;
+
+typedef struct s_sprites
 {
 	int 			num; //nb of sprites
 	double			*z_buffer;
-    int				*sprite_order;
+    int				*order;
     double			*sprite_distance;
 	double			spriteX;
 	double			spriteY;
-	int				texture;
 	t_coord			*sprite;
-}					t_sprite;
+	int				screen_x;
+	int				height;
+	int				width;
+	int				draw_start_y;
+	int				draw_start_x;
+	int				draw_end_y;
+	int				draw_end_x;
+	double  		trans_x;
+	double  		trans_y;
+	int				tex_x;
+	int				selec_tex;
+	char			**sprite_path;
+}					t_sprites;
 
 typedef struct s_mouse
 {
@@ -99,7 +117,7 @@ typedef struct s_tex
 	int		tex_num;
 	double	wallX;
 	int		texX;
-	int		texY;
+	int		tex_y;
 }			t_tex;
 
 typedef struct s_wall
@@ -136,6 +154,7 @@ typedef struct s_parse
 	int		F_RGB;
 	char	*C;
 	int		C_RGB;
+	int		sprites_num;
 }		t_parse;
 
 typedef struct s_screen
@@ -152,6 +171,7 @@ typedef struct s_texture
     t_data	E_wall;
     t_data	W_wall;
     t_data  tex_door[5];
+	t_data	*sprites;
 }   		t_texture;
 
 typedef struct s_keys
@@ -179,9 +199,10 @@ typedef struct s_ctx
     t_texture   texture;
 	t_tex		tex;
 	t_keys		keys;
-    t_sprite    *sprite;
+    t_sprites    sprites;
     t_mouse     mouse;
 	t_minimap	mini;
+	t_time		time;
 }				t_ctx;
 
 #endif

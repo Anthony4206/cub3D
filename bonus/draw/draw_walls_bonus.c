@@ -38,7 +38,7 @@ void	calc_wall_x(t_ctx *ctx)
 /* The x-coordinate of the texture will remain the same,
 because we stay in the same vertical stripe of the screen.
 ->Now we need a loop in the y-direction to give each pixel of the vertical
-stripe the correct y-coordinate of the texture, called texY.*/
+stripe the correct y-coordinate of the texture, called tex_y.*/
 void	calc_x_coord_tex(t_ctx *ctx)
 {
 	ctx->tex.texX = (int)(ctx->tex.wallX * (double)ctx->tex.tex_width);
@@ -62,20 +62,20 @@ void	color_x_stripe(t_ctx *ctx, int x)
     y = ctx->wall.draw_start - 1;
     while (++y < ctx->wall.draw_end)
     {
-        ctx->tex.texY = (int)tex_pos & (ctx->tex.tex_height - 1);
+        ctx->tex.tex_y = (int)tex_pos & (ctx->tex.tex_height - 1);
         tex_pos += step;
        	if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0) // NORD
 			color = 0xfabc3c; //yellow
-			// color = ctx->tex.texture[0][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			// color = ctx->tex.texture[0][ctx->tex.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 		else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX > 0) // EST
 			color = 0xFF0000;
-			// color = ctx->tex.texture[1][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			// color = ctx->tex.texture[1][ctx->tex.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 		else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY > 0) // SUD
 			color = 0x7dff42; //green
-			// color = ctx->tex.texture[2][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			// color = ctx->tex.texture[2][ctx->tex.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 		else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX < 0) // OUEST
 			color = 0xc442ff; //purple
-			// color = ctx->tex.texture[3][ctx->tex.tex_height * ctx->tex.texY + ctx->tex.texX];
+			// color = ctx->tex.texture[3][ctx->tex.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 		ctx->screen.buffer[y][x] = color;
 //		printf("BUFFER COLORED[%d][%d] = %d\n", y, x, ctx->screen.buffer[y][x]);
     }
@@ -95,16 +95,16 @@ void	color_x_stripe(t_ctx *ctx, int x)
 //     y = ctx->wall.draw_start;
 //     while (++y < ctx->wall.draw_end)
 //     {
-//         ctx->tex.texY = (int)tex_pos & (ctx->tex.tex_height - 1);
+//         ctx->tex.tex_y = (int)tex_pos & (ctx->tex.tex_height - 1);
 //         tex_pos += step;
 //        	if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0) // NORD
-// 			color = ctx->tex.texture[0][ctx->texture.N_wall.tex_height * ctx->tex.texY + ctx->tex.texX];
+// 			color = ctx->tex.texture[0][ctx->texture.N_wall.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 // 		else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX > 0) // EST
-// 			color = ctx->tex.texture[1][ctx->texture.E_wall.tex_height * ctx->tex.texY + ctx->tex.texX];
+// 			color = ctx->tex.texture[1][ctx->texture.E_wall.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 // 		else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY > 0) // SUD
-// 			color = ctx->tex.texture[2][ctx->texture.S_wall.tex_height * ctx->tex.texY + ctx->tex.texX];
+// 			color = ctx->tex.texture[2][ctx->texture.S_wall.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 // 		else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX < 0) // OUEST
-// 			color = ctx->tex.texture[3][ctx->texture.W_wall.tex_height * ctx->tex.texY + ctx->tex.texX];
+// 			color = ctx->tex.texture[3][ctx->texture.W_wall.tex_height * ctx->tex.tex_y + ctx->tex.texX];
 //         if (ctx->ray.hit_side == 1) // pour assombrir... pas demandé
 //             color = (color >> 1) & 8355711;
 //         ctx->screen.buffer[y][x] = color;

@@ -12,7 +12,7 @@
 
 #include <mlx.h>
 #include <libft.h>
-
+#include <fcntl.h>
 #include "init_bonus.h"
 #include "utils_bonus.h"
 #include "structs_bonus.h"
@@ -100,11 +100,10 @@ void	init_cub(t_ctx *ctx)
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
+	parse_sprite(ctx);
+	init_sprites_img(ctx);
     init_mini_map(ctx);
 	init_screen_buffer(ctx);
-}
-
-void    init_sprite_img()
-{
-    //initialiser image
+	init_sprite(ctx);
+	ctx->time.init_time = get_time();
 }
