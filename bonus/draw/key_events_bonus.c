@@ -41,7 +41,7 @@ int	press_key(int key, void *param)
 		end_program(ctx);
 		exit(EXIT_SUCCESS);
 	}
-	 else if (key == 13)
+	else if (key == 13)
  		ctx->keys.key_w = true;
 	else if (key == 0)
  		ctx->keys.key_a = true;
@@ -53,5 +53,7 @@ int	press_key(int key, void *param)
  		ctx->keys.key_left = true;
 	else if (key == 124)
  		ctx->keys.key_right = true;
+    else if (key == 49)
+        ctx->keys.key_door = true;
 	return (0);
 }

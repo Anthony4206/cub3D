@@ -17,9 +17,35 @@
 #include "walls_bonus.h"
 #include "../parse/parse_bonus.h"
 
+/*int pos_door(char **map, int x, int y)
+{
+    if (map[y + 1][x] == 'D')
+
+    if (map[y - 1][x] == 'D')
+
+    if (map[y][x + 1] == 'D')
+
+    if (map[y][x - 1] == 'D')
+
+    return (0);
+}*/
+
 void    init_tex_dir(t_ctx *ctx)
 {
-    if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
+    /*if (ctx->wall.is_door && !ctx->wall.open_door)
+    {
+        ctx->tex.select_tex = ctx->texture.tex_door[4];
+        if (ctx->keys.key_door && pos_door(ctx))
+            ctx->wall.open_door = 1;
+        ctx->parse.map[] = 
+    }
+    else if (ctx->wall.is_door && ctx->wall.open_door)
+    {
+        ctx->tex.select_tex = ctx->texture.tex_door[0];
+        if (ctx->keys.key_door)
+            ctx->wall.open_door = 0;
+    }*/
+    /*else */if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
         ctx->tex.select_tex = ctx->texture.N_wall;
     else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY >= 0)
         ctx->tex.select_tex = ctx->texture.S_wall;
@@ -75,7 +101,6 @@ void	color_x_stripe(t_ctx *ctx, int x)
     {
         ctx->tex.texY = (int)tex_pos & (ctx->tex.select_tex.tex_height - 1);
         tex_pos += step;
-
         color = (*(int*)(ctx->tex.select_tex.addr + (4 *
             ctx->tex.select_tex.tex_width * (int)ctx->tex.texY) + (4 *
                 (int)ctx->tex.texX)));

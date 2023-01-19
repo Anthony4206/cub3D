@@ -107,6 +107,8 @@ typedef struct s_wall
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+    int     is_door;
+    int     open_door;
 	t_data	texture;
 }			t_wall;
 
@@ -160,6 +162,7 @@ typedef struct s_keys
 	bool	key_d;
 	bool	key_left;
 	bool	key_right;
+    bool    key_door;
 }			t_keys;
 
 typedef struct s_ctx
