@@ -32,20 +32,20 @@
 
 void    init_tex_dir(t_ctx *ctx)
 {
-    /*if (ctx->wall.is_door && !ctx->wall.open_door)
+    if (ctx->wall.is_door && !ctx->wall.open_door)
     {
         ctx->tex.select_tex = ctx->texture.tex_door[4];
-        if (ctx->keys.key_door && pos_door(ctx))
+        if (ctx->keys.key_door /*&& pos_door(ctx)*/)
             ctx->wall.open_door = 1;
-        ctx->parse.map[] = 
+        //ctx->parse.map[] = 
     }
     else if (ctx->wall.is_door && ctx->wall.open_door)
     {
         ctx->tex.select_tex = ctx->texture.tex_door[0];
         if (ctx->keys.key_door)
             ctx->wall.open_door = 0;
-    }*/
-    /*else */if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
+    }
+    else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
         ctx->tex.select_tex = ctx->texture.N_wall;
     else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY >= 0)
         ctx->tex.select_tex = ctx->texture.S_wall;

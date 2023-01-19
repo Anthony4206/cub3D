@@ -13,16 +13,16 @@ void	parse_sprite(t_ctx *ctx)
 
 	i = -1;
 	ctx->sprites.sprite_path = malloc(sizeof(char *) * 5);
-	ctx->sprites.sprite_path[0] = ft_strdup("./texture/sprites/Explosion_1.xpm");
-	ctx->sprites.sprite_path[1] = ft_strdup("./texture/sprites/Explosion_2.xpm");
-	ctx->sprites.sprite_path[2] = ft_strdup("./texture/sprites/Explosion_3.xpm");
-	ctx->sprites.sprite_path[3] = ft_strdup("./texture/sprites/Explosion_4.xpm");
-	ctx->sprites.sprite_path[4] = ft_strdup("./texture/sprites/Explosion_1.xpm");
-	// ctx->sprites.sprite_path[0] = ft_strdup("./texture/sprites/Flamme 1.xpm");
-	// ctx->sprites.sprite_path[1] = ft_strdup("./texture/sprites/Flamme 2.xpm");
-	// ctx->sprites.sprite_path[2] = ft_strdup("./texture/sprites/Flamme 3.xpm");
-	// ctx->sprites.sprite_path[3] = ft_strdup("./texture/sprites/Flamme 4.xpm");
-	// ctx->sprites.sprite_path[4] = ft_strdup("./texture/sprites/Flamme 5.xpm");
+	// ctx->sprites.sprite_path[0] = ft_strdup("./texture/sprites/Explosion_1.xpm");
+	// ctx->sprites.sprite_path[1] = ft_strdup("./texture/sprites/Explosion_2.xpm");
+	// ctx->sprites.sprite_path[2] = ft_strdup("./texture/sprites/Explosion_3.xpm");
+	// ctx->sprites.sprite_path[3] = ft_strdup("./texture/sprites/Explosion_4.xpm");
+	// ctx->sprites.sprite_path[4] = ft_strdup("./texture/sprites/Explosion_1.xpm");
+	ctx->sprites.sprite_path[0] = ft_strdup("./texture/sprites/Flamme 1.xpm");
+	ctx->sprites.sprite_path[1] = ft_strdup("./texture/sprites/Flamme 2.xpm");
+	ctx->sprites.sprite_path[2] = ft_strdup("./texture/sprites/Flamme 3.xpm");
+	ctx->sprites.sprite_path[3] = ft_strdup("./texture/sprites/Flamme 4.xpm");
+	ctx->sprites.sprite_path[4] = ft_strdup("./texture/sprites/Flamme 5.xpm");
 	while (++i < 5)
 	{
 		if (open(ctx->sprites.sprite_path[i], O_RDONLY) < 0)
