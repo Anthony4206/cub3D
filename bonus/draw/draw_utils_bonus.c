@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   draw_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:13:32 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/09 10:15:32 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:21:21 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int	ft_close(t_ctx *ctx)
 {
 	mlx_destroy_window(ctx->mlx, ctx->win);
+//	system("leaks cub3D");
 	exit (EXIT_SUCCESS);
 }
 

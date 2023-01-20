@@ -41,6 +41,7 @@ int	press_key(int key, void *param)
 	{
 		mlx_destroy_window(ctx->mlx, ctx->win);
 		end_program(ctx);
+//		system("leaks cub3D");
 		exit(EXIT_SUCCESS);
 	}
 	else if (key == 13)

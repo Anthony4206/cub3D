@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:25:14 by alevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 13:25:34 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:21:04 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,5 @@ int	main(int argc, char **argv)
 	init_cub(&ctx);
 	take_instructions_and_draw(&ctx);
 	mlx_loop(ctx.mlx);
-    //mlx_hook pour configurer le bonus souris
-//	system("leaks cub3D");
-    //initialiser aussi la key pour les portes.
 	return (0);
 }
