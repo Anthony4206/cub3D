@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:35:02 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/10 10:49:33 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 07:40:05 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 
 void	check_pos(char **map, int i, int j)
 {
-	if (map[i - 1][j - 1] == ' ' || map[i - 1][j] == ' '
-		|| map[i - 1][j + 1] == ' ' || map[i][j - 1] == ' '
-		|| map[i][j + 1] == ' ' || map[i + 1][j - 1] == ' '
-		|| map[i + 1][j] == ' ' || map[i + 1][j + 1] == ' ')
+	if (map[i - 1][j] == ' ' || map[i][j - 1] == ' ' ||
+		map[i][j + 1] == ' ' || map[i + 1][j] == ' ')
 		error_exit("Error\nMap is not close\n");
 }
 

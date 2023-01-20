@@ -39,7 +39,7 @@ void	draw_stripes(t_ctx *ctx, int stripe)
 						* ctx->texture.sprites[ctx->sprites.selec_tex].tex_width
 						* (int)tex_y) + (4 * (int)ctx->sprites.tex_x)));
 		if ((color & 0x00FFFFFF) != 0)
-			ctx->screen.buffer[y][stripe] = color;
+			my_mlx_pixel_put(&ctx->img_sprite, stripe, y, color);
 	}
 }
 

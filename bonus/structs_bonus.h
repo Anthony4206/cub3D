@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/16 11:17:13 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 09:25:28 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ typedef struct s_wall
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-    int     open_door;
 	t_data	texture;
 }			t_wall;
 
@@ -191,6 +190,7 @@ typedef struct s_ctx
 	void		*win;
 	t_data		img;
     t_data      img_door;
+	t_data		img_sprite;
 	t_parse		parse;
 	t_map		map;
 	t_wall		wall;

@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:14:45 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/16 07:25:06 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 07:20:47 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_background(t_ctx *ctx)
 	}
 }
 
-void	print_background_door(t_ctx *ctx)
+void	print_transparent_background(t_data *img)
 {
 	int	y;
 	int	x;
@@ -47,7 +47,7 @@ void	print_background_door(t_ctx *ctx)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			my_mlx_pixel_put(&ctx->img_door, x, y, 0xFFFFFFFF);
+			my_mlx_pixel_put(img, x, y, 0xFFFFFFFF);
 	}
 }
 
@@ -80,12 +80,14 @@ int	draw(t_ctx *ctx)
 	player_rotates(ctx);
 	print_background(ctx);
 	raycasting_walls(ctx);
-	print_background_door(ctx);
+	print_transparent_background(&ctx->img_door);
     raycasting_doors(ctx);
+	print_transparent_background(&ctx->img_sprite);
 	draw_sprite(ctx);
 	draw_and_clear_buffer(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img_door.img, 0, 0);
+	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img_sprite.img, 0, 0);
 	draw_minimap(ctx);
     return (0);
 }

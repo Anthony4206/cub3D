@@ -20,6 +20,11 @@ void	color_x_stripe_door(t_ctx *ctx, int x)
                 (int)ctx->tex.texX)));
         my_mlx_pixel_put(&ctx->img_door, x, y, color);
     }
+	if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == '1' ||
+		ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == 'D' ||
+		(ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == 'O' &&
+		color == 0x261B1B))
+    	ctx->sprites.z_buffer[x] = ctx->ray.perp_wall_dist;
 }
 
 int pos_door(char **map, int x, int y)
@@ -29,21 +34,21 @@ int pos_door(char **map, int x, int y)
         map[y][x + 1] == 'O' || map[y][x - 1] == 'O')
     {
         if (map[y + 1][x] == 'D')
-            map[y + 1][x] = 'O';
+			map[y + 1][x] = 'O';
         else if (map[y + 1][x] == 'O')
-            map[y + 1][x] = 'D';
+			map[y + 1][x] = 'D';
         if (map[y - 1][x] == 'D')
-            map[y - 1][x] = 'O';
+			map[y - 1][x] = 'O';
         else if (map[y - 1][x] == 'O')
-            map[y - 1][x] = 'D';
+			map[y - 1][x] = 'D';
         if (map[y][x + 1] == 'D')
-            map[y][x + 1] = 'O';
+			map[y][x + 1] = 'O';
         else if (map[y][x + 1] == 'O')
-            map[y][x + 1] = 'D';
+			map[y][x + 1] = 'D';
         if (map[y][x - 1] == 'D')
-            map[y][x - 1] = 'O';
+			map[y][x - 1] = 'O';
         else if (map[y][x - 1] == 'O')
-            map[y][x - 1] = 'D';
+			map[y][x - 1] = 'D';
         return (1);
     }
     return (0);
@@ -56,20 +61,14 @@ void    init_tex_door(t_ctx *ctx)
         ctx->tex.select_tex = ctx->texture.tex_door[4];
         if (ctx->keys.key_door &&
             pos_door(ctx->parse.map, ctx->player.posX, ctx->player.posY))
-        {
-            ctx->wall.open_door = 1;
             ctx->keys.key_door = false;
-        }
     }
     else
     {
         ctx->tex.select_tex = ctx->texture.tex_door[0];
         if (ctx->keys.key_door &&
             pos_door(ctx->parse.map, ctx->player.posX, ctx->player.posY))
-        {
-            ctx->wall.open_door = 0;
             ctx->keys.key_door = false;
-        }
     }
 }
 

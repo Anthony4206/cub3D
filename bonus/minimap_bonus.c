@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 06:48:58 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/16 15:13:46 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:03:56 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "structs_bonus.h"
 #include "draw/walls_bonus.h"
+#include "utils_bonus.h"
 
 void    init_mini_map(t_ctx *ctx)
 {
@@ -45,7 +46,7 @@ void	print_background_minimap(t_ctx *ctx, int scale)
 	}
 	else
 	{
-		size = scale * (ctx->parse.map_height + 1);
+		size = scale * (ctx->parse.map_height + 3);
 		y = -1;
 		while (++y < size)
 		{
@@ -119,6 +120,9 @@ void    draw_minimap(t_ctx *ctx)
 {
 	int	scale;
 
+	if (ctx->parse.map_height > 100 || ctx->parse.map_width > 100)
+		error_exit("Error\nThis map size is not available \
+in beta, wait for patch 1.0.25\n");
 	if (ctx->parse.map_height > ctx->parse.map_width)
 		scale = M_HEIGHT / ctx->parse.map_height;
 	else

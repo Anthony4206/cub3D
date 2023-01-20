@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:31:42 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/16 06:54:11 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 07:19:31 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void    init_mlx(t_ctx *ctx)
     ctx->img_door.img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
     ctx->img_door.addr = mlx_get_data_addr(ctx->img_door.img,
         &ctx->img_door.bpp, &ctx->img_door.line_len, &ctx->img_door.endian);
+	ctx->img_sprite.img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
+    ctx->img_sprite.addr = mlx_get_data_addr(ctx->img_sprite.img,
+        &ctx->img_sprite.bpp, &ctx->img_sprite.line_len, &ctx->img_sprite.endian);
 }
 
 void    init_texture_img(t_ctx *ctx)
