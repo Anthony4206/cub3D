@@ -2,24 +2,24 @@
 #include "../structs.h"
 #include "walls.h"
 
-int	player_low_perim_is_clear(t_ctx *ctx, int x, int y, int r)
-{
-	while (x < ctx->player.posX)
-	{
-		x += 0.000001;
-		y += 0.000001;
-		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
-			return (0);
-	}
-	while (x < ctx->player.posX + r)
-	{
-		x += 0.000001;
-		y -= 0.000001;
-		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
-			return (0);
-	}
-	return (1);
-}
+// int	player_low_perim_is_clear(t_ctx *ctx, int x, int y, int r)
+// {
+// 	while (x < ctx->player.posX)
+// 	{
+// 		x += 0.000001;
+// 		y += 0.000001;
+// 		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+// 			return (0);
+// 	}
+// 	while (x < ctx->player.posX + r)
+// 	{
+// 		x += 0.000001;
+// 		y -= 0.000001;
+// 		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+// 			return (0);
+// 	}
+// 	return (1);
+// }
 
 int	check_new_pos(t_ctx *ctx)
 {
@@ -44,8 +44,22 @@ int	check_new_pos(t_ctx *ctx)
 		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
 			return (0);
 	}
-	if (!player_low_perim_is_clear(ctx, x, y, r))
-		return (0);
+		while (x < ctx->player.posX)
+	{
+		x += 0.000001;
+		y += 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	while (x < ctx->player.posX + r)
+	{
+		x += 0.000001;
+		y -= 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	// if (!player_low_perim_is_clear(ctx, x, y, r))
+	// 	return (0);
 	return (1);
 }
 
@@ -105,7 +119,6 @@ void	player_moves(t_ctx *ctx)
 	float	step;
 	float	old_pos_x;
 	float	old_pos_y;
-
 
 	step = 0.05;
 	old_pos_x = ctx->player.posX;

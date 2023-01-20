@@ -60,9 +60,12 @@ void	draw_and_clear_buffer(t_ctx *ctx)
 int	draw(t_ctx *ctx)
 {
 	ft_bzero(ctx->img.addr, WIDTH * HEIGHT * 4);
+	printf("COUCOU 1 \n");
 	player_moves(ctx);
+	printf("COUCOU 2 \n");
 	player_rotates(ctx);
 	print_background(ctx);
+	printf("COUCOU 3\n");
 	raycasting_walls(ctx);
 	draw_and_clear_buffer(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
