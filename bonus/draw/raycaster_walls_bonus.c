@@ -65,13 +65,8 @@ void	exec_dda(t_ctx *ctx, int x)
 			ctx->ray.mapY += ctx->ray.stepY;
 			ctx->ray.hit_side = 1;			
 		}
-		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == '1' ||
-            ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == 'D' )
+		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == '1')
 			hit = true;
-        if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == 'D')
-            ctx->wall.is_door = 1;
-        else
-            ctx->wall.is_door = 0;
 	}
 }
 

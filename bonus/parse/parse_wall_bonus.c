@@ -16,9 +16,12 @@
 #include "../utils_bonus.h"
 #include "parse_bonus.h"
 
-void    check_door(char **map, int x, int y)
+int check_door(char **map, int x, int y)
 {
-    if (map[y][x + 1] == )
+    if ((map[y][x + 1] == '1' && map[y][x - 1] == '1') ||
+        (map[y + 1][x] == '1' && map[y - 1][x] == '1'))
+        return (1);
+    return (0);
 }
 
 void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
@@ -29,7 +32,10 @@ void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 	while (parse->map[i][++j])
 	{
         if (parse->map[i][j] == 'D')
-            check_door(parse, j, i);
+        {
+            if (!check_door(parse->map, j, i))
+		        error_exit("Error\nInvalid gate placement\n");
+        }            
 		if (ft_strchr("NSEW", parse->map[i][j]))
 		{
 			(*player)++;
@@ -38,6 +44,8 @@ void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 		}
 		if (ft_strchr("0NSEWDA", parse->map[i][j]) && j > *pos)
 			*pos = j;
+		if (ft_strchr("A", parse->map[i][j]))
+			parse->sprites_num++;
 	}
 }
 

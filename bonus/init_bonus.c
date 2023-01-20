@@ -12,7 +12,7 @@
 
 #include <mlx.h>
 #include <libft.h>
-
+#include <fcntl.h>
 #include "init_bonus.h"
 #include "utils_bonus.h"
 #include "structs_bonus.h"
@@ -57,7 +57,10 @@ void    init_mlx(t_ctx *ctx)
 	ctx->win = mlx_new_window(ctx->mlx, WIDTH, HEIGHT, "cub3d");
 	ctx->img.img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
 	ctx->img.addr = mlx_get_data_addr(ctx->img.img, &ctx->img.bpp,
-			&ctx->img.line_len, &ctx->img.endian);
+		&ctx->img.line_len, &ctx->img.endian);
+    ctx->img_door.img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
+    ctx->img_door.addr = mlx_get_data_addr(ctx->img_door.img,
+        &ctx->img_door.bpp, &ctx->img_door.line_len, &ctx->img_door.endian);
 }
 
 void    init_texture_img(t_ctx *ctx)
@@ -82,7 +85,7 @@ void    init_texture_img(t_ctx *ctx)
 	ctx->texture.W_wall.addr = mlx_get_data_addr(ctx->texture.W_wall.img,
 			&ctx->texture.W_wall.bpp, &ctx->texture.W_wall.line_len,
 			&ctx->texture.W_wall.endian);
-    init_door_img(ctx);
+	init_door_img(ctx);
 }
 
 void	init_screen_buffer(t_ctx *ctx)
@@ -100,11 +103,10 @@ void	init_cub(t_ctx *ctx)
 	init_plane(ctx);
 	init_mlx(ctx);
 	init_texture_img(ctx);
+	parse_sprite(ctx);
+	init_sprites_img(ctx);
     init_mini_map(ctx);
 	init_screen_buffer(ctx);
-}
-
-void    init_sprite_img()
-{
-    //initialiser image
+	init_sprite(ctx);
+	ctx->time.init_time = get_time();
 }

@@ -99,6 +99,16 @@ void	init_map_tab(t_parse *parse, char *line, int fd)
 	free(line);
 }
 
+void    init_map_door(t_parse *parse)
+{
+    int i;
+
+    i = -1;
+    parse->map_door = ft_calloc(sizeof(int *), parse->map_height);
+	while (++i < parse->map_height)
+		parse->map_door[i] = ft_calloc(sizeof(int), parse->map_width);
+}
+
 void	get_map(t_parse *parse, char *line, int fd, char *file)
 {
 	int		i;
@@ -116,5 +126,6 @@ void	get_map(t_parse *parse, char *line, int fd, char *file)
 		line = get_next_line(fd);
 	}
 	init_map_tab(parse, line, fd);
+    init_map_door(parse);
 //	display_map(parse);
 }

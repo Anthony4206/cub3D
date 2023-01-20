@@ -31,7 +31,8 @@ void	player_moves(t_ctx *ctx)
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
 	}
-	if (ctx->parse.map[(int)ctx->player.posY][(int)ctx->player.posX] - '0' > 0)
+	if (ctx->parse.map[(int)ctx->player.posY][(int)ctx->player.posX] - '0' == 1 ||
+        ctx->parse.map[(int)ctx->player.posY][(int)ctx->player.posX] == 'D')
 	{
 		ctx->player.posX = old_pos_x;
 		ctx->player.posY = old_pos_y;

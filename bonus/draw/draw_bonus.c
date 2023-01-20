@@ -37,6 +37,20 @@ void	print_background(t_ctx *ctx)
 	}
 }
 
+void	print_background_door(t_ctx *ctx)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+			my_mlx_pixel_put(&ctx->img_door, x, y, 0xFFFFFFFF);
+	}
+}
+
 void	draw_and_clear_buffer(t_ctx *ctx)
 {
 	int	x;
@@ -66,8 +80,12 @@ int	draw(t_ctx *ctx)
 	player_rotates(ctx);
 	print_background(ctx);
 	raycasting_walls(ctx);
+	print_background_door(ctx);
+    raycasting_doors(ctx);
+	draw_sprite(ctx);
 	draw_and_clear_buffer(ctx);
 	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img.img, 0, 0);
+	mlx_put_image_to_window(&ctx->mlx, ctx->win, ctx->img_door.img, 0, 0);
 	draw_minimap(ctx);
     return (0);
 }
@@ -82,7 +100,7 @@ int	take_instructions_and_draw(t_ctx *ctx)
 	mlx_hook(ctx->win, 4, 0, press_mouse, ctx);
 	mlx_hook(ctx->win, 5, 0, release_mouse, ctx);
 	mlx_hook(ctx->win, 6, 0, move_mouse, ctx);
-    mlx_loop_hook(ctx->mlx, draw, ctx);
+	mlx_loop_hook(ctx->mlx, draw, ctx);
 	mlx_loop(ctx->mlx);
 	return (0);
 }

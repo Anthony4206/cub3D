@@ -20,7 +20,9 @@ int	release_key(int key, void *param)
  		ctx->keys.key_left = false;
 	else if (key == 124)
  		ctx->keys.key_right = false;
-	//printf("keycode = %d is released\n", key);
+    else if (key == 49)
+        ctx->keys.key_door = false;
+	//printf("keycode = %d is released\sssdzn", key);
     return (0);
 }
 
@@ -55,5 +57,5 @@ int	press_key(int key, void *param)
  		ctx->keys.key_right = true;
     else if (key == 49)
         ctx->keys.key_door = true;
-	return (0);
+    return (0);
 }

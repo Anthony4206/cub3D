@@ -17,35 +17,9 @@
 #include "walls_bonus.h"
 #include "../parse/parse_bonus.h"
 
-/*int pos_door(char **map, int x, int y)
-{
-    if (map[y + 1][x] == 'D')
-
-    if (map[y - 1][x] == 'D')
-
-    if (map[y][x + 1] == 'D')
-
-    if (map[y][x - 1] == 'D')
-
-    return (0);
-}*/
-
 void    init_tex_dir(t_ctx *ctx)
 {
-    /*if (ctx->wall.is_door && !ctx->wall.open_door)
-    {
-        ctx->tex.select_tex = ctx->texture.tex_door[4];
-        if (ctx->keys.key_door && pos_door(ctx))
-            ctx->wall.open_door = 1;
-        ctx->parse.map[] = 
-    }
-    else if (ctx->wall.is_door && ctx->wall.open_door)
-    {
-        ctx->tex.select_tex = ctx->texture.tex_door[0];
-        if (ctx->keys.key_door)
-            ctx->wall.open_door = 0;
-    }*/
-    /*else */if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
+    if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
         ctx->tex.select_tex = ctx->texture.N_wall;
     else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY >= 0)
         ctx->tex.select_tex = ctx->texture.S_wall;
@@ -75,7 +49,7 @@ void	calc_wall_x(t_ctx *ctx)
 /* The x-coordinate of the texture will remain the same,
 because we stay in the same vertical stripe of the screen.
 ->Now we need a loop in the y-direction to give each pixel of the vertical
-stripe the correct y-coordinate of the texture, called texY.*/
+stripe the correct y-coordinate of the texture, called tex_y.*/
 void	calc_x_coord_tex(t_ctx *ctx)
 {
 	ctx->tex.texX = (int)(ctx->tex.wallX * (double)ctx->tex.select_tex.tex_width);
@@ -99,13 +73,13 @@ void	color_x_stripe(t_ctx *ctx, int x)
     y = ctx->wall.draw_start - 1;
     while (++y < ctx->wall.draw_end)
     {
-        ctx->tex.texY = (int)tex_pos & (ctx->tex.select_tex.tex_height - 1);
+        ctx->tex.tex_y = (int)tex_pos & (ctx->tex.select_tex.tex_height - 1);
         tex_pos += step;
         color = (*(int*)(ctx->tex.select_tex.addr + (4 *
-            ctx->tex.select_tex.tex_width * (int)ctx->tex.texY) + (4 *
+            ctx->tex.select_tex.tex_width * (int)ctx->tex.tex_y) + (4 *
                 (int)ctx->tex.texX)));
         ctx->screen.buffer[y][x] = color;
     }
-    //ctx->sprite.z_buffer[x] = ctx->ray.perp_wall_dist;
+    ctx->sprites.z_buffer[x] = ctx->ray.perp_wall_dist;
 }
 
