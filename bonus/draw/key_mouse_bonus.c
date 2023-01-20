@@ -32,12 +32,12 @@ void    rotate(t_ctx *ctx, float a, int x)
 	double	tmp_x;
 	double	tmp_plane_x;
     
-    tmp_x = ctx->player.dirX * cos(a) + ctx->player.dirY * (-sin(a));
-    ctx->player.dirY = ctx->player.dirX * sin(a) + ctx->player.dirY * (cos(a));
-    ctx->player.dirX = tmp_x;
-    tmp_plane_x = ctx->ray.plane_X * cos(a) - ctx->ray.plane_Y * sin(a);
-    ctx->ray.plane_Y =ctx->ray.plane_X * sin(a) + ctx->ray.plane_Y * cos(a);
-    ctx->ray.plane_X = tmp_plane_x;
+    tmp_x = ctx->player.dir_x * cos(a) + ctx->player.dir_y * (-sin(a));
+    ctx->player.dir_y = ctx->player.dir_x * sin(a) + ctx->player.dir_y * (cos(a));
+    ctx->player.dir_x = tmp_x;
+    tmp_plane_x = ctx->ray.plane_x * cos(a) - ctx->ray.plane_y * sin(a);
+    ctx->ray.plane_y =ctx->ray.plane_x * sin(a) + ctx->ray.plane_y * cos(a);
+    ctx->ray.plane_x = tmp_plane_x;
     ctx->mouse.save_x = x;    
 }
 

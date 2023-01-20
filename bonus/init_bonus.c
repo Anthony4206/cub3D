@@ -23,32 +23,32 @@ void	init_plane(t_ctx *ctx)
 {
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
 	{
-		ctx->ray.plane_X = 0.66;
-		ctx->ray.plane_Y = 0.0;
+		ctx->ray.plane_x = 0.66;
+		ctx->ray.plane_y = 0.0;
 	}
 	else
 	{
-		ctx->ray.plane_X = 0;
-		ctx->ray.plane_Y = 0.66;
+		ctx->ray.plane_x = 0;
+		ctx->ray.plane_y = 0.66;
 	}
 }
 
 void	init_player(t_ctx *ctx)
 {
-	ctx->player.posX = ctx->parse.init_posX + 0.55;
-	ctx->player.posY = ctx->parse.init_posY + 0.55;
+	ctx->player.pos_x = ctx->parse.init_pos_x + 0.55;
+	ctx->player.pos_y = ctx->parse.init_pos_y + 0.55;
 	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
-		ctx->player.dirX = 0;
+		ctx->player.dir_x = 0;
 	else if (ctx->parse.init_dir == 'E')
-		ctx->player.dirX = 1;
+		ctx->player.dir_x = 1;
 	else
-		ctx->player.dirX = -1;
+		ctx->player.dir_x = -1;
 	if (ctx->parse.init_dir == 'E' || ctx->parse.init_dir == 'W')
-		ctx->player.dirY = 0;
+		ctx->player.dir_y = 0;
 	else if (ctx->parse.init_dir == 'S')
-		ctx->player.dirY = 1;
+		ctx->player.dir_y = 1;
 	else
-		ctx->player.dirY = -1;
+		ctx->player.dir_y = -1;
 }
 
 void    init_mlx(t_ctx *ctx)
@@ -68,26 +68,26 @@ void    init_mlx(t_ctx *ctx)
 
 void    init_texture_img(t_ctx *ctx)
 {
-	ctx->texture.N_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.N, &ctx->texture.N_wall.tex_width, &ctx->texture.N_wall.tex_height);
-	ctx->texture.N_wall.addr = mlx_get_data_addr(ctx->texture.N_wall.img,
-			&ctx->texture.N_wall.bpp, &ctx->texture.N_wall.line_len,
-			&ctx->texture.N_wall.endian);
-	ctx->texture.S_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.S, &ctx->texture.S_wall.tex_width, &ctx->texture.S_wall.tex_height);	
-	ctx->texture.S_wall.addr = mlx_get_data_addr(ctx->texture.S_wall.img,
-			&ctx->texture.S_wall.bpp, &ctx->texture.S_wall.line_len,
-			&ctx->texture.S_wall.endian);
-	ctx->texture.E_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.E, &ctx->texture.E_wall.tex_width, &ctx->texture.E_wall.tex_height);	
-	ctx->texture.E_wall.addr = mlx_get_data_addr(ctx->texture.E_wall.img,
-			&ctx->texture.E_wall.bpp, &ctx->texture.E_wall.line_len,
-			&ctx->texture.E_wall.endian);
-	ctx->texture.W_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.W, &ctx->texture.W_wall.tex_width, &ctx->texture.W_wall.tex_height);
-	ctx->texture.W_wall.addr = mlx_get_data_addr(ctx->texture.W_wall.img,
-			&ctx->texture.W_wall.bpp, &ctx->texture.W_wall.line_len,
-			&ctx->texture.W_wall.endian);
+	ctx->texture.n_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.no, &ctx->texture.n_wall.tex_width, &ctx->texture.n_wall.tex_height);
+	ctx->texture.n_wall.addr = mlx_get_data_addr(ctx->texture.n_wall.img,
+			&ctx->texture.n_wall.bpp, &ctx->texture.n_wall.line_len,
+			&ctx->texture.n_wall.endian);
+	ctx->texture.s_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.so, &ctx->texture.s_wall.tex_width, &ctx->texture.s_wall.tex_height);	
+	ctx->texture.s_wall.addr = mlx_get_data_addr(ctx->texture.s_wall.img,
+			&ctx->texture.s_wall.bpp, &ctx->texture.s_wall.line_len,
+			&ctx->texture.s_wall.endian);
+	ctx->texture.e_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.ea, &ctx->texture.e_wall.tex_width, &ctx->texture.e_wall.tex_height);	
+	ctx->texture.e_wall.addr = mlx_get_data_addr(ctx->texture.e_wall.img,
+			&ctx->texture.e_wall.bpp, &ctx->texture.e_wall.line_len,
+			&ctx->texture.e_wall.endian);
+	ctx->texture.w_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.we, &ctx->texture.w_wall.tex_width, &ctx->texture.w_wall.tex_height);
+	ctx->texture.w_wall.addr = mlx_get_data_addr(ctx->texture.w_wall.img,
+			&ctx->texture.w_wall.bpp, &ctx->texture.w_wall.line_len,
+			&ctx->texture.w_wall.endian);
 	init_door_img(ctx);
 }
 

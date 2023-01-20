@@ -83,27 +83,27 @@ typedef struct s_minimap
 
 typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 }			t_player;
 
 typedef struct s_ray
 {
-	double	cameraX;
-	double	ray_dirX;
-	double	ray_dirY;
-	double	plane_X;
-	double	plane_Y;
-	double	delta_distX;
-	double	delta_distY;
-	double	side_distX;
-	double	side_distY;
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 	int		hit_side;
 	double	perp_wall_dist;
 }			t_ray;
@@ -115,8 +115,8 @@ typedef struct s_tex
     t_data  select_tex;
 	int		**texture; //tab of all textures, containing texHeight*texWidth
 	int		tex_num;
-	double	wallX;
-	int		texX;
+	double	wall_x;
+	int		tex_x;
 	int		tex_y;
 }			t_tex;
 
@@ -142,17 +142,17 @@ typedef struct s_parse
 	int		line_map_start;
 	char	**map;
     int     **map_door;
-	double	init_posX;
-	double	init_posY;
+	double	init_pos_x;
+	double	init_pos_y;
 	char	init_dir; //NSEW
 	char	*N;
 	char	*S;
 	char	*E;
 	char	*W;
 	char	*F;
-	int		F_RGB;
+	int		f_rgb;
 	char	*C;
-	int		C_RGB;
+	int		c_rgb;
 	int		sprites_num;
 }		t_parse;
 
@@ -165,10 +165,10 @@ typedef struct s_screen
 
 typedef struct s_texture
 {
-    t_data	N_wall;
-    t_data	S_wall;
-    t_data	E_wall;
-    t_data	W_wall;
+    t_data	n_wall;
+    t_data	s_wall;
+    t_data	e_wall;
+    t_data	w_wall;
     t_data  tex_door[5];
 	t_data	*sprites;
 }   		t_texture;

@@ -72,38 +72,38 @@ int	check_colors(char *color)
 void	init_texture(char *texture, t_parse *parse, int size, int n)
 {
 	if (texture[0] == 'N')
-		parse->N = add_arg(texture + n, size);
+		parse->no = add_arg(texture + n, size);
 	else if (texture[0] == 'S')
-		parse->S = add_arg(texture + n, size);
+		parse->so = add_arg(texture + n, size);
 	else if (texture[0] == 'E')
-		parse->E = add_arg(texture + n, size);
+		parse->ea = add_arg(texture + n, size);
 	else if (texture[0] == 'W')
-		parse->W = add_arg(texture + n, size);
+		parse->we = add_arg(texture + n, size);
 	else if (texture[0] == 'F')
 	{
-		parse->F = add_arg(texture + n, size);
-		parse->F_RGB = check_colors(parse->F);
+		parse->floor = add_arg(texture + n, size);
+		parse->f_rgb = check_colors(parse->floor);
 	}
 	else if (texture[0] == 'C')
 	{
-		parse->C = add_arg(texture + n, size);
-		parse->C_RGB = check_colors(parse->C);
+		parse->ceiling = add_arg(texture + n, size);
+		parse->c_rgb = check_colors(parse->ceiling);
 	}
 }
 
 void	parse_texture(char *texture, t_parse *parse, int size, int n)
 {
-	if (texture[0] == 'N' && parse->N)
+	if (texture[0] == 'N' && parse->no)
 		error_exit("Error\nTexture specified more than once\n");
-	else if (texture[0] == 'S' && parse->S)
+	else if (texture[0] == 'S' && parse->so)
 		error_exit("Error\nTexture specified more than once\n");
-	else if (texture[0] == 'W' && parse->W)
+	else if (texture[0] == 'W' && parse->we)
 		error_exit("Error\nTexture specified more than once\n");
-	else if (texture[0] == 'E' && parse->E)
+	else if (texture[0] == 'E' && parse->ea)
 		error_exit("Error\nTexture specified more than once\n");
-	else if (texture[0] == 'F' && parse->F)
+	else if (texture[0] == 'F' && parse->floor)
 		error_exit("Error\nTexture specified more than once\n");
-	else if (texture[0] == 'C' && parse->C)
+	else if (texture[0] == 'C' && parse->ceiling)
 		error_exit("Error\nTexture specified more than once\n");
 	init_texture(texture, parse, size, n);
 }
@@ -119,8 +119,8 @@ void	parse_header(t_parse *parse, char **line, int fd)
 			error_exit("Error\nInvalid map format\n");
         }
 		check_line(parse, *line);
-		if (parse->C && parse->E && parse->F && parse->N
-			&& parse->S && parse->W)
+		if (parse->ceiling && parse->ea && parse->floor && parse->no
+			&& parse->so && parse->we)
 			break ;
 		free(*line);
 	}

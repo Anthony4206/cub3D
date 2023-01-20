@@ -10,15 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <libft.h>
-#include <stdio.h>
-
 #include "../utils.h"
 #include "../structs.h"
 #include "parse.h"
 
-//les dossiers sont open (à voir)
 t_parse	parse(char *str)
 {
 	t_parse	ret;
@@ -30,7 +26,7 @@ t_parse	parse(char *str)
 		error_exit("Error\nInvalid map name\n");
 	if (ft_strncmp(str + ft_strlen(str) - 4, ".cub", 4))
 		error_exit("Error\nInvalid map format\n");
-    ft_bzero(&ret, sizeof(t_parse));
+	ft_bzero(&ret, sizeof(t_parse));
 	parse_header(&ret, &line, fd);
 	get_map(&ret, line, fd, str);
 	parse_wall(&ret);

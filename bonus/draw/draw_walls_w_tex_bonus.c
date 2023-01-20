@@ -19,14 +19,14 @@
 
 void    init_tex_dir(t_ctx *ctx)
 {
-    if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0)
-        ctx->tex.select_tex = ctx->texture.N_wall;
-    else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY >= 0)
-        ctx->tex.select_tex = ctx->texture.S_wall;
-    else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX >= 0)
-        ctx->tex.select_tex = ctx->texture.E_wall;
-    else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX < 0)
-        ctx->tex.select_tex = ctx->texture.W_wall;
+    if (ctx->ray.hit_side == 1 && ctx->ray.ray_dir_y < 0)
+        ctx->tex.select_tex = ctx->texture.n_wall;
+    else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dir_y >= 0)
+        ctx->tex.select_tex = ctx->texture.s_wall;
+    else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dir_x >= 0)
+        ctx->tex.select_tex = ctx->texture.e_wall;
+    else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dir_x < 0)
+        ctx->tex.select_tex = ctx->texture.w_wall;
 }
 
 void    draw_wall(t_ctx *ctx, int x)
@@ -40,10 +40,10 @@ void    draw_wall(t_ctx *ctx, int x)
 void	calc_wall_x(t_ctx *ctx)
 {
 	if (ctx->ray.hit_side == 0)
-        ctx->tex.wallX = ctx->player.posY + ctx->ray.perp_wall_dist * ctx->ray.ray_dirY;
+        ctx->tex.wall_x = ctx->player.pos_y + ctx->ray.perp_wall_dist * ctx->ray.ray_dir_y;
     else
-		ctx->tex.wallX = ctx->player.posX + ctx->ray.perp_wall_dist * ctx->ray.ray_dirX;
-    ctx->tex.wallX -= floor((ctx->tex.wallX));
+		ctx->tex.wall_x = ctx->player.pos_x + ctx->ray.perp_wall_dist * ctx->ray.ray_dir_x;
+    ctx->tex.wall_x -= floor((ctx->tex.wall_x));
 }
 
 /* The x-coordinate of the texture will remain the same,
@@ -52,11 +52,11 @@ because we stay in the same vertical stripe of the screen.
 stripe the correct y-coordinate of the texture, called tex_y.*/
 void	calc_x_coord_tex(t_ctx *ctx)
 {
-	ctx->tex.texX = (int)(ctx->tex.wallX * (double)ctx->tex.select_tex.tex_width);
-    if (ctx->ray.hit_side == 0 && ctx->ray.ray_dirX > 0)
-        ctx->tex.texX = ctx->tex.select_tex.tex_width - ctx->tex.texX - 1;
-    if (ctx->ray.hit_side == 1 && ctx->ray.ray_dirY < 0) 
-        ctx->tex.texX = ctx->tex.select_tex.tex_width - ctx->tex.texX - 1;
+	ctx->tex.tex_x = (int)(ctx->tex.wall_x * (double)ctx->tex.select_tex.tex_width);
+    if (ctx->ray.hit_side == 0 && ctx->ray.ray_dir_x > 0)
+        ctx->tex.tex_x = ctx->tex.select_tex.tex_width - ctx->tex.tex_x - 1;
+    if (ctx->ray.hit_side == 1 && ctx->ray.ray_dir_y < 0) 
+        ctx->tex.tex_x = ctx->tex.select_tex.tex_width - ctx->tex.tex_x - 1;
 }
 
 /* Determines how much to increase the texture coordinate
@@ -77,7 +77,7 @@ void	color_x_stripe(t_ctx *ctx, int x)
         tex_pos += step;
         color = (*(int*)(ctx->tex.select_tex.addr + (4 *
             ctx->tex.select_tex.tex_width * (int)ctx->tex.tex_y) + (4 *
-                (int)ctx->tex.texX)));
+                (int)ctx->tex.tex_x)));
         ctx->screen.buffer[y][x] = color;
     }
     ctx->sprites.z_buffer[x] = ctx->ray.perp_wall_dist;

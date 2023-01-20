@@ -104,8 +104,8 @@ void    draw_player(t_ctx *ctx, int scale)
     int incr_x;
     int incr_y;
 
-    x = ctx->player.posX * scale + (scale / 3);
-    y = ctx->player.posY * scale + (scale / 3);
+    x = ctx->player.pos_x * scale + (scale / 3);
+    y = ctx->player.pos_y * scale + (scale / 3);
     incr_y = -1;
     while (++incr_y < (scale / 3) * 2)
     {

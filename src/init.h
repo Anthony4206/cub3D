@@ -14,8 +14,6 @@
 # define INIT_H
 
 # include "structs.h"
-# include <math.h>
-#include <stdbool.h>
 
 void	init_cub(t_ctx *ctx);
 

@@ -11,11 +11,9 @@
 /* ************************************************************************** */
 
 #include <libft.h>
-
 #include "../structs.h"
 #include "../utils.h"
 #include "parse.h"
-
 
 void	check_pos(char **map, int i, int j)
 {
@@ -26,8 +24,8 @@ void	check_pos(char **map, int i, int j)
 
 void	parse_player(t_parse *parse, char *orient, int i, int j)
 {
-	parse->init_posX = j;
-	parse->init_posY = i;
+	parse->init_pos_x = j;
+	parse->init_pos_y = i;
 	parse->init_dir = *orient;
 	*orient = '0';
 }

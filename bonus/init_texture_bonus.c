@@ -6,26 +6,26 @@
 
 void    init_texture_img(t_ctx *ctx)
 {
-	ctx->texture.N_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.N, &ctx->texture.N_wall.tex_width, &ctx->texture.N_wall.tex_height);
-	ctx->texture.N_wall.addr = mlx_get_data_addr(ctx->texture.N_wall.img,
-			&ctx->texture.N_wall.bpp, &ctx->texture.N_wall.line_len,
-			&ctx->texture.N_wall.endian);
-	ctx->texture.S_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.S, &ctx->texture.S_wall.tex_width, &ctx->texture.S_wall.tex_height);	
-	ctx->texture.S_wall.addr = mlx_get_data_addr(ctx->texture.S_wall.img,
-			&ctx->texture.S_wall.bpp, &ctx->texture.S_wall.line_len,
-			&ctx->texture.S_wall.endian);
-	ctx->texture.E_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.E, &ctx->texture.E_wall.tex_width, &ctx->texture.E_wall.tex_height);	
-	ctx->texture.E_wall.addr = mlx_get_data_addr(ctx->texture.E_wall.img,
-			&ctx->texture.E_wall.bpp, &ctx->texture.E_wall.line_len,
-			&ctx->texture.E_wall.endian);
-	ctx->texture.W_wall.img = mlx_xpm_file_to_image(ctx->mlx,
-			ctx->parse.W, &ctx->texture.W_wall.tex_width, &ctx->texture.W_wall.tex_height);
-	ctx->texture.W_wall.addr = mlx_get_data_addr(ctx->texture.W_wall.img,
-			&ctx->texture.W_wall.bpp, &ctx->texture.W_wall.line_len,
-			&ctx->texture.W_wall.endian);
+	ctx->texture.n_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.N, &ctx->texture.n_wall.tex_width, &ctx->texture.n_wall.tex_height);
+	ctx->texture.n_wall.addr = mlx_get_data_addr(ctx->texture.n_wall.img,
+			&ctx->texture.n_wall.bpp, &ctx->texture.n_wall.line_len,
+			&ctx->texture.n_wall.endian);
+	ctx->texture.s_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.S, &ctx->texture.s_wall.tex_width, &ctx->texture.s_wall.tex_height);	
+	ctx->texture.s_wall.addr = mlx_get_data_addr(ctx->texture.s_wall.img,
+			&ctx->texture.s_wall.bpp, &ctx->texture.s_wall.line_len,
+			&ctx->texture.s_wall.endian);
+	ctx->texture.e_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.E, &ctx->texture.e_wall.tex_width, &ctx->texture.e_wall.tex_height);	
+	ctx->texture.e_wall.addr = mlx_get_data_addr(ctx->texture.e_wall.img,
+			&ctx->texture.e_wall.bpp, &ctx->texture.e_wall.line_len,
+			&ctx->texture.e_wall.endian);
+	ctx->texture.w_wall.img = mlx_xpm_file_to_image(ctx->mlx,
+			ctx->parse.W, &ctx->texture.w_wall.tex_width, &ctx->texture.w_wall.tex_height);
+	ctx->texture.w_wall.addr = mlx_get_data_addr(ctx->texture.w_wall.img,
+			&ctx->texture.w_wall.bpp, &ctx->texture.w_wall.line_len,
+			&ctx->texture.w_wall.endian);
     init_door_img(ctx);
 }
 

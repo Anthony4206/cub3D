@@ -17,16 +17,16 @@
 #include "../structs.h"
 #include "../utils.h"
 
-void    check_open_file(t_parse *parse)
+void	check_open_file(t_parse *parse)
 {
-    if (open(parse->N, O_RDONLY) == -1)
-        error_exit("Error\nInvalid texture file name\n");
-    if (open(parse->S, O_RDONLY) == -1)
-        error_exit("Error\nInvalid texture file name\n");
-    if (open(parse->E, O_RDONLY) == -1)
-        error_exit("Error\nInvalid texture file name\n");
-    if (open(parse->W, O_RDONLY) == -1)
-        error_exit("Error\nInvalid texture file name\n");
+	if (open(parse->no, O_RDONLY) == -1)
+		error_exit("Error\nInvalid texture file name\n");
+	if (open(parse->so, O_RDONLY) == -1)
+		error_exit("Error\nInvalid texture file name\n");
+	if (open(parse->ea, O_RDONLY) == -1)
+		error_exit("Error\nInvalid texture file name\n");
+	if (open(parse->we, O_RDONLY) == -1)
+		error_exit("Error\nInvalid texture file name\n");
 }
 
 char	*add_arg(char *s, int size)

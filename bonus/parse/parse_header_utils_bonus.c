@@ -33,13 +33,13 @@ void    check_door_xpm(void)
 
 void    check_open_file(t_parse *parse)
 {
-    if (open(parse->N, O_RDONLY) == -1)
+    if (open(parse->no, O_RDONLY) == -1)
         error_exit("Error\nInvalid texture file name\n");
-    if (open(parse->S, O_RDONLY) == -1)
+    if (open(parse->so, O_RDONLY) == -1)
         error_exit("Error\nInvalid texture file name\n");
-    if (open(parse->E, O_RDONLY) == -1)
+    if (open(parse->ea, O_RDONLY) == -1)
         error_exit("Error\nInvalid texture file name\n");
-    if (open(parse->W, O_RDONLY) == -1)
+    if (open(parse->we, O_RDONLY) == -1)
         error_exit("Error\nInvalid texture file name\n");
     check_door_xpm();
 }
