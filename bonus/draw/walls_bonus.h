@@ -42,5 +42,8 @@ void	calc_order_sprite_dist(t_ctx *ctx);
 void	transform_sprite_coord(t_ctx *ctx, int i);
 void	raycasting_doors(t_ctx *ctx);
 void	calculate_delta(t_ctx *ctx);
+int		get_texture(t_ctx *ctx, int x, int y);
+int		sliding_ag_walls(t_ctx *ctx, float step);
+int	    check_new_pos(t_ctx *ctx);
 
 #endif

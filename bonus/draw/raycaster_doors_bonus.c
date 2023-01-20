@@ -110,7 +110,7 @@ int	exec_dda_door(t_ctx *ctx)
 		{
 			ctx->ray.side_dist_y += ctx->ray.delta_dist_y;
 			ctx->ray.map_y += ctx->ray.step_y;
-			ctx->ray.hit_side = 1;			
+			ctx->ray.hit_side = 1;
 		}
 		if (ctx->parse.map[ctx->ray.map_y][ctx->ray.map_x] == '1')
 		{
@@ -134,7 +134,7 @@ int	exec_dda_door(t_ctx *ctx)
 void	raycasting_doors(t_ctx *ctx)
 {
 	int	x;
-	
+
 	x = -1;
 	while (++x < WIDTH)
 	{
