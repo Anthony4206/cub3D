@@ -2,6 +2,25 @@
 #include "../structs.h"
 #include "walls.h"
 
+int	player_low_perim_is_clear(t_ctx *ctx, int x, int y, int r)
+{
+	while (x < ctx->player.posX)
+	{
+		x += 0.000001;
+		y += 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	while (x < ctx->player.posX + r)
+	{
+		x += 0.000001;
+		y -= 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	return (1);
+}
+
 int	check_new_pos(t_ctx *ctx)
 {
 	double	r;
@@ -25,22 +44,9 @@ int	check_new_pos(t_ctx *ctx)
 		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
 			return (0);
 	}
-	while (x < ctx->player.posX)
-	{
-		x += 0.000001;
-		y += 0.000001;
-		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
-			return (0);
-	}
-	while (x < ctx->player.posX + r)
-	{
-		x += 0.000001;
-		y -= 0.000001;
-		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
-			return (0);
-	}
+	if (!player_low_perim_is_clear(ctx, x, y, r))
+		return (0);
 	return (1);
-	
 }
 
 int	check_sliding_ag_walls(t_ctx *ctx, float step)
