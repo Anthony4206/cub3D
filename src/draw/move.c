@@ -12,7 +12,7 @@
 
 #include <libft.h>
 #include "../structs.h"
-#include "walls.h"
+#include "draw.h"
 
 int	player_low_perim_is_clear(t_ctx *ctx, float x, float y, int r)
 {

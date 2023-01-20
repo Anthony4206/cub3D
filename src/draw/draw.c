@@ -12,7 +12,7 @@
 
 #include <libft.h>
 #include "../structs.h"
-#include "walls.h"
+#include "draw.h"
 
 void	print_background(t_ctx *ctx)
 {

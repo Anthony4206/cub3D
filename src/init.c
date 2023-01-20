@@ -16,7 +16,7 @@
 #include "utils.h"
 #include "structs.h"
 #include "parse/parse.h"
-#include "draw/walls.h"
+#include "draw/draw.h"
 
 void	init_plane(t_ctx *ctx)
 {

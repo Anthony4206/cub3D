@@ -15,7 +15,7 @@
 #include "init.h"
 #include "structs.h"
 #include "parse/parse.h"
-#include "draw/walls.h"
+#include "draw/draw.h"
 
 int	main(int argc, char **argv)
 {

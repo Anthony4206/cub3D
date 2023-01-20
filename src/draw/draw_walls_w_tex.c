@@ -14,7 +14,7 @@
 #include "../init.h"
 #include "../structs.h"
 #include "../parse/parse.h"
-#include "walls.h"
+#include "draw.h"
 #include "../parse/parse.h"
 
 void	init_tex_dir(t_ctx *ctx)

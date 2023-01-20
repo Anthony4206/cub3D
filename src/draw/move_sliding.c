@@ -12,7 +12,7 @@
 
 #include <libft.h>
 #include "../structs.h"
-#include "walls.h"
+#include "draw.h"
 
 int	check_sliding_pos_x(t_ctx *ctx, float step, int sign)
 {

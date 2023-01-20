@@ -15,7 +15,7 @@
 #include "../init.h"
 #include "../structs.h"
 #include "../parse/parse.h"
-#include "walls.h"
+#include "draw.h"
 
 //step_x and step_y eather -1 or +1 to indicate the dir of the ray
 void	calculate_side_dist(t_ctx *ctx)
