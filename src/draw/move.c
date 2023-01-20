@@ -2,6 +2,118 @@
 #include "../structs.h"
 #include "walls.h"
 
+// int	player_low_perim_is_clear(t_ctx *ctx, int x, int y, int r)
+// {
+// 	while (x < ctx->player.posX)
+// 	{
+// 		x += 0.000001;
+// 		y += 0.000001;
+// 		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+// 			return (0);
+// 	}
+// 	while (x < ctx->player.posX + r)
+// 	{
+// 		x += 0.000001;
+// 		y -= 0.000001;
+// 		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+// 			return (0);
+// 	}
+// 	return (1);
+// }
+
+int	check_new_pos(t_ctx *ctx)
+{
+	double	r;
+	float	x;
+	float	y;
+
+	r = 0.2;
+	x = ctx->player.posX + r;
+	y = ctx->player.posY;
+	while (x > ctx->player.posX)
+	{
+		x -= 0.000001;
+		y -= 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	while (x > ctx->player.posX - r)
+	{
+		x -= 0.000001;
+		y += 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+		while (x < ctx->player.posX)
+	{
+		x += 0.000001;
+		y += 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	while (x < ctx->player.posX + r)
+	{
+		x += 0.000001;
+		y -= 0.000001;
+		if (ctx->parse.map[(int)y][(int)x] - '0' > 0)
+			return (0);
+	}
+	// if (!player_low_perim_is_clear(ctx, x, y, r))
+	// 	return (0);
+	return (1);
+}
+
+int	check_sliding_ag_walls(t_ctx *ctx, float step)
+{
+	if (ctx->keys.key_w == true)
+	{
+		if (ctx->player.dirX == 0 || ctx->player.dirY == 0)
+			return (0);
+		if (ctx->player.dirX < 0 && ctx->player.dirY < 0)
+		{
+			ctx->player.posX = ctx->player.posX - step;
+			if (check_new_pos(ctx))
+				return (1);
+			ctx->player.posX = ctx->player.posX + step;
+			ctx->player.posY = ctx->player.posY - step;
+			if (!check_new_pos(ctx))
+				return (0);
+		}
+		else if (ctx->player.dirX > 0 && ctx->player.dirY < 0)
+		{
+			ctx->player.posX = ctx->player.posX + step;
+			if (check_new_pos(ctx))
+				return (1);
+			ctx->player.posX = ctx->player.posX - step;
+			ctx->player.posY = ctx->player.posY - step;
+			if (!check_new_pos(ctx))
+				return (0);
+		}
+		else if (ctx->player.dirX > 0 && ctx->player.dirY > 0)
+		{
+			ctx->player.posX = ctx->player.posX + step;
+			if (check_new_pos(ctx))
+				return (1);
+			ctx->player.posX = ctx->player.posX - step;
+			ctx->player.posY = ctx->player.posY + step;
+			if (!check_new_pos(ctx))
+				return (0);
+		}
+		else if (ctx->player.dirX < 0 && ctx->player.dirY > 0)
+		{
+			ctx->player.posX = ctx->player.posX - step;
+			if (check_new_pos(ctx))
+				return (1);
+			ctx->player.posX = ctx->player.posX + step;
+			ctx->player.posY = ctx->player.posY + step;
+			if (!check_new_pos(ctx))
+				return (0);
+		}
+		return (1);
+	}
+	return (1);
+}
+
 void	player_moves(t_ctx *ctx)
 {
 	float	step;
@@ -31,10 +143,15 @@ void	player_moves(t_ctx *ctx)
 		ctx->player.posX = ctx->player.posX + (ctx->player.dirY * step);
 		ctx->player.posY = ctx->player.posY - (ctx->player.dirX * step);
 	}
-	if (ctx->parse.map[(int)ctx->player.posY][(int)ctx->player.posX] - '0' > 0)
+	if (!check_new_pos(ctx))
 	{
 		ctx->player.posX = old_pos_x;
 		ctx->player.posY = old_pos_y;
+		if (!(check_sliding_ag_walls(ctx, step)))
+		{
+			ctx->player.posX = old_pos_x;
+			ctx->player.posY = old_pos_y;
+		}
 	}
 }
 

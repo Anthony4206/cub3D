@@ -48,8 +48,8 @@ int	move_mouse(int x, int y, void *param)
     (void)y;
     ctx = (t_ctx *)param;
     if (ctx->mouse.mouse_pressed && x < ctx->mouse.save_x)
-        rotate(ctx, -0.04, x);
+        rotate(ctx, -0.06, x);
     else if (ctx->mouse.mouse_pressed && x > ctx->mouse.save_x)
-        rotate(ctx, 0.04, x);
+        rotate(ctx, 0.06, x);
 	return (0);
 }
