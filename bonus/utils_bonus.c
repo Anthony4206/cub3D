@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 13:44:58 by alevasse          #+#    #+#             */
+/*   Updated: 2023/01/20 14:50:33 by alevasse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
-# include "structs_bonus.h"
+
+#include "structs_bonus.h"
 
 //tv_sec = seconds, tv.usec = micro seconds;
 //gettimeofday: returns time in microseconds
@@ -23,10 +36,18 @@ int	get_cur_time(t_ctx *ctx)
 	return (t);
 }
 
-//pas oublier free
 void	error_exit(char *msg)
 {
 	ft_putstr_fd(msg, 2);
-//	system("leaks cub3D");
 	exit(EXIT_FAILURE);
+}
+
+void	init_screen_buffer(t_ctx *ctx)
+{
+	int	y;
+
+	y = -1;
+	ctx->screen.buffer = ft_calloc(sizeof(unsigned int *), HEIGHT);
+	while (++y < HEIGHT)
+		ctx->screen.buffer[y] = ft_calloc(sizeof(unsigned int), WIDTH);
 }

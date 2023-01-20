@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:13:32 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 12:21:21 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:12:24 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 
 #include "../structs_bonus.h"
 
+void	calculate_delta(t_ctx *ctx)
+{
+	if (ctx->ray.ray_dir_x == 0)
+		ctx->ray.delta_dist_x = 1e30;
+	else
+		ctx->ray.delta_dist_x = fabs(1 / ctx->ray.ray_dir_x);
+	if (ctx->ray.ray_dir_y == 0)
+		ctx->ray.delta_dist_y = 1e30;
+	else
+		ctx->ray.delta_dist_y = fabs(1 / ctx->ray.ray_dir_y);
+}
+
 int	ft_close(t_ctx *ctx)
 {
 	mlx_destroy_window(ctx->mlx, ctx->win);
-//	system("leaks cub3D");
 	exit (EXIT_SUCCESS);
 }
 
@@ -29,20 +40,5 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	{
 		dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
 		*(unsigned int *)dst = color;
-	}
-}
-
-void	display_buffer(t_ctx *ctx)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-				printf("%d ", ctx->screen.buffer[y][x]);
-		printf("\n");
 	}
 }

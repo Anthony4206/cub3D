@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:05:33 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 12:19:07 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:02:56 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include "../utils_bonus.h"
 #include "parse_bonus.h"
 
-int check_door(char **map, int x, int y)
+int	check_door(char **map, int x, int y)
 {
-    if ((map[y][x + 1] == '1' && map[y][x - 1] == '1') ||
-        (map[y + 1][x] == '1' && map[y - 1][x] == '1'))
-        return (1);
-    return (0);
+	if ((map[y][x + 1] == '1' && map[y][x - 1] == '1') ||
+		(map[y + 1][x] == '1' && map[y - 1][x] == '1'))
+		return (1);
+	return (0);
 }
 
 void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
@@ -31,11 +31,11 @@ void	check_pos_wall(t_parse *parse, int *pos, int *player, int i)
 	j = -1;
 	while (parse->map[i][++j])
 	{
-        if (parse->map[i][j] == 'D')
-        {
-            if (!check_door(parse->map, j, i))
-		        error_exit("Error\nInvalid gate placement\n");
-        }            
+		if (parse->map[i][j] == 'D')
+		{
+			if (!check_door(parse->map, j, i))
+				error_exit("Error\nInvalid gate placement\n");
+		}
 		if (ft_strchr("NSEW", parse->map[i][j]))
 		{
 			(*player)++;

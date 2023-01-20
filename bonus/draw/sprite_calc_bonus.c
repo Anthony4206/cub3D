@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite_calc_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 15:04:11 by alevasse          #+#    #+#             */
+/*   Updated: 2023/01/20 15:04:13 by alevasse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "../utils_bonus.h"
 #include "../init_bonus.h"
@@ -49,11 +61,11 @@ void	calc_order_sprite_dist(t_ctx *ctx)
 	while (++i < ctx->sprites.num)
 	{
 		ctx->sprites.order[i] = i;
-		ctx->sprites.sprite_distance[i] = ((ctx->player.posX
+		ctx->sprites.sprite_distance[i] = ((ctx->player.pos_x
 					- ctx->sprites.sprite[i].x)
-				* (ctx->player.posX - ctx->sprites.sprite[i].x)
-				+ (ctx->player.posY - ctx->sprites.sprite[i].y)
-				* (ctx->player.posY - ctx->sprites.sprite[i].y));
+				* (ctx->player.pos_x - ctx->sprites.sprite[i].x)
+				+ (ctx->player.pos_y - ctx->sprites.sprite[i].y)
+				* (ctx->player.pos_y - ctx->sprites.sprite[i].y));
 	}
 }
 
@@ -63,16 +75,16 @@ void	transform_sprite_coord(t_ctx *ctx, int i)
 {
 	double	inv_det;
 
-	ctx->sprites.spriteX = ctx->sprites.sprite[ctx->sprites.order[i]].x
-		- ctx->player.posX;
-	ctx->sprites.spriteY = ctx->sprites.sprite[ctx->sprites.order[i]].y
-		- ctx->player.posY;
-	inv_det = 1.0 / (ctx->ray.plane_X * ctx->player.dirY
-			- ctx->player.dirX * ctx->ray.plane_Y);
-	ctx->sprites.trans_x = inv_det * (ctx->player.dirY * ctx->sprites.spriteX
-			- ctx->player.dirX * ctx->sprites.spriteY);
-	ctx->sprites.trans_y = inv_det * (-ctx->ray.plane_Y * ctx->sprites.spriteX
-			+ ctx->ray.plane_X * ctx->sprites.spriteY);
+	ctx->sprites.sprite_x = ctx->sprites.sprite[ctx->sprites.order[i]].x
+		- ctx->player.pos_x;
+	ctx->sprites.sprite_y = ctx->sprites.sprite[ctx->sprites.order[i]].y
+		- ctx->player.pos_y;
+	inv_det = 1.0 / (ctx->ray.plane_x * ctx->player.dir_y
+			- ctx->player.dir_x * ctx->ray.plane_y);
+	ctx->sprites.trans_x = inv_det * (ctx->player.dir_y * ctx->sprites.sprite_x
+			- ctx->player.dir_x * ctx->sprites.sprite_y);
+	ctx->sprites.trans_y = inv_det * (-ctx->ray.plane_y * ctx->sprites.sprite_x
+			+ ctx->ray.plane_x * ctx->sprites.sprite_y);
 	ctx->sprites.screen_x = (int)((WIDTH / 2) * (1 + ctx->sprites.trans_x
 				/ ctx->sprites.trans_y));
 	ctx->sprites.height = abs((int)(HEIGHT / ctx->sprites.trans_y));

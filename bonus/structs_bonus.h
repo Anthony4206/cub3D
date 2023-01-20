@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 09:25:28 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:39:55 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # define M_WIDTH 350
 # define M_HEIGHT 350
 
-# include <stdio.h>
 # include <mlx.h>
 # include <stdbool.h>
 # include <math.h>
@@ -38,32 +37,32 @@ typedef struct s_time
 
 typedef struct s_sprites
 {
-	int 			num; //nb of sprites
-	double			*z_buffer;
-    int				*order;
-    double			*sprite_distance;
-	double			spriteX;
-	double			spriteY;
-	t_coord			*sprite;
-	int				screen_x;
-	int				height;
-	int				width;
-	int				draw_start_y;
-	int				draw_start_x;
-	int				draw_end_y;
-	int				draw_end_x;
-	double  		trans_x;
-	double  		trans_y;
-	int				tex_x;
-	int				selec_tex;
-	char			**sprite_path;
-}					t_sprites;
+	int		num;
+	double	*z_buffer;
+	int		*order;
+	double	*sprite_distance;
+	double	sprite_x;
+	double	sprite_y;
+	t_coord	*sprite;
+	int		screen_x;
+	int		height;
+	int		width;
+	int		draw_start_y;
+	int		draw_start_x;
+	int		draw_end_y;
+	int		draw_end_x;
+	double	trans_x;
+	double	trans_y;
+	int		tex_x;
+	int		selec_tex;
+	char	**sprite_path;
+}			t_sprites;
 
 typedef struct s_mouse
 {
-    int     save_x;
-    int     mouse_pressed;
-}           t_mouse;
+	int	save_x;
+	int	mouse_pressed;
+}		t_mouse;
 
 typedef struct s_data
 {
@@ -83,40 +82,36 @@ typedef struct s_minimap
 
 typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 }			t_player;
 
 typedef struct s_ray
 {
-	double	cameraX;
-	double	ray_dirX;
-	double	ray_dirY;
-	double	plane_X;
-	double	plane_Y;
-	double	delta_distX;
-	double	delta_distY;
-	double	side_distX;
-	double	side_distY;
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 	int		hit_side;
 	double	perp_wall_dist;
 }			t_ray;
 
 typedef struct s_tex
 {
-	// int		tex_width;
-	// int		tex_height;
-    t_data  select_tex;
-	int		**texture; //tab of all textures, containing texHeight*texWidth
-	int		tex_num;
-	double	wallX;
-	int		texX;
+	t_data	select_tex;
+	double	wall_x;
+	int		tex_x;
 	int		tex_y;
 }			t_tex;
 
@@ -128,50 +123,41 @@ typedef struct s_wall
 	t_data	texture;
 }			t_wall;
 
-//A REMPLIR AVEC DES DONNEES DU PARSE
-typedef struct s_map
-{
-	int		height;
-	int		width;
-}			t_map;
-
 typedef struct s_parse
 {
 	int		map_height;
 	int		map_width;
 	int		line_map_start;
 	char	**map;
-    int     **map_door;
-	double	init_posX;
-	double	init_posY;
-	char	init_dir; //NSEW
-	char	*N;
-	char	*S;
-	char	*E;
-	char	*W;
-	char	*F;
-	int		F_RGB;
-	char	*C;
-	int		C_RGB;
+	int		**map_door;
+	double	init_pos_x;
+	double	init_pos_y;
+	char	init_dir;
+	char	*n;
+	char	*s;
+	char	*e;
+	char	*w;
+	char	*f;
+	int		f_rgb;
+	char	*c;
+	int		c_rgb;
 	int		sprites_num;
 }		t_parse;
 
 typedef struct s_screen
 {
-	int				width; //in pixel
-	int				height; //in pixel
 	unsigned int	**buffer;
 }					t_screen;
 
 typedef struct s_texture
 {
-    t_data	N_wall;
-    t_data	S_wall;
-    t_data	E_wall;
-    t_data	W_wall;
-    t_data  tex_door[5];
+	t_data	n_wall;
+	t_data	s_wall;
+	t_data	e_wall;
+	t_data	w_wall;
+	t_data	tex_door[5];
 	t_data	*sprites;
-}   		t_texture;
+}			t_texture;
 
 typedef struct s_keys
 {
@@ -181,7 +167,7 @@ typedef struct s_keys
 	bool	key_d;
 	bool	key_left;
 	bool	key_right;
-    bool    key_door;
+	bool	key_door;
 }			t_keys;
 
 typedef struct s_ctx
@@ -189,19 +175,18 @@ typedef struct s_ctx
 	void		*mlx;
 	void		*win;
 	t_data		img;
-    t_data      img_door;
+	t_data		img_door;
 	t_data		img_sprite;
 	t_parse		parse;
-	t_map		map;
 	t_wall		wall;
 	t_ray		ray;
 	t_player	player;
 	t_screen	screen;
-    t_texture   texture;
+	t_texture	texture;
 	t_tex		tex;
 	t_keys		keys;
-    t_sprites    sprites;
-    t_mouse     mouse;
+	t_sprites	sprites;
+	t_mouse		mouse;
 	t_minimap	mini;
 	t_time		time;
 }				t_ctx;

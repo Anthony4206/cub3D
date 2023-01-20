@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   parse_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:37:55 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:45:34 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:00:03 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	parse_player(t_parse *parse, char *orient, int i, int j);
 void	parse_wall(t_parse *parse);
 void	check_if_map_in_last(char **line, int fd);
 void	parse_header(t_parse *parse, char **line, int fd);
-void    check_open_file(t_parse *parse);
+void	check_open_file(t_parse *parse);
+void	init_map_door(t_parse *parse);
 
 #endif

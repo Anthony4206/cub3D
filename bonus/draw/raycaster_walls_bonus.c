@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster_walls.c                                  :+:      :+:    :+:   */
+/*   raycaster_walls_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:21:24 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/10 11:10:14 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:13:55 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,32 @@
 #include "../parse/parse_bonus.h"
 #include "walls_bonus.h"
 
-//stepX and StepY eather -1 or +1 to indicate the dir of the ray
+//step_x and StepY eather -1 or +1 to indicate the dir of the ray
 void	calculate_side_dist(t_ctx *ctx)
 {
-	if (ctx->ray.ray_dirX < 0)
+	if (ctx->ray.ray_dir_x < 0)
 	{
-		ctx->ray.stepX = -1;
-		ctx->ray.side_distX = (ctx->player.posX - ctx->ray.mapX) * ctx->ray.delta_distX;
+		ctx->ray.step_x = -1;
+		ctx->ray.side_dist_x = (ctx->player.pos_x - ctx->ray.map_x)
+			* ctx->ray.delta_dist_x;
 	}
 	else
 	{
-		ctx->ray.stepX = 1;
-		ctx->ray.side_distX = (ctx->ray.mapX + 1.0 - ctx->player.posX) * ctx->ray.delta_distX;
+		ctx->ray.step_x = 1;
+		ctx->ray.side_dist_x = (ctx->ray.map_x + 1.0 - ctx->player.pos_x)
+			* ctx->ray.delta_dist_x;
 	}
-	if (ctx->ray.ray_dirY < 0)
+	if (ctx->ray.ray_dir_y < 0)
 	{
-		ctx->ray.stepY = -1;
-		ctx->ray.side_distY = (ctx->player.posY - ctx->ray.mapY) * ctx->ray.delta_distY;	
+		ctx->ray.step_y = -1;
+		ctx->ray.side_dist_y = (ctx->player.pos_y - ctx->ray.map_y)
+			* ctx->ray.delta_dist_y;
 	}
 	else
 	{
-		ctx->ray.stepY = 1;
-		ctx->ray.side_distY = (ctx->ray.mapY + 1.0 - ctx->player.posY) * ctx->ray.delta_distY;
+		ctx->ray.step_y = 1;
+		ctx->ray.side_dist_y = (ctx->ray.map_y + 1.0 - ctx->player.pos_y)
+			* ctx->ray.delta_dist_y;
 	}
 }
 
@@ -53,19 +57,19 @@ void	exec_dda(t_ctx *ctx, int x)
 	hit = false;
 	while (hit == false)
 	{
-		if (ctx->ray.side_distX < ctx->ray.side_distY)
+		if (ctx->ray.side_dist_x < ctx->ray.side_dist_y)
 		{
-			ctx->ray.side_distX += ctx->ray.delta_distX;
-			ctx->ray.mapX += ctx->ray.stepX;
+			ctx->ray.side_dist_x += ctx->ray.delta_dist_x;
+			ctx->ray.map_x += ctx->ray.step_x;
 			ctx->ray.hit_side = 0;
 		}
 		else
 		{
-			ctx->ray.side_distY += ctx->ray.delta_distY;
-			ctx->ray.mapY += ctx->ray.stepY;
-			ctx->ray.hit_side = 1;			
+			ctx->ray.side_dist_y += ctx->ray.delta_dist_y;
+			ctx->ray.map_y += ctx->ray.step_y;
+			ctx->ray.hit_side = 1;
 		}
-		if (ctx->parse.map[ctx->ray.mapY][ctx->ray.mapX] == '1')
+		if (ctx->parse.map[ctx->ray.map_y][ctx->ray.map_x] == '1')
 			hit = true;
 	}
 }
@@ -73,9 +77,11 @@ void	exec_dda(t_ctx *ctx, int x)
 void	calc_perp_wall_dist(t_ctx *ctx)
 {
 	if (ctx->ray.hit_side == 0)
-		ctx->ray.perp_wall_dist = (ctx->ray.side_distX - ctx->ray.delta_distX);
+		ctx->ray.perp_wall_dist = (ctx->ray.side_dist_x
+				- ctx->ray.delta_dist_x);
 	else
-		ctx->ray.perp_wall_dist = (ctx->ray.side_distY - ctx->ray.delta_distY);
+		ctx->ray.perp_wall_dist = (ctx->ray.side_dist_y
+				- ctx->ray.delta_dist_y);
 }
 
 void	calc_height_wall(t_ctx *ctx)
@@ -92,23 +98,18 @@ void	calc_height_wall(t_ctx *ctx)
 void	raycasting_walls(t_ctx *ctx)
 {
 	int	x;
-	
+
 	x = -1;
 	while (++x < WIDTH)
 	{
-		ctx->ray.cameraX = 2 * x / (double)WIDTH - 1;
-		ctx->ray.ray_dirX = ctx->player.dirX + ctx->ray.plane_X * ctx->ray.cameraX;
-		ctx->ray.ray_dirY = ctx->player.dirY + ctx->ray.plane_Y * ctx->ray.cameraX;
-		ctx->ray.mapX = (int)ctx->player.posX;
-		ctx->ray.mapY = (int)ctx->player.posY;
-		if (ctx->ray.ray_dirX == 0)
-			ctx->ray.delta_distX = 1e30;
-		else
-			ctx->ray.delta_distX = fabs(1 / ctx->ray.ray_dirX);
-		if (ctx->ray.ray_dirY == 0)
-			ctx->ray.delta_distY = 1e30;
-		else
-			ctx->ray.delta_distY = fabs(1 / ctx->ray.ray_dirY);
+		ctx->ray.camera_x = 2 * x / (double)WIDTH - 1;
+		ctx->ray.ray_dir_x = ctx->player.dir_x + ctx->ray.plane_x
+			* ctx->ray.camera_x;
+		ctx->ray.ray_dir_y = ctx->player.dir_y + ctx->ray.plane_y
+			* ctx->ray.camera_x;
+		ctx->ray.map_x = (int)ctx->player.pos_x;
+		ctx->ray.map_y = (int)ctx->player.pos_y;
+		calculate_delta(ctx);
 		calculate_side_dist(ctx);
 		exec_dda(ctx, x);
 		calc_perp_wall_dist(ctx);

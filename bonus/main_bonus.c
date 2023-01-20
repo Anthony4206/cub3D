@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:25:14 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 12:21:04 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:40:45 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_exit("error: too few arguments\n");
-    ft_bzero(&ctx, sizeof(t_ctx));
+	ft_bzero(&ctx, sizeof(t_ctx));
 	ctx.parse = parse(argv[1]);
 	init_cub(&ctx);
 	take_instructions_and_draw(&ctx);

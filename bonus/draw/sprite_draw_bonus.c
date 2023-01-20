@@ -1,4 +1,17 @@
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite_draw_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 15:03:44 by alevasse          #+#    #+#             */
+/*   Updated: 2023/01/20 15:04:07 by alevasse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <libft.h>
+
 #include "../utils_bonus.h"
 #include "../init_bonus.h"
 #include "../structs_bonus.h"
