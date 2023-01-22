@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <libft.h>
-#include <stdio.h>
-
 #include "parse.h"
 #include "../utils.h"
 #include "../structs.h"
@@ -99,26 +96,6 @@ void	init_map_tab(t_parse *parse, char *line, int fd)
 	free(line);
 }
 
-/*void	display_map(t_parse *parse)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-//	printf("MAP HEIGHT = %d\n", parse->map_height);
-//	printf("MAP WIDTH = %d\n", parse->map_width);
-	while (y < parse->map_height)
-	{
-		while (parse->map[y][x])
-//			printf("%c", parse->map[y][x]);
-		//printf("Fin de ligne a : %d\n", x);
-//		printf("\n");
-		x = 0;
-		y++;
-	}
-}*/
-
 void	get_map(t_parse *parse, char *line, int fd, char *file)
 {
 	int		i;
@@ -136,5 +113,4 @@ void	get_map(t_parse *parse, char *line, int fd, char *file)
 		line = get_next_line(fd);
 	}
 	init_map_tab(parse, line, fd);
-//	display_map(parse);
 }

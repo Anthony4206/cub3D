@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include <libft.h>
-
 #include "utils.h"
 #include "init.h"
 #include "structs.h"
 #include "parse/parse.h"
-#include "draw/walls.h"
+#include "draw/draw.h"
 
 int	main(int argc, char **argv)
 {
@@ -24,21 +23,10 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_exit("error: too few arguments\n");
-    ft_bzero(&ctx, sizeof(t_ctx));
+	ft_bzero(&ctx, sizeof(t_ctx));
 	ctx.parse = parse(argv[1]);
 	init_cub(&ctx);
 	take_instructions_and_draw(&ctx);
 	mlx_loop(ctx.mlx);
-//	system("leaks cub3D");
-	
-	{
-		//message d'erreur (envoyé directement dans la fonction parse)
-		//exit failure
-	}
-	 // parse_error et parse peuvent aussi être fait ensemble
-    //init_cub(&ctx);
-    //mlx_hook pour configurer les touches d'action
-	//mlx_loop qui renvoi à la fonction pour dessiner
-    //return
 	return (0);
 }

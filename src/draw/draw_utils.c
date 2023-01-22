@@ -35,7 +35,7 @@ void	display_buffer(t_ctx *ctx)
 	{
 		x = -1;
 		while (++x < WIDTH)
-				printf("%d ", ctx->screen.buffer[y][x]);
+			printf("%d ", ctx->screen.buffer[y][x]);
 		printf("\n");
 	}
 }

@@ -33,6 +33,6 @@ void	parse_player(t_parse *parse, char *orient, int i, int j);
 void	parse_wall(t_parse *parse);
 void	check_if_map_in_last(char **line, int fd);
 void	parse_header(t_parse *parse, char **line, int fd);
-void    check_open_file(t_parse *parse);
+void	check_open_file(t_parse *parse);
 
 #endif

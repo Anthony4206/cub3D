@@ -6,44 +6,43 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 07:26:26 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/16 13:04:18 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:04:44 by mdemma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
 # define WIDTH 900
 # define HEIGHT 700
-
 # include <stdio.h>
-#include <mlx.h>
-#include <stdbool.h>
+# include <mlx.h>
+# include <stdbool.h>
 # include <math.h>
+# include <fcntl.h>
 
 typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 }			t_player;
 
 typedef struct s_ray
 {
-	double	cameraX;
-	double	ray_dirX;
-	double	ray_dirY;
-	double	plane_X;
-	double	plane_Y;
-	double	delta_distX;
-	double	delta_distY;
-	double	side_distX;
-	double	side_distY;
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 	int		hit_side;
 	double	perp_wall_dist;
 }			t_ray;
@@ -61,13 +60,10 @@ typedef struct s_data
 
 typedef struct s_tex
 {
-	// int		tex_width;
-	// int		tex_height;
-    t_data  select_tex;
-	int		**texture; //tab of all textures, containing texHeight*texWidth
+	t_data	select_tex;
 	int		tex_num;
-	double	wallX;
-	int		texX;
+	double	wall_x;
+	int		tex_x;
 	int		tex_y;
 }		t_tex;
 
@@ -79,7 +75,6 @@ typedef struct s_wall
 	t_data	texture;
 }		t_wall;
 
-//A REMPLIR AVEC DES DONNEES DU PARSE
 typedef struct s_map
 {
 	int		height;
@@ -92,33 +87,34 @@ typedef struct s_parse
 	int		map_width;
 	int		line_map_start;
 	char	**map;
-	double	init_posX;
-	double	init_posY;
-	char	init_dir; //NSEW
-	char	*N;
-	char	*S;
-	char	*E;
-	char	*W;
-	char	*F;
-	int		F_RGB;
-	char	*C;
-	int		C_RGB;
+	double	init_pos_x;
+	double	init_pos_y;
+	char	init_dir;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+	char	*floor;
+	int		f_rgb;
+	char	*ceiling;
+	int		c_rgb;
 }		t_parse;
 
+/*W and H in pixels. */
 typedef struct s_screen
 {
-	int				width; //in pixel
-	int				height; //in pixel
+	int				width;
+	int				height;
 	unsigned int	**buffer;
 }					t_screen;
 
 typedef struct s_texture
 {
-    t_data	N_wall;
-    t_data	S_wall;
-    t_data	E_wall;
-    t_data	W_wall;
-}   		t_texture;
+	t_data	n_wall;
+	t_data	s_wall;
+	t_data	e_wall;
+	t_data	w_wall;
+}			t_texture;
 
 typedef struct s_keys
 {
@@ -141,7 +137,7 @@ typedef struct s_ctx
 	t_ray		ray;
 	t_player	player;
 	t_screen	screen;
-    t_texture   texture;
+	t_texture	texture;
 	t_tex		tex;
 	t_keys		keys;
 }			t_ctx;
