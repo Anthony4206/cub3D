@@ -1,10 +1,10 @@
-NO ./texture/walls/wall_4.xpm
-SO ./texture/walls/bluestone.xpm
-WE ./texture/walls/wall_2.xpm
-EA ./texture/walls/wall_3.xpm
+NO ./texture/walls/wood.xpm
+SO ./texture/walls/greystone.xpm
+WE ./texture/walls/redbricks.xpm
+EA ./texture/walls/mossy.xpm
 
-F   136,45,23
-C 119,181,254
+F   0,0,153
+C 0,0,0
 
         1111111111111111111111111
         1000000000110000000000001
