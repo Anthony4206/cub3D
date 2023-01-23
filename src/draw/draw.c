@@ -6,12 +6,14 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:14:45 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/10 09:37:26 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:18:35 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+
 #include "../structs.h"
+#include "../utils.h"
 #include "draw.h"
 
 void	print_background(t_ctx *ctx)
@@ -74,6 +76,7 @@ int	take_instructions_and_draw(t_ctx *ctx)
 	draw(ctx);
 	mlx_hook(ctx->win, 2, 0, press_key, ctx);
 	mlx_hook(ctx->win, 3, 0, release_key, ctx);
+	mlx_hook(ctx->win, 17, 0, ft_close, ctx);
 	mlx_loop_hook(ctx->mlx, draw, ctx);
 	mlx_loop(ctx->mlx);
 	return (0);

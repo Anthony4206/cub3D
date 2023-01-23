@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:32:33 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/23 11:56:17 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:08:31 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	player_low_perim_is_clear(t_ctx *ctx, float x, float y, int r)
 	while (x < ctx->player.pos_x)
 	{
 		x += 0.000001;
+		y += 0.000001;
 		if (get_texture(ctx, x, y))
 			return (0);
 	}
