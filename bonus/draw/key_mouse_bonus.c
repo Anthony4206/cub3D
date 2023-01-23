@@ -6,14 +6,14 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:18:53 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 11:46:32 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:53:22 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 int	press_mouse(int button, int x, int y, void *param)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move.c                                             :+:      :+:    :+:   */
+/*   move_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdemma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:32:33 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/20 13:32:35 by mdemma           ###   ########.fr       */
+/*   Updated: 2023/01/23 11:56:17 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void	player_moves(t_ctx *ctx)
 	old_pos_y = ctx->player.pos_y;
 	if (ctx->keys.key_w == true)
 		change_pos(ctx, ctx->player.dir_x * step, ctx->player.dir_y * step);
-	else if (ctx->keys.key_s == true)
+	if (ctx->keys.key_s == true)
 		change_pos(ctx, -ctx->player.dir_x * step, -ctx->player.dir_y * step);
-	else if (ctx->keys.key_d == true)
+	if (ctx->keys.key_d == true)
 		change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
-	else if (ctx->keys.key_a == true)
+	if (ctx->keys.key_a == true)
 		change_pos(ctx, ctx->player.dir_y * step, -ctx->player.dir_x * step);
 	if (!check_new_pos(ctx))
 	{
