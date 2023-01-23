@@ -14,7 +14,7 @@
 #include "../structs.h"
 #include "draw.h"
 
-int	player_low_perim_is_clear(t_ctx *ctx, float x, float y, int r)
+int	player_low_perim_is_clear(t_ctx *ctx, double x, double y, double r)
 {
 	while (x < ctx->player.pos_x)
 	{
@@ -36,8 +36,8 @@ int	player_low_perim_is_clear(t_ctx *ctx, float x, float y, int r)
 int	check_new_pos(t_ctx *ctx)
 {
 	double	r;
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 
 	r = 0.2;
 	x = ctx->player.pos_x + r;
