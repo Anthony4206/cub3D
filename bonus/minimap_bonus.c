@@ -13,7 +13,7 @@
 #include <libft.h>
 
 #include "structs_bonus.h"
-#include "draw/walls_bonus.h"
+#include "draw/draw_bonus.h"
 #include "utils_bonus.h"
 
 void	init_mini_map(t_ctx *ctx)

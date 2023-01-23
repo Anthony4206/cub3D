@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "structs_bonus.h"
-#include "draw/walls_bonus.h"
+#include "draw/draw_bonus.h"
 
 void	print_background_wdt(t_ctx *ctx, int scale)
 {

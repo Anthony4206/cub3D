@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../utils_bonus.h"
-#include "../init_bonus.h"
 #include "../structs_bonus.h"
-#include "../parse/parse_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 //step_x and StepY eather -1 or +1 to indicate the dir of the ray
 void	calculate_side_dist(t_ctx *ctx)

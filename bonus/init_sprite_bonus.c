@@ -17,7 +17,7 @@
 #include "utils_bonus.h"
 #include "structs_bonus.h"
 #include "parse/parse_bonus.h"
-#include "draw/walls_bonus.h"
+#include "draw/draw_bonus.h"
 
 void	parse_sprite(t_ctx *ctx)
 {

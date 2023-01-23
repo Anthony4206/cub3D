@@ -15,7 +15,7 @@
 #include "../init_bonus.h"
 #include "../structs_bonus.h"
 #include "../parse/parse_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 int	sprites_are_sorted(t_sprites sprites)
 {

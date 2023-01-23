@@ -13,7 +13,7 @@
 #include <libft.h>
 
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 int	get_texture(t_ctx *ctx, int x, int y)
 {

@@ -13,7 +13,7 @@
 #include <libft.h>
 
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 int	press_mouse(int button, int x, int y, void *param)
 {

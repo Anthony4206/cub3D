@@ -6,7 +6,7 @@
 #    By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 13:11:44 by alevasse          #+#    #+#              #
-#    Updated: 2023/01/20 14:33:03 by alevasse         ###   ########.fr        #
+#    Updated: 2023/01/23 10:47:19 by mdemma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_B			= 	bonus/main_bonus.c bonus/utils_bonus.c bonus/init_bonus.c bonus/parse
 					bonus/draw/key_events_bonus.c bonus/draw/key_mouse_bonus.c bonus/minimap_bonus.c \
 					bonus/draw/move_bonus.c bonus/init_door_bonus.c bonus/init_sprite_bonus.c \
 					bonus/draw/sprite_calc_bonus.c bonus/draw/sprite_draw_bonus.c bonus/draw/raycaster_doors_bonus.c \
-					bonus/minimap_utils_bonus.c bonus/draw/move_sliding_bonus.c \
+					bonus/minimap_utils_bonus.c bonus/draw/move_sliding_bonus.c bonus/draw/draw_doors_bonus.c\
 
 OBJ 			= ${SRC:.c=.o}
 OBJ_B			= ${SRC_B:.c=.o}

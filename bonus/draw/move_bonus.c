@@ -13,21 +13,21 @@
 #include <libft.h>
 
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 int	player_low_perim_is_clear(t_ctx *ctx, float x, float y, int r)
 {
 	while (x < ctx->player.pos_x)
 	{
 		x += 0.000001;
-		if (get_texture(ctx, x , y))
+		if (get_texture(ctx, x, y))
 			return (0);
 	}
 	while (x < ctx->player.pos_x + r)
 	{
 		x += 0.000001;
 		y -= 0.000001;
-		if (get_texture(ctx, x , y))
+		if (get_texture(ctx, x, y))
 			return (0);
 	}
 	return (1);
@@ -46,14 +46,14 @@ int	check_new_pos(t_ctx *ctx)
 	{
 		x -= 0.000001;
 		y -= 0.000001;
-		if (get_texture(ctx, x , y))
+		if (get_texture(ctx, x, y))
 			return (0);
 	}
 	while (x > ctx->player.pos_x - r)
 	{
 		x -= 0.000001;
 		y += 0.000001;
-		if (get_texture(ctx, x , y))
+		if (get_texture(ctx, x, y))
 			return (0);
 	}
 	if (!player_low_perim_is_clear(ctx, x, y, r))

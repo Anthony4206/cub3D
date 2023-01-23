@@ -16,7 +16,7 @@
 #include "../init_bonus.h"
 #include "../structs_bonus.h"
 #include "../parse/parse_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 void	calc_draw_start_end(t_ctx *ctx)
 {

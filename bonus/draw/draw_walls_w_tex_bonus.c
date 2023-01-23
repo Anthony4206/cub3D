@@ -14,7 +14,7 @@
 
 #include "../init_bonus.h"
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 #include "../parse/parse_bonus.h"
 
 void	init_tex_dir(t_ctx *ctx)

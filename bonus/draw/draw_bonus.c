@@ -13,7 +13,7 @@
 #include <libft.h>
 
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 #include "../init_bonus.h"
 
 void	print_background(t_ctx *ctx)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   walls_bonus.h                                      :+:      :+:    :+:   */
+/*   draw_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WALLS_BONUS_H
-# define WALLS_BONUS_H
+#ifndef DRAW_BONUS_H
+# define DRAW_BONUS_H
 
 # include "../structs_bonus.h"
 
@@ -44,6 +44,7 @@ void	raycasting_doors(t_ctx *ctx);
 void	calculate_delta(t_ctx *ctx);
 int		get_texture(t_ctx *ctx, int x, int y);
 int		sliding_ag_walls(t_ctx *ctx, float step);
-int	    check_new_pos(t_ctx *ctx);
+int		check_new_pos(t_ctx *ctx);
+void	draw_door(t_ctx *ctx, int x);
 
 #endif

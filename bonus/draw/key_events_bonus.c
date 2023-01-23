@@ -13,7 +13,7 @@
 #include <libft.h>
 #include <math.h>
 #include "../structs_bonus.h"
-#include "walls_bonus.h"
+#include "draw_bonus.h"
 
 int	release_key(int key, void *param)
 {
