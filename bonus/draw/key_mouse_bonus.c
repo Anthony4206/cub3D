@@ -6,14 +6,14 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:18:53 by alevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 15:21:30 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:46:32 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
 #include "../structs_bonus.h"
-#include "draw_bonus.h"
+#include "walls_bonus.h"
 
 int	press_mouse(int button, int x, int y, void *param)
 {
@@ -23,7 +23,10 @@ int	press_mouse(int button, int x, int y, void *param)
 	(void)y;
 	ctx = (t_ctx *)param;
 	if (button == 1)
+	{
+		ctx->mouse.save_x = x;
 		ctx->mouse.mouse_pressed = 1;
+	}
 	return (0);
 }
 
@@ -60,9 +63,7 @@ int	move_mouse(int x, int y, void *param)
 
 	(void)y;
 	ctx = (t_ctx *)param;
-	if (ctx->mouse.mouse_pressed && x < ctx->mouse.save_x)
-		rotate(ctx, -0.06, x);
-	else if (ctx->mouse.mouse_pressed && x > ctx->mouse.save_x)
-		rotate(ctx, 0.06, x);
+	if (ctx->mouse.mouse_pressed)
+		rotate(ctx, 0.004 * (x - ctx->mouse.save_x), x);
 	return (0);
 }
