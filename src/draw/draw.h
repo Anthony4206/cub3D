@@ -34,5 +34,6 @@ void	player_moves(t_ctx *ctx);
 void	player_rotates(t_ctx *ctx);
 int		sliding_ag_walls(t_ctx *ctx, float step);
 int		check_new_pos(t_ctx *ctx);
+void	change_pos(t_ctx *ctx, float a, float b);
 
 #endif

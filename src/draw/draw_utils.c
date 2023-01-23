@@ -39,3 +39,9 @@ void	display_buffer(t_ctx *ctx)
 		printf("\n");
 	}
 }
+
+void	change_pos(t_ctx *ctx, float a, float b)
+{
+	ctx->player.pos_x = ctx->player.pos_x + a;
+	ctx->player.pos_y = ctx->player.pos_y + b;
+}

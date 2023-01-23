@@ -62,39 +62,44 @@ int	check_new_pos(t_ctx *ctx)
 	return (1);
 }
 
-void	change_pos(t_ctx *ctx, float a, float b)
+void	check_pos_and_slide(t_ctx *ctx, float old_x, float old_y, float step)
 {
-	ctx->player.pos_x = ctx->player.pos_x + a;
-	ctx->player.pos_y = ctx->player.pos_y + b;
+	if (!check_new_pos(ctx))
+	{
+		ctx->player.pos_x = old_x;
+		ctx->player.pos_y = old_y;
+		if (!(sliding_ag_walls(ctx, step)))
+		{
+			ctx->player.pos_x = old_x;
+			ctx->player.pos_y = old_y;
+		}
+	}
 }
 
 void	player_moves(t_ctx *ctx)
 {
 	float	step;
-	float	old_pos_x;
-	float	old_pos_y;
+	float	old_x;
+	float	old_y;
 
 	step = 0.15;
-	old_pos_x = ctx->player.pos_x;
-	old_pos_y = ctx->player.pos_y;
+	old_x = ctx->player.pos_x;
+	old_y = ctx->player.pos_y;
 	if (ctx->keys.key_w == true)
 		change_pos(ctx, ctx->player.dir_x * step, ctx->player.dir_y * step);
 	if (ctx->keys.key_s == true)
 		change_pos(ctx, -ctx->player.dir_x * step, -ctx->player.dir_y * step);
-	if (ctx->keys.key_d == true)
-		change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
-	if (ctx->keys.key_a == true)
+	if (ctx->keys.key_d == true && (ctx->parse.init_dir == 'S'
+			|| ctx->parse.init_dir == 'W'))
 		change_pos(ctx, ctx->player.dir_y * step, -ctx->player.dir_x * step);
-	if (!check_new_pos(ctx))
-	{
-		ctx->player.pos_x = old_pos_x;
-		ctx->player.pos_y = old_pos_y;
-		if (!(sliding_ag_walls(ctx, step)))
-		{
-			ctx->player.pos_x = old_pos_x;
-			ctx->player.pos_y = old_pos_y;
-		}
-	}
+	else if (ctx->keys.key_d == true)
+		change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
+	if (ctx->keys.key_a == true && (ctx->parse.init_dir == 'S'
+			|| ctx->parse.init_dir == 'W'))
+		change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
+	else if (ctx->keys.key_a == true)
+		change_pos(ctx, ctx->player.dir_y * step, -ctx->player.dir_x * step);
+	check_pos_and_slide(ctx, old_x, old_y, step);
 }
 
 void	player_rotates(t_ctx *ctx)

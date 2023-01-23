@@ -46,5 +46,6 @@ int		get_texture(t_ctx *ctx, int x, int y);
 int		sliding_ag_walls(t_ctx *ctx, float step);
 int		check_new_pos(t_ctx *ctx);
 void	draw_door(t_ctx *ctx, int x);
+void	change_pos(t_ctx *ctx, float a, float b);
 
 #endif
