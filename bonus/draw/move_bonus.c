@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:32:33 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/23 12:08:31 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:03:47 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,14 @@ void	player_rotates(t_ctx *ctx)
 	double	tmp_plane_x;
 
 	a = 0;
-	if (ctx->keys.key_left == true)
-		a = -0.07;
-	else if (ctx->keys.key_right == true)
-		a = 0.07;
+	if ((ctx->keys.key_left == true && (ctx->parse.init_dir == 'N'
+				|| ctx->parse.init_dir == 'E')) || (ctx->keys.key_right == true
+			&& (ctx->parse.init_dir == 'S' || ctx->parse.init_dir == 'W')))
+		a = -0.05;
+	if ((ctx->keys.key_right == true && (ctx->parse.init_dir == 'N'
+				|| ctx->parse.init_dir == 'E')) || (ctx->keys.key_left == true
+			&& (ctx->parse.init_dir == 'S' || ctx->parse.init_dir == 'W')))
+		a = 0.05;
 	if (ctx->keys.key_left == true || ctx->keys.key_right == true)
 	{
 		tmp_x = ctx->player.dir_x * cos(a) + ctx->player.dir_y * (-sin(a));

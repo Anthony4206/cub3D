@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:21:24 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/20 15:13:55 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:08:48 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	exec_dda(t_ctx *ctx, int x)
 			ctx->ray.map_y += ctx->ray.step_y;
 			ctx->ray.hit_side = 1;
 		}
-		if (ctx->parse.map[ctx->ray.map_y][ctx->ray.map_x] == '1')
+		if (ctx->parse.map[ctx->ray.map_y][ctx->ray.map_x] == '1' ||
+			ctx->parse.map[ctx->ray.map_y][ctx->ray.map_x] == 'D')
 			hit = true;
 	}
 }

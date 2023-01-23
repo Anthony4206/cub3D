@@ -6,7 +6,7 @@
 /*   By: alevasse <alevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:30:46 by mdemma            #+#    #+#             */
-/*   Updated: 2023/01/20 15:23:15 by alevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:56:51 by alevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,19 @@ void	init_tex_dir(t_ctx *ctx)
 	else if (ctx->ray.hit_side == 1 && ctx->ray.ray_dir_y >= 0)
 		ctx->tex.select_tex = ctx->texture.s_wall;
 	else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dir_x >= 0)
-		ctx->tex.select_tex = ctx->texture.e_wall;
+	{
+		if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'E')
+			ctx->tex.select_tex = ctx->texture.e_wall;
+		else
+			ctx->tex.select_tex = ctx->texture.w_wall;
+	}
 	else if (ctx->ray.hit_side == 0 && ctx->ray.ray_dir_x < 0)
-		ctx->tex.select_tex = ctx->texture.w_wall;
+	{
+		if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'E')
+			ctx->tex.select_tex = ctx->texture.w_wall;
+		else
+			ctx->tex.select_tex = ctx->texture.e_wall;
+	}
 }
 
 void	draw_wall(t_ctx *ctx, int x)
