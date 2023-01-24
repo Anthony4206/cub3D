@@ -27,14 +27,12 @@ void	print_background(t_ctx *ctx)
 		x = -1;
 		while (++x < WIDTH)
 			ctx->screen.buffer[y][x] = ctx->parse.c_rgb;
-			ctx->screen.buffer[y][x] = ctx->parse.c_rgb;
 	}
 	y--;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			ctx->screen.buffer[y][x] = ctx->parse.f_rgb;
 			ctx->screen.buffer[y][x] = ctx->parse.f_rgb;
 	}
 }

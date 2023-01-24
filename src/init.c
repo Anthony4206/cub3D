@@ -20,15 +20,25 @@
 
 void	init_plane(t_ctx *ctx)
 {
-	if (ctx->parse.init_dir == 'N' || ctx->parse.init_dir == 'S')
+	if (ctx->parse.init_dir == 'N')
 	{
 		ctx->ray.plane_x = 0.66;
 		ctx->ray.plane_y = 0.0;
 	}
-	else
+	else if (ctx->parse.init_dir == 'S')
+	{
+		ctx->ray.plane_x = -0.66;
+		ctx->ray.plane_y = 0.0;
+	}
+	else if (ctx->parse.init_dir == 'E')
 	{
 		ctx->ray.plane_x = 0;
 		ctx->ray.plane_y = 0.66;
+	}
+	else
+	{
+		ctx->ray.plane_x = 0;
+		ctx->ray.plane_y = -0.66;
 	}
 }
 

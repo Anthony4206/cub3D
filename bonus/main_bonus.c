@@ -17,6 +17,7 @@
 #include "structs_bonus.h"
 #include "parse/parse_bonus.h"
 #include "draw/draw_bonus.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
