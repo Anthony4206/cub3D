@@ -88,15 +88,9 @@ void	player_moves(t_ctx *ctx)
 		change_pos(ctx, ctx->player.dir_x * step, ctx->player.dir_y * step);
 	if (ctx->keys.key_s == true)
 		change_pos(ctx, -ctx->player.dir_x * step, -ctx->player.dir_y * step);
-	if (ctx->keys.key_d == true && (ctx->parse.init_dir == 'S'
-			|| ctx->parse.init_dir == 'W'))
-		change_pos(ctx, ctx->player.dir_y * step, -ctx->player.dir_x * step);
-	else if (ctx->keys.key_d == true)
-		change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
-	if (ctx->keys.key_a == true && (ctx->parse.init_dir == 'S'
-			|| ctx->parse.init_dir == 'W'))
-		change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
-	else if (ctx->keys.key_a == true)
+	if (ctx->keys.key_d == true)
+	 	change_pos(ctx, -ctx->player.dir_y * step, ctx->player.dir_x * step);
+	if (ctx->keys.key_a == true)
 		change_pos(ctx, ctx->player.dir_y * step, -ctx->player.dir_x * step);
 	check_pos_and_slide(ctx, old_x, old_y, step);
 }
@@ -108,13 +102,9 @@ void	player_rotates(t_ctx *ctx)
 	double	tmp_plane_x;
 
 	a = 0;
-	if ((ctx->keys.key_left == true && (ctx->parse.init_dir == 'N'
-				|| ctx->parse.init_dir == 'E')) || (ctx->keys.key_right == true
-			&& (ctx->parse.init_dir == 'S' || ctx->parse.init_dir == 'W')))
+	if (ctx->keys.key_left == true)
 		a = -0.05;
-	if ((ctx->keys.key_right == true && (ctx->parse.init_dir == 'N'
-				|| ctx->parse.init_dir == 'E')) || (ctx->keys.key_left == true
-			&& (ctx->parse.init_dir == 'S' || ctx->parse.init_dir == 'W')))
+	if (ctx->keys.key_right == true)
 		a = 0.05;
 	if (ctx->keys.key_left == true || ctx->keys.key_right == true)
 	{
